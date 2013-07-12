@@ -22,7 +22,42 @@ include("$absoluteurl"."components/xmlparser/loadparser.php");
 $PG_mainbody = NULL; //erase variable which contains episodes data
 
 // Trying to generate the track list on the right
-$trackfeed = NULL;
+$trackfeed = '<div id="jquery_jplayer"></div>
+	
+				<div id="jp_container" data-spy="affix" data-offset-top="0">
+					<p>
+						<span class="track-name">&nbsp;</span>
+						<span class="jp-current-time"></span> | <span class="jp-duration"></span>
+						
+					</p>
+					<div class="jp-progress progress">
+						<div class="jp-seek-bar progress">
+							<div class="jp-play-bar bar"></div>
+						</div>
+					</div>
+					
+					<div class="btn-holder">
+					
+						<div class="btn-group">
+							<a class="jp-play btn" href="#"><i class="icon-play"></i></a>
+							<a class="jp-pause btn" href="#"><i class="icon-pause"></i></a>
+							<a class="jp-stop btn" href="#"><i class="icon-stop"></i></a>
+						</div>
+					
+					
+						<div class="volume-holder">
+							<a class="jp-mute" href="#"><i class="icon-volume-off"></i></a>
+							<a class="jp-unmute" href="#"><i class="icon-volume-down"></i></a>
+							
+							<div class="jp-volume-bar">
+								<div class="jp-volume-bar-value"></div>
+							</div>
+			
+							<a class="jp-volume-max" href="#"><i class="icon-volume-up"></i></a>
+						</div>
+					</div>
+					<ul class="nav nav-list">
+						<li class="nav-header">Select a track</li>';
 
 // Open podcast directory
 $handle = opendir ($absoluteurl.$upload_dir);
@@ -102,10 +137,9 @@ if (!empty($file_array)) { //if directory is not empty
 						# $text_authornamepg = author's name
 						# $text_authoremailpg = author's email
 
-						$PG_mainbody .= 
-							'<div class="episode">';
+						$PG_mainbody .= '<article>';
 
-						$PG_mainbody .= '<h3 class="episode_title"><a href="?p=episode&amp;name='.$file_multimediale[0].'.'.$podcast_filetype.'">'.$text_title.'</a>';
+						$PG_mainbody .= '<h3><a href="?p=episode&amp;name='.$file_multimediale[0].'.'.$podcast_filetype.'">'.$text_title.'</a>';
 
 						if ($podcast_filetype=="mpg" OR $podcast_filetype=="mpeg" OR $podcast_filetype=="mov" OR $podcast_filetype=="mp4" OR $podcast_filetype=="wmv" OR $podcast_filetype=="3gp" OR $podcast_filetype=="mp4" OR $podcast_filetype=="avi" OR $podcast_filetype=="flv" OR $podcast_filetype=="m4v") { // if it is a video
 
@@ -113,18 +147,15 @@ if (!empty($file_array)) { //if directory is not empty
 							$isvideo = "yes"; 
 						}
 						$episode_date .= "<a href=\"".$url.$upload_dir.$file_multimediale[0].".".$podcast_filetype."\" title=\"$L_donloadthis\"><i class=\"icon-download\"></i></a>";
-						$PG_mainbody .= '</h3><p>'.$episode_date.'</p>
-							<ul class="episode_imgdesc">';
+						$PG_mainbody .= '</h3><p>'.$episode_date.'</p>';
 							if(isset($text_imgpg) AND $text_imgpg!=NULL AND file_exists("$img_dir$text_imgpg")) {
-
-								$PG_mainbody .= "<li><img src=\"$img_dir$text_imgpg\" class=\"episode_image\" alt=\"$text_title\" /></li>";
-
+								$PG_mainbody .= "<img src=\"$img_dir$text_imgpg\" class=\"episode_image\" alt=\"$text_title\" />";
 							}
 
 							if(isset($text_longdesc) AND $text_longdesc!=NULL ) { // if is set long description
-								$PG_mainbody .= '<li>'.$text_longdesc;
+								$PG_mainbody .= $text_longdesc;
 							} else {
-								$PG_mainbody .= '<li>'.$text_shortdesc;	
+								$PG_mainbody .= $text_shortdesc;	
 							}
 
 							if($podcast_filetype=="mp3") {
@@ -190,7 +221,7 @@ if (!empty($file_array)) { //if directory is not empty
 										ready: function () {
 											$(this).jPlayer("setMedia", {
 												m4v: "'.$url.$upload_dir.$file_multimediale[0].'.'.$podcast_filetype.'",
-												poster: "'.$url.'/images/itunes_image.jpg"
+												poster: "'.$url.'"
 											});
 										},
 										size: {
@@ -208,12 +239,7 @@ if (!empty($file_array)) { //if directory is not empty
 								</script>'; 
 							}
 
-							$PG_mainbody .= "<br />
-
-							
-							</li>
-							</ul>
-							</div>";
+							$PG_mainbody .= "</article>";
 
 						if ($recent_count == 0) { //use keywords of the most recent episode as meta tags in the home page
 							$assignmetakeywords = $text_keywordspg;
@@ -223,7 +249,10 @@ if (!empty($file_array)) { //if directory is not empty
 				}
 			}
 		}
+	
 	}
+	$trackfeed .= '</ul>
+		</div>';
 } else { 
 	$PG_mainbody .= '<div class="topseparator"><p>'.$L_dir.' <b>'.$upload_dir.'</b> '.$L_empty.'</p></div>';
 }

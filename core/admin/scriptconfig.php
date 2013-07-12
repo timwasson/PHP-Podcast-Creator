@@ -87,7 +87,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 			
 			
 			$i = 1;
-			while ($i <= 10) {
+			while ($i <= 50) {
 				$PG_mainbody .= '<option value=\''.$i.'\'';
 				if ($max_recent == $i) { $PG_mainbody .= ' selected'; }
 				$PG_mainbody .= '>'.$i.'</option>';
@@ -129,7 +129,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 		$PG_mainbody .= '>'.$L_year.' / '.$L_month.' / '.$L_day.'</option>
 		
 			<option value=\'F jS, Y\'';
-		if ($dateformat == "F jS Y") { $PG_mainbody .= ' selected'; }
+		if ($dateformat == "F jS, Y") { $PG_mainbody .= ' selected'; }
 		$PG_mainbody .= '>October 3rd, 1979</option>
 
 			</select>';

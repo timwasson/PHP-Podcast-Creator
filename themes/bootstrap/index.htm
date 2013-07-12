@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<head>
+	
+	<title>-----PG_PAGETITLE-----</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	-----PG_METATAGS-----
+
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/themes/bootstrap/css/bootstrap-audio-skin.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div class="container">
+
+		<header class="row">
+			<div class="span12">
+				<h1><a href="?p=home" accesskey="H" title="-----PG_MENUHOME----- (H)">-----PG_PODCASTTITLE-----</a></h1>
+			</div>
+		</header>
+		<div class="row">
+			<div class="span9">
+				
+					<!-- <h2>-----PG_PODCASTSUBTITLE-----</h2>
+					<p>-----PG_PODCASTDESC-----</p> -->
+					-----PG_MAINBODY-----
+				
+			</div>
+			<aside class="span3">
+			
+				<div id="jquery_jplayer"></div>
+	
+				<div id="jp_container">
+					<p>
+						<span class="track-name">&nbsp;</span>
+						<span class="jp-current-time"></span> | <span class="jp-duration"></span>
+						
+					</p>
+					<div class="jp-progress progress">
+						<div class="jp-seek-bar progress">
+							<div class="jp-play-bar bar"></div>
+						</div>
+					</div>
+					
+					<div class="btn-holder">
+					
+						<div class="btn-group">
+							<a class="jp-play btn" href="#"><i class="icon-play"></i></a>
+							<a class="jp-pause btn" href="#"><i class="icon-pause"></i></a>
+							<a class="jp-stop btn" href="#"><i class="icon-stop"></i></a>
+						</div>
+					
+					
+						<div class="volume-holder">
+							<a class="jp-mute" href="#"><i class="icon-volume-off"></i></a>
+							<a class="jp-unmute" href="#"><i class="icon-volume-down"></i></a>
+							
+							<div class="jp-volume-bar">
+								<div class="jp-volume-bar-value"></div>
+							</div>
+			
+							<a class="jp-volume-max" href="#"><i class="icon-volume-up"></i></a>
+						</div>
+					</div>
+					<ul class="nav nav-list">
+						<li class="nav-header">Select a track</li>
+						-----PG_TRACKLIST-----
+					</ul>
+				</div>
+		
+
+				-----PG_ADMINMENU-----
+
+			</aside>
+		</div>
+		<footer class="row">
+			<div class="span12"><a href="?p=admin" accesskey="A" title="-----PG_MENUADMIN----- (A)">-----PG_MENUADMIN-----</a></div>
+		</footer>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+	-----PG_JSLOAD-----
+	<script>
+	$(function() {
+        $("[rel='tooltip']").tooltip();
+    });
+	</script>
+</body>
+
+</html>

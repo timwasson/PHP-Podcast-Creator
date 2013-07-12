@@ -1,0 +1,41 @@
+8
+
+dir
+5
+https://yellowjug@podcastgen.svn.sourceforge.net/svnroot/podcastgen/components/podcastgen_languages
+https://yellowjug@podcastgen.svn.sourceforge.net/svnroot/podcastgen
+
+
+
+2009-11-16T17:11:54.998258Z
+4
+yellowjug
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+30dc1123-3d68-4ce6-b511-1f8584badd10
+
+podcastgen_languages.xml
+file
+
+
+
+
+2009-11-16T17:05:23.000000Z
+4aba0fccd503185af767b1b01b0f4485
+2009-11-16T17:11:54.998258Z
+4
+yellowjug
+has-props
+

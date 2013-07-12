@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!-- generator="Podcast Generator 1.4" -->
+		<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xml:lang="en" version="2.0">
+	<channel>
+		<title>Atomicast</title>
+		<link>http://pcg.localhost:904/</link>
+		<description>The world's most useless podcast ever made.</description>
+		<generator>Podcast Generator 1.4 - http://podcastgen.sourceforge.net</generator>
+	<lastBuildDate>Fri, 12 Jul 2013 09:59:09 -0500</lastBuildDate>
+		<language>en</language>
+		<copyright>Copyright 2013</copyright>
+		<itunes:image href="http://pcg.localhost:904/images/itunes_image.jpg" />
+		<image>
+		<url>http://pcg.localhost:904/images/itunes_image.jpg</url>
+		<title>Atomicast</title>
+		<link>http://pcg.localhost:904/</link>
+		</image>
+		<itunes:summary>The world's most useless podcast ever made.</itunes:summary>
+		<itunes:subtitle>Useless, totally useless crap.</itunes:subtitle>
+		<itunes:author>Atomicast</itunes:author>
+		<itunes:owner>
+		<itunes:name>Atomicast</itunes:name>
+		<itunes:email>tim@atomicast.com</itunes:email>
+		</itunes:owner>
+		<itunes:explicit>yes</itunes:explicit>
+		<itunes:category text="Comedy">
+			</itunes:category>
+			<itunes:category text="Society &amp; Culture">
+			</itunes:category>
+			<itunes:category text="TV &amp; Film">
+			</itunes:category>
+			<item>
+								<title>test</title>
+								<itunes:subtitle>test</itunes:subtitle>
+								<itunes:summary><![CDATA[ test ]]></itunes:summary>
+								<description>test</description>
+								<link>http://pcg.localhost:904/?p=episode&amp;name=2013-07-12_workday.mp4</link>
+								<enclosure url="http://pcg.localhost:904/media/2013-07-12_workday.mp4" length="28223565" type="video/mp4"/>
+								<guid>http://pcg.localhost:904/?p=episode&amp;name=2013-07-12_workday.mp4</guid>
+								<author>tim@atomicast.com (Atomicast)</author>
+									<itunes:author>Atomicast</itunes:author>
+									<itunes:explicit>no</itunes:explicit>
+									<pubDate>Fri, 12 Jul 2013 09:59:09 -0500</pubDate>
+								</item><item>
+								<title>test</title>
+								<itunes:subtitle>test</itunes:subtitle>
+								<itunes:summary><![CDATA[ test ]]></itunes:summary>
+								<description>test</description>
+								<link>http://pcg.localhost:904/?p=episode&amp;name=2013-07-12_atomicast_reboot_2.mp3</link>
+								<enclosure url="http://pcg.localhost:904/media/2013-07-12_atomicast_reboot_2.mp3" length="22046011" type="audio/mpeg"/>
+								<guid>http://pcg.localhost:904/?p=episode&amp;name=2013-07-12_atomicast_reboot_2.mp3</guid>
+								<itunes:duration>45:55</itunes:duration>
+									<author>tim@atomicast.com (Atomicast)</author>
+									<itunes:author>Atomicast</itunes:author>
+									<itunes:explicit>no</itunes:explicit>
+									<pubDate>Fri, 12 Jul 2013 09:53:36 -0500</pubDate>
+								</item><item>
+								<title>Reboot second</title>
+								<itunes:subtitle>this is a second entry but without an image.</itunes:subtitle>
+								<itunes:summary><![CDATA[ this is a second entry but without an image. ]]></itunes:summary>
+								<description>this is a second entry but without an image.</description>
+								<link>http://pcg.localhost:904/?p=episode&amp;name=2013-07-11_atomicast_reboot_21.mp3</link>
+								<enclosure url="http://pcg.localhost:904/media/2013-07-11_atomicast_reboot_21.mp3" length="22046011" type="audio/mpeg"/>
+								<guid>http://pcg.localhost:904/?p=episode&amp;name=2013-07-11_atomicast_reboot_21.mp3</guid>
+								<itunes:duration>45:55</itunes:duration>
+									<author>tim@atomicast.com (Atomicast)</author>
+									<itunes:author>Atomicast</itunes:author>
+									<itunes:explicit>no</itunes:explicit>
+									<pubDate>Thu, 11 Jul 2013 08:23:50 -0500</pubDate>
+								</item><item>
+								<title>Reboot</title>
+								<itunes:subtitle>The Atomicast REBOOT</itunes:subtitle>
+								<itunes:summary><![CDATA[ This is the reboot of the amazing ATOMICAST.  ]]></itunes:summary>
+								<description>The Atomicast REBOOT</description>
+								<link>http://pcg.localhost:904/?p=episode&amp;name=2013-07-11_atomicast_reboot_2.mp3</link>
+								<enclosure url="http://pcg.localhost:904/media/2013-07-11_atomicast_reboot_2.mp3" length="22046011" type="audio/mpeg"/>
+								<guid>http://pcg.localhost:904/?p=episode&amp;name=2013-07-11_atomicast_reboot_2.mp3</guid>
+								<itunes:duration>45:55</itunes:duration>
+									<author>mail@atomicast.com (Atomicast)</author>
+									<itunes:author>Atomicast</itunes:author>
+									<itunes:keywords>reboot, atomicast, reboot</itunes:keywords><itunes:explicit>yes</itunes:explicit>
+									<pubDate>Thu, 11 Jul 2013 08:19:57 -0500</pubDate>
+								</item></channel></rss>

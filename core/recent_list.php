@@ -252,6 +252,8 @@ if (!empty($file_array)) { //if directory is not empty
 	
 	}
 	$trackfeed .= '</ul>
+		<a href="" class="label label-info"><i class="icon-music"></i> Add to iTunes</a>
+		<a href="" class="label label-warning"><i class="icon-rss"></i> RSS feed</a>
 		</div>';
 } else { 
 	$PG_mainbody .= '<div class="topseparator"><p>'.$L_dir.' <b>'.$upload_dir.'</b> '.$L_empty.'</p></div>';

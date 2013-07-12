@@ -4,7 +4,7 @@
 # PODCAST GENERATOR
 #
 # Created by Alberto Betella
-# http://podcastgen.sourceforge.net
+# Improved by Tim Wasson
 # 
 # This is Free Software released under the GNU/GPL License.
 ############################################################
@@ -14,15 +14,6 @@ if (isset($_REQUEST['GLOBALS']) OR isset($_REQUEST['absoluteurl']) OR isset($_RE
 ########### End
 
 include ('checkconfigexistence.php');
-?>
-
-
-
-
-	<ul class="episode_imgdesc">
-	<li>
-
-	<?php
 
 $PG_mainbody = NULL; //define
 
@@ -48,13 +39,14 @@ foreach($parser->document->language as $singlelanguage)
 
 ## SCRIPT LANGUAGES LIST
 
-$PG_mainbody .= '<br /><br />
+$PG_mainbody .= '
 
+	
+
+	<fieldset><legend>Select Language</legend>
 	<form method="post" action="index.php?step=2">
-
-	<p><label for="setuplanguage"><b>Select Language</b></label></p>
-	';
-$PG_mainbody .= '<select name="setuplanguage">';
+	<br />
+	<select name="setuplanguage">';
 
 
 natcasesort($arr); // Natcasesort orders more naturally and is different from "sort", which is case sensitive
@@ -80,11 +72,10 @@ foreach ($arr as $key => $val) {
 
 }
 $PG_mainbody .= '</select>
-	<br /><br />
-	<input type="submit" value="'.$SL_next.'">
+	<br />
+	<input type="submit" value="'.$SL_next.'" class="btn btn-primary">
 	</form>
-	<br /><br />
-	';
+	</fieldset>';
 
 
 //print output

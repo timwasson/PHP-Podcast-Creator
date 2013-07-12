@@ -26,7 +26,7 @@ $script_directory = "../";
 
 		if (file_exists("../config.php")) { //if config.php already exists stop the script
 
-			echo "<font color=\"red\">$SL_configexists</font><br />$SL_configdelete";
+			echo "<div class=\"alert alert-error\">$SL_configexists<br />$SL_configdelete</div>";
 
 			exit;
 
@@ -36,7 +36,7 @@ $script_directory = "../";
 
 		###############
 		############### try to set writing permissions
-		$PG_mainbody .= "<b>$SL_checkperm</b><br />";
+		$PG_mainbody .= "<h3>$SL_checkperm</h3>";
 
 		## checking media dir
 		$fp = fopen("$media_directory$testfile",'a'); //create test file
@@ -46,12 +46,12 @@ $script_directory = "../";
 
 		if (file_exists("$media_directory$testfile")) {
 
-			$PG_mainbody .= "<p><font color=\"green\">$SL_mediadir $SL_iswritable</font></p>";
+			$PG_mainbody .= "<div class=\"alert alert-success\">$SL_mediadir $SL_iswritable</div>";
 			unlink ("$media_directory$testfile");
 			$dir1 = "ok";
 		}
 		else {
-			$PG_mainbody .= "<p><font color=\"red\"><b>$SL_mediadir ".$media_directory." $SL_notwritable</b></font></p>";
+			$PG_mainbody .= "<div class=\"alert alert-error\">$SL_mediadir ".$media_directory." $SL_notwritable</div>";
 			$dir1 = "NO";
 		}
 
@@ -64,12 +64,12 @@ $script_directory = "../";
 
 		if (file_exists("$images_directory$testfile")) {
 
-			$PG_mainbody .= "<p><font color=\"green\">$SL_imgdir $SL_iswritable</font></p>";
+			$PG_mainbody .= "<div class=\"alert alert-success\">".$SL_imgdir." ".$SL_iswritable."</div>";
 			unlink ("$images_directory$testfile");
 			$dir2 = "ok";
 		}
 		else {
-			$PG_mainbody .= "<p><font color=\"red\"><b>$SL_imgdir ".$images_directory." $SL_notwritable</b></font></p>";
+			$PG_mainbody .= "<div class=\"alert alert-error\">$SL_imgdir ".$images_directory." $SL_notwritable</div>";
 			$dir2 = "NO";
 		}
 
@@ -82,54 +82,53 @@ $script_directory = "../";
 
 		if (file_exists("$script_directory$testfile")) {
 
-			$PG_mainbody .=  "<p><font color=\"green\">$SL_scriptdir $SL_iswritable</font></p>";
+			$PG_mainbody .=  "<div class=\"alert alert-success\">$SL_scriptdir $SL_iswritable</div>";
 			unlink ("$script_directory$testfile");
 			$dir3 = "ok";
 		}
 		else {
-			$PG_mainbody .=  "<p><font color=\"red\"><b>$SL_scriptdir ".$script_directory." $SL_notwritable</b></font></p>";
+			$PG_mainbody .=  "<div class=\"alert alert-error\">$SL_scriptdir ".$script_directory." $SL_notwritable</div>";
 			$dir3 = "NO";
 		}
 
 
 		if (isset($dir1) AND $dir1=="ok" AND isset($dir2) AND $dir2=="ok" AND isset($dir3) AND $dir3=="ok") { // OK CAN PROCEED
 
-			$PG_mainbody .= "<br /><p><b>$SL_permok</b></p>";
+			$PG_mainbody .= "<h4>$SL_permok</h4>";
 			$PG_mainbody .=  "<p>$SL_canproceed</p>";
 
 			$PG_mainbody .= '
 				<form method="post" action="index.php?step=4">
-				<br />
 				<input type="hidden" name="setuplanguage" value="'.$_POST['setuplanguage'].'">
-				<input type="submit" value="'.$SL_next.'">
+				<input type="submit" value="'.$SL_next.'" class="btn btn-primary">
 				</form>
 				';
 
 		} else {
 
-			$PG_mainbody .=  "<br /><br /><font color=\"red\"><b>$SL_trytochmod</b></font>";
+			$PG_mainbody .=  "<h4>$SL_trytochmod</h4><ul>";
 
 			if (isset($dir1) AND $dir1!="ok") {
-				$PG_mainbody .=  "<br />$SL_settingchmod $media_directory ($SL_mediadir)";
+				$PG_mainbody .=  "<li>$SL_settingchmod $media_directory ($SL_mediadir)</li>";
 				chmod("$media_directory", 0777);
 			}
 			if (isset($dir1) AND $dir2!="ok") {
-				$PG_mainbody .=  "<br />$SL_settingchmod to $images_directory ($SL_imgdir)";
+				$PG_mainbody .=  "<li>$SL_settingchmod to $images_directory ($SL_imgdir)</li>";
 				chmod("$images_directory", 0777);
 			}
 			if (isset($dir1) AND $dir3!="ok") {
-				$PG_mainbody .=  "<br />$SL_settingchmod $script_directory ($SL_scriptdir)";
+				$PG_mainbody .=  "<li>$SL_settingchmod $script_directory ($SL_scriptdir)</li>";
 				chmod("$script_directory", 0777);
 			}
 
-			$PG_mainbody .=  "<br /><p><b>$SL_permtried</b></p>";
+			$PG_mainbody .=  "</ul><p><b>$SL_permtried</b></p>";
 
 			// reload button
 			$PG_mainbody .= '
 				<form method="post" action="index.php?step=3">
 				<br />
 				<input type="hidden" name="setuplanguage" value="'.$_POST['setuplanguage'].'">
-				<input type="submit" value="'.$SL_reload1.'">
+				<input type="submit" value="'.$SL_reload1.'" class="btn btn-primary">
 				</form>
 				';
 

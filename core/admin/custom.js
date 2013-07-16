@@ -42,7 +42,11 @@ $(function() {
 	$("#uploadform").submit(function() {
 		$("#userfile, #title, #description").unwrap();
 		
-		CheckEmpEr($("#userfile"));
+		// Check for the file input only if the FTP file is empty.
+		if($("#ftpfile").val().length == 0) {
+			CheckEmpEr($("#userfile"));
+		}
+		
 		CheckEmpEr($("#title"));
 		CheckEmpEr($("#description"));
 		
@@ -57,5 +61,13 @@ $(function() {
 	$(".delep").on("click",function() {
 		url2del = $(this).data("delurl");
 		$("#delurl").attr("href",url2del);
+	});
+	
+	//Insert the FTP uploaded files into the site.
+	$(".ftpupload").on("click",function(e) {
+		e.preventDefault();
+		$("#userfile").hide();
+		$("#ftpfile").attr("value",$(this).data("ftpurl")).attr("type","input").addClass("uneditable-input");
+		$('#uploadFiles').modal('hide');
 	});
 });

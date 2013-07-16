@@ -3,7 +3,7 @@
 # PODCAST GENERATOR
 #
 # Created by Alberto Betella
-# http://podcastgen.sourceforge.net
+# Improved by Tim Wasson
 # 
 # This is Free Software released under the GNU/GPL License.
 ############################################################
@@ -57,8 +57,10 @@ if (isset($_GET['file']) AND $_GET['file']!=NULL) {
 	include ("$absoluteurl"."core/admin/feedgenerate.php"); //(re)generate XML feed
 	##########
 
-	$PG_mainbody .= '<p><a href=?p=admin&do=editdel>'.$L_delother.'</a></p>';
-
+	//$PG_mainbody .= '<p><a href=?p=admin&do=editdel>'.$L_delother.'</a></p>';
+	
+	include("editdel.php");
+	
 } else { 
 	$PG_mainbody .="$L_deletenothing";
 }

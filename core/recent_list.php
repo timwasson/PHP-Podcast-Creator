@@ -22,9 +22,8 @@ include("$absoluteurl"."components/xmlparser/loadparser.php");
 $PG_mainbody = NULL; //erase variable which contains episodes data
 
 // Trying to generate the track list on the right
-$trackfeed = '<div id="jquery_jplayer"></div>
-	
-				<div id="jp_container" data-spy="affix" data-offset-top="0">
+$trackfeed = '<div id="jp_container">
+					<div id="jquery_jplayer"></div>
 					<p>
 						<span class="track-name">&nbsp;</span>
 						<span class="jp-current-time"></span> | <span class="jp-duration"></span>
@@ -226,8 +225,7 @@ if (!empty($file_array)) { //if directory is not empty
 										},
 										size: {
 											width: "100%",
-											height: "auto",
-											cssClass: "jp-video-360p"
+											height: "auto"
 										},
 
 										swfPath: "/components/player/js",

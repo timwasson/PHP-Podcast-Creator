@@ -13,12 +13,18 @@ if (isset($_REQUEST['GLOBALS']) OR isset($_REQUEST['absoluteurl']) OR isset($_RE
 ########### End
 
 ### Check if user is logged ###
-	if ($amilogged != "true") { exit; }
+if ($amilogged != "true") { exit; }
 ###
 
-if (isset($_POST['userfile']) AND $_POST['userfile']!=NULL AND isset($_POST['title']) AND $_POST['title']!=NULL AND isset($_POST['description']) AND $_POST['description']!=NULL){ //001
+if(isset($_POST['ftpfile'])) {
+	$userfile = $_POST['ftpfile'];
+} else {
+	$userfile = $_POST['userfile'];
+}
 
-	$file = $_POST['userfile']; //episode file
+if (isset($userfile) AND $userfile!=NULL AND isset($_POST['title']) AND $_POST['title']!=NULL AND isset($_POST['description']) AND $_POST['description']!=NULL){ //001
+
+	$file = $userfile; //episode file
 
 	$img = $_FILES['image'] ['name']; // image file
 	

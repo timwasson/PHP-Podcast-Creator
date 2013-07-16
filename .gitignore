@@ -6,3 +6,14 @@ config.php
 components/player/*
 
 components/tinymce/*
+themes/bootstrap/css/custom.less
+
+themes/bootstrap/css/custom.css
+
+core/admin/custom-ck.js
+
+feed.xml
+
+feed.xml
+
+feed.xml

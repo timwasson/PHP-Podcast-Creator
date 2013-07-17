@@ -155,7 +155,18 @@ if(isset($amilogged) AND $amilogged =="true") {
 
 
 		include ("$absoluteurl"."components/xmlparser/loadparser.php");
-		include ("$absoluteurl"."core/admin/readfeedlanguages.php");
+		
+		
+		if (file_exists("$absoluteurl"."components/feed_languages/feed_languages.xml")) {
+
+			$xml = file_get_contents("$absoluteurl"."components/feed_languages/feed_languages.xml");
+			//Set up the parser object
+			$parser = new XMLParser($xml);
+		
+			//Parse the XML file with categories data...
+			$parser->Parse();
+		
+		}
 
 
 		// define variables
@@ -226,8 +237,8 @@ if(isset($amilogged) AND $amilogged =="true") {
 
 		$PG_mainbody .= '></p>';
 
-		$PG_mainbody .= '<br /><p>
-			<input type="submit" name="'.$L_send.'" value="'.$L_send.'" onClick="showNotify(\''.$L_setting.'\');"></p>';
+		$PG_mainbody .= '<div class="form-actions">
+			<input type="submit" name="'.$L_send.'" value="'.$L_send.'" class="btn btn-primary"></div>';
 	}
 
 }

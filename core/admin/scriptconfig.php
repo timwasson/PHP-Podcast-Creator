@@ -136,7 +136,91 @@ if(isset($amilogged) AND $amilogged =="true") {
 
 		##### SCRIPT LANGUAGE
 		include ("$absoluteurl"."components/xmlparser/loadparser.php");
-		include ("$absoluteurl"."core/admin/readscriptlanguages.php");
+		
+		//if (file_exists("$absoluteurl"."components/podcastgen_languages/podcastgen_languages.xml")) {
+		
+			$xml = "<PodcastGenerator>
+
+	<language>
+		<id>ca</id>
+		<description>Català</description>
+	</language>
+
+<language>
+	<id>cy</id>
+	<description>Cymraeg</description>
+</language>
+
+	<language>
+		<id>de</id>
+		<description>Deutsch</description>
+	</language>
+
+	<language>
+		<id>en</id>
+		<description>English</description>
+	</language>
+	
+	<language>
+		<id>es</id>
+		<description>Español</description>
+	</language>
+	
+	<language>
+		<id>et</id>
+		<description>Eesti</description>
+	</language>
+	
+	<language>
+		<id>fa</id>
+		<description>فارسی</description>
+	</language>
+	
+	
+	<language>
+		<id>fr</id>
+		<description>Français</description>
+	</language>
+	
+	<language>
+		<id>it</id>
+		<description>Italiano</description>
+	</language>
+	
+	<language>
+		<id>hu</id>
+		<description>Magyar</description>
+	</language>
+	
+	<language>
+		<id>ja</id>
+		<description>日本語</description>
+	</language>
+	
+	<language>
+		<id>pt</id>
+		<description>Português</description>
+	</language>
+
+	<language>
+		<id>th</id>
+		<description>ไทย</description>
+	</language>	
+	
+	<language>
+		<id>tr</id>
+		<description>Türkçe</description>
+	</language>
+	
+	
+</PodcastGenerator>";
+			//Set up the parser object
+			$parser = new XMLParser($xml);
+		
+			//Parse the XML file with categories data...
+			$parser->Parse();
+		
+		//}
 
 
 		// define variables

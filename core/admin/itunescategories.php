@@ -39,9 +39,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 		
 		if (isset($_FILES['image'] ['name']) AND $_FILES['image'] ['name'] != NULL) { 
 
-
 			$img = $_FILES['image'] ['name'];
-
 
 			$img_ext=explode(".",$img); // divide filename from extension
 
@@ -51,25 +49,16 @@ if(isset($amilogged) AND $amilogged =="true") {
 
 				if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile2))
 				{
-					$PG_mainbody .= "<p><b>$L_imgsent</b></p>"; // If upload is successful.
+					$PG_mainbody .= "<div class=\"alert alert-error\">".$L_imgsent."</div>"; // If upload is successful.
 				}
 				else { //if upload NOT successful
-
-					$PG_mainbody .= "<p><b>$L_imgnotsent</b></p>";
+					$PG_mainbody .= "<div class=\"alert alert-error\">".$L_imgnotsent."</div>";
 					//	$temporaneo= $_FILES['image']['tmp_name'];
-
 				}
-
 			} else { // if image extension is NOT valid
-
-				$PG_mainbody .= "<p><b>$L_imgnotvalidext $L_imgkeep</b></p>";
+				$PG_mainbody .= "<div class=\"alert alert-error\">".$L_imgnotvalidext." ".$L_imgkeep."</div>";
 				$PG_mainbody .= "<p>$L_image_itunes_param</p>";
-				$PG_mainbody .= '<br />
-					<form>
-					<INPUT TYPE="button" VALUE='.$L_back.' onClick="history.back()">
-					</form>';
 			}
-
 		}
 		
 		include ("$absoluteurl"."core/admin/createconfig.php"); //regenerate config.php

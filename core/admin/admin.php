@@ -38,7 +38,6 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 			<li class="divider"></li>
 			<li class="nav-header">'.$L_admin_itunessettings.'</li>
 			
-			<li><a href="?p=admin&do=itunesimg">'.$L_change_itunesimage.'</a></li>
 			<li><a href="?p=admin&do=itunescat">'.$L_changecat.'</a></li>
 			<li><a href="https://phobos.apple.com/WebObjects/MZFinance.woa/wa/publishPodcast?feedURL='.$url.$feed_dir.'feed.xml" target="_blank">'.$L_submit_itunes_store.'</a></li>
 			

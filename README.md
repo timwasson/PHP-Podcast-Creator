@@ -14,10 +14,11 @@ While waiting for the official release of the original Podcast Generator 2.0, I 
 - Multilanguage support;
 - Web upload of audio/video episodes;
 - Web mp3 streaming player;
+- Easy FTP support for episodes too large to upload via HTTP;
 
-In an effort to streamline the original Generator, I removed categories, archives, freebox, the default themes, and several other components. I removed the reliance on prototype/scriptaculous and replaced that functionality with jQuery(via CDN). I improved error checking, and implemented Twitter Bootstrap (also via CDN) as the main theme for easy customization. 
+In an effort to streamline the original Generator, I removed categories, archives, freebox, the default themes, and several other components. I removed the reliance on prototype/scriptaculous and replaced that functionality with jQuery (via CDN). I improved error checking, and implemented Twitter Bootstrap (also via CDN) as the main theme for easy customization. 
 
-I swapped out the web player with jPlayer for yummy HTML5 audio and video. I implement FontAwesome (also via CDN) for quick and easy icons. I removed a lot of clutter and cleaned up the files to make additions and modifications easier. I updated the RTE. 
+I swapped out the web player with jPlayer for yummy HTML5 audio and video. I implemented FontAwesome (also via CDN) for quick and easy icons. I removed a lot of clutter and cleaned up the files to make additions and modifications easier. I updated the RTE. 
 
 ## Installation Instructions
 Upload all the files to your server. Create a directory called "media" in the root directory. Give the root directory, media and images folders all a CHMOD of 755. 

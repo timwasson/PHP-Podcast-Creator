@@ -12,6 +12,7 @@ $(function() {
 		}
 	});
 	
+	var error = 0;
 	
 	// Show additional information on the Add Podcast page
 	//First slide up the panel
@@ -41,6 +42,7 @@ $(function() {
 	
 	$("#uploadform").submit(function() {
 		$("#userfile, #title, #description").unwrap();
+		error = 0;
 		
 		// Check for the file input only if the FTP file is empty.
 		if($("#ftpfile").val().length == 0) {
@@ -55,7 +57,10 @@ $(function() {
 			return false;
 		}
 	});
-	
+
+
+	// Get the file size of the file upload.
+
 	
 	//Update the deletion URL
 	$(".delep").on("click",function() {

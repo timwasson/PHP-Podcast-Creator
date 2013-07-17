@@ -13,16 +13,16 @@ if (isset($_REQUEST['GLOBALS']) OR isset($_REQUEST['absoluteurl']) OR isset($_RE
 ########### End
 
 ### Check if user is logged ###
-	if ($amilogged != "true") { exit; }
+if ($amilogged != "true") { exit; }
 ###
-
+ 
 if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['do']=="upload" AND isset($_GET['c']) AND $_GET['c']=="ok") { 
 
 	// This is for a NEW episode.
 	$PG_mainbody .= '<h3>'.$L_uploadpodcast.'</h3>';
-	
+
 	// If the episode has been uploaded via FTP
-	if(isset($_POST['ftpfile'])) {
+	if(isset($_POST['ftpfile']) AND !empty($_POST['ftpfile'])) {
 		include("$absoluteurl"."core/admin/sendchanges.php");
 	} else {
 		//If this has been uploaded via the web.
@@ -114,7 +114,7 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 		}
 		
 		$PG_mainbody .= '
-			<form action="'.$action.'" method="POST" enctype="multipart/form-data" name="uploadform" id="uploadform">
+			<form action="'.$action.'" method="post" enctype="multipart/form-data" name="uploadform" id="uploadform">
 
 			<fieldset>
 			<legend>'.$L_maininfo.'</legend>
@@ -131,18 +131,21 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 		
 		if($mode=="edit") {
 			$PG_mainbody .= '<h4>'.$L_filetoedit.'</h4>
-			<div class="well"><strong>'.$text_title.'</strong> ('.$_GET['name'].')</div><input type="hidden" name="userfile" value="'.$_GET['name'].'">';
+			<div class="well">
+				<strong>'.$text_title.'</strong> ('.$_GET['name'].')
+			</div>
+			<input type="hidden" name="userfile" value="'.$_GET['name'].'">';
 		} else {
-			$PG_mainbody .= '
-			<h4>'.$L_file.'*</h4>
+			$PG_mainbody .= '<h4>'.$L_file.'*</h4>
 			<div class="well"><input name="userfile" id="userfile" type="file">
-			<input name="ftpfile" id="ftpfile" type="hidden">
-			<p class="pull-right"><a href="#uploadFiles" data-toggle="modal">or check for files uploaded via FTP</a></p></div>';
+				<input name="ftpfile" id="ftpfile" type="hidden">
+				<p class="pull-right">
+					<a href="#uploadFiles" data-toggle="modal">or check for files uploaded via FTP</a>
+				</p>
+			</div>';
 		}
 				
-		$PG_mainbody .= '
-			
-			<small><p>'.$L_fieldsrequired.'</p></small>
+		$PG_mainbody .= '<small><p>'.$L_fieldsrequired.'</p></small>
 			</fieldset>
 			
 			<label class="checkbox">
@@ -207,48 +210,51 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 			<div class="form-actions">
 				<input type="submit" value="'.$L_send.'" class="btn btn-primary">
 			</div>
+			
+			<!-- <div class="progress" id="fileProgress"><div class="bar" style="width:50%"></div></div> -->
+
 		</form>
 		
-<div id="uploadFiles" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    <h3 id="myModalLabel">Uploaded Files</h3>
-  </div>
-  <div class="modal-body">
-    <p>These are files that have been uploaded via FTP but not yet included in your feed. Select the file you\'d like associated with this episode. <strong>File names should contain no special characters. Only lower-case letters, numbers, and underscores. <em>The only period in the file name should be between the file name and the extension.</em></strong></p><ul>';
-
-// This chunk of code checks for uploaded files that don't have a database file associated with them. These can then be inserted 
-$handle = opendir ($absoluteurl.$upload_dir);
-while (($filename = readdir ($handle)) !== false)
-{
-	if ($filename != '..' && $filename != '.' && $filename != 'index.htm' && $filename != '_vti_cnf' && $filename != '.DS_Store')
+	<div id="uploadFiles" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+	    <h3 id="myModalLabel">Uploaded Files</h3>
+	  </div>
+	  <div class="modal-body">
+	    <p>These are files that have been uploaded via FTP but not yet included in your feed. Select the file you\'d like associated with this episode. <strong>File names should contain no special characters. Only lower-case letters, numbers, and underscores. <em>The only period in the file name should be between the file name and the extension.</em></strong></p><ul>';
+	
+	// This chunk of code checks for uploaded files that don't have a database file associated with them. These can then be inserted 
+	$handle = opendir ($absoluteurl.$upload_dir);
+	while (($filename = readdir ($handle)) !== false)
 	{
-		$file_array[$filename] = filemtime ($absoluteurl.$upload_dir.$filename);
+		if ($filename != '..' && $filename != '.' && $filename != 'index.htm' && $filename != '_vti_cnf' && $filename != '.DS_Store')
+		{
+			$file_array[$filename] = filemtime ($absoluteurl.$upload_dir.$filename);
+		}
 	}
-}
-
-if (!empty($file_array)) { //if directory is not empty
-	# asort ($file_array);
-	arsort ($file_array); //the opposite of asort (inverse order)
-	$recent_count = 0; //set recents to zero
-	foreach ($file_array as $key => $value)	{
-		$file_multimediale = explode(".",$key); //divide filename from extension [1]=extension (if there is another point in the filename... it's a problem)
-		$fileData = checkFileType($file_multimediale[1],$podcast_filetypes,$filemimetypes);
-		if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined variable $fileData[0]
-			$filedescr = "$absoluteurl"."$upload_dir$file_multimediale[0].xml"; //database file
-			if (!file_exists("$filedescr")) { //if database file exists 
-				$PG_mainbody .= "<li><a class=\"ftpupload\" data-ftpurl=\"".$key."\">".$key."</a></li>";
+	
+	if (!empty($file_array)) { //if directory is not empty
+		# asort ($file_array);
+		arsort ($file_array); //the opposite of asort (inverse order)
+		$recent_count = 0; //set recents to zero
+		foreach ($file_array as $key => $value)	{
+			$file_multimediale = explode(".",$key); //divide filename from extension [1]=extension (if there is another point in the filename... it's a problem)
+			$fileData = checkFileType($file_multimediale[1],$podcast_filetypes,$filemimetypes);
+			if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined variable $fileData[0]
+				$filedescr = "$absoluteurl"."$upload_dir$file_multimediale[0].xml"; //database file
+				if (!file_exists("$filedescr")) { //if database file exists 
+					$PG_mainbody .= "<li><a class=\"ftpupload\" data-ftpurl=\"".$key."\">".$key."</a></li>";
+				}
 			}
 		}
 	}
-}
-    $PG_mainbody .= '</ul>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Save changes</button>
-  </div>
-</div>';
+	$PG_mainbody .= '</ul>
+	  </div>
+	  <div class="modal-footer">
+	    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	    <button class="btn btn-primary">Save changes</button>
+	  </div>
+	</div>';
 
 } // end else . if GET variable "c" is not = "ok"
 ?>

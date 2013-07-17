@@ -19,30 +19,18 @@ if (isset($_REQUEST['GLOBALS']) OR isset($_REQUEST['absoluteurl']) OR isset($_RE
 if (isset($_FILES['userfile']) AND $_FILES['userfile']!=NULL AND isset($_POST['title']) AND $_POST['title']!=NULL AND isset($_POST['description']) AND $_POST['description']!=NULL){ //001
 
 	$file= $_FILES['userfile'] ['name']; //episode file
-
 	$img= $_FILES['image'] ['name']; // image file
-
 	$title = $_POST['title'];
-
 	$description = $_POST['description'];
-
-
 	$long_description = $_POST['long_description'];
-
 	$keywords = $_POST['keywords'];
-
 	$explicit = $_POST['explicit'];
-
 	$auth_name = $_POST['auth_name'];
-
 	$auth_email = $_POST['auth_email'];
-
 	// $errore= $_FILES['userfile']['error'];
-
 	$temporaneo= $_FILES['userfile']['tmp_name'];
 
 	// echo "<br /><br /><br />$file - err $errore - temp: $temporaneo<br /><br /><br />";
-
 	$filesuffix = NULL; // declare variable for duplicated filenames
 	$image_new_name = NULL; // declare variable for image name
 

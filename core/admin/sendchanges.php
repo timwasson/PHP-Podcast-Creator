@@ -7,7 +7,7 @@
 # 
 # This is Free Software released under the GNU/GPL License.
 ############################################################
-echo "Hello!";
+//echo "Hello!";
 ########### Security code, avoids cross-site scripting (Register Globals ON)
 if (isset($_REQUEST['GLOBALS']) OR isset($_REQUEST['absoluteurl']) OR isset($_REQUEST['amilogged']) OR isset($_REQUEST['theme_path'])) { exit; } 
 ########### End

@@ -17,24 +17,25 @@ include ('checkconfigexistence.php');
 
 $PG_mainbody = NULL; //define
 
-include ("$absoluteurl"."components/xmlparser/loadparser.php");
-include ("$absoluteurl"."setup/readsetuplanguages.php");
-
-
 // define variables
 $arr = NULL;
 $arrid = NULL;
 $n = 0;
 
-foreach($parser->document->language as $singlelanguage)
-{
-	//echo $singlelanguage->id[0]->tagData."<br>";
-	//echo $singlelanguage->description[0]->tagData;
-
-	$arr[] .= $singlelanguage->description[0]->tagData;
-	$arrid[] .= $singlelanguage->id[0]->tagData;
-	$n++;
-}
+$arr = ["ca" => "Català",
+			"cy" => "Cymraeg",
+			"de" => "Deutsch",
+			"en" => "English",
+			"es" => "Español",
+			"et" => "Eesti",
+			"fa" => "فارسی",
+			"fr" => "Français",
+			"it" => "Italiano",
+			"hu" => "Magyar",
+			"ja" => "日本語",
+			"pt" => "Português",
+			"th" => "ไทย",	
+			"tr" => "Türkçe"];
 
 
 ## SCRIPT LANGUAGES LIST
@@ -55,22 +56,14 @@ natcasesort($arr); // Natcasesort orders more naturally and is different from "s
 $browserlanguage = substr($_SERVER["HTTP_ACCEPT_LANGUAGE"],0,2); // ASSIGN BROWSER LANGUAGE into a VARIABLE
 
 foreach ($arr as $key => $val) {
+			$PG_mainbody .= '
+				<option value="' . $key . '"';
+			if ($scriptlang == $key) {
+				$PG_mainbody .= ' selected';
+			}
+			$PG_mainbody .= '>' . $val . '</option>';	
+		}
 
-
-
-	$PG_mainbody .= '
-		<option value="' . $arrid[$key] . '"';
-
-	// PRE select the language in the form checking the browser language
-
-	if (isset($browserlanguage) AND  $browserlanguage == $arrid[$key]) {
-		$PG_mainbody .= ' selected';
-	}
-
-	$PG_mainbody .= '>' . $val . '</option>
-		';	
-
-}
 $PG_mainbody .= '</select>
 	<br />
 	<input type="submit" value="'.$SL_next.'" class="btn btn-primary">

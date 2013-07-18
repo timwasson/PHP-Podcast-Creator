@@ -18,8 +18,10 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 	include("$absoluteurl"."core/admin/login.php");
 
 	include("$absoluteurl"."core/admin/checklogged.php");
-
-
+	
+	if (file_exists("$absoluteurl"."setup")) {
+	    $PG_mainbody .= "<div class=\"alert alert-error\"><i class=\"icon-warning-sign\"></i> Uh oh. Your /setup/ directory still exists. You should delete this as it is a security threat.</div>";
+	}
 	// check if user is already logged in
 	if(isset($amilogged) AND $amilogged =="true") {
 		

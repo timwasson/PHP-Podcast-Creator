@@ -3,7 +3,7 @@
 # PODCAST GENERATOR
 #
 # Created by Alberto Betella
-# http://podcastgen.sourceforge.net
+# Improved by Tim Wasson
 # 
 # This is Free Software released under the GNU/GPL License.
 ############################################################
@@ -60,21 +60,9 @@ $recent_episode_in_feed = "All"; // How many file to show in the XML feed (1,2,5
 
 $episodeperpage = 10;
 
-$enablestreaming = "yes"; // Enable mp3 streaming? ("yes" or "no")
-
-$streamingplayercolor = "grey";
-
 $dateformat = "d-m-Y"; // d-m-Y OR m-d-Y OR Y-m-d 
 
-$freebox = "yes"; // enable freely customizable box
-
-$enablehelphints = "yes";
-
-$enablepgnewsinadmin = "yes";
-
 $strictfilenamepolicy = "yes"; // strictly rename files (just characters A to Z and numbers) 
-
-$categoriesenabled = "yes";
 
 $firsttimehere = "yes";
 

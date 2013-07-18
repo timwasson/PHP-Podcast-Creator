@@ -18,9 +18,6 @@ if(isset($amilogged) AND $amilogged =="true") { //if logged
 			$absoluteurl = addslashes($absoluteurl); // double slashes
 	}
 
-
-	include ("$absoluteurl"."core/admin/VERSION.php"); //read PodcastGenerator version
-
 	$configfiletocreate = '<?php
 
 	#################################################################
@@ -59,22 +56,9 @@ if(isset($amilogged) AND $amilogged =="true") { //if logged
 
 	$episodeperpage = '.$episodeperpage.';
 
-	$enablestreaming = "'.$enablestreaming.'"; // Enable mp3 streaming? ("yes" or "no")
-
-	$streamingplayercolor = "'.$streamingplayercolor.'";
-
 	$dateformat = "'.$dateformat.'"; // d-m-Y OR m-d-Y OR Y-m-d 
 
-	$freebox = "'.$freebox.'"; // enable freely customizable box
-
-	$enablehelphints = "'.$enablehelphints.'";
-
-	$enablepgnewsinadmin = "'.$enablepgnewsinadmin.'";
-
 	$strictfilenamepolicy = "'.$strictfilenamepolicy.'"; // strictly rename files (just characters A to Z and numbers) 
-
-	$categoriesenabled = "'.$categoriesenabled.'";
-
 
 	###################
 	# XML Feed elements

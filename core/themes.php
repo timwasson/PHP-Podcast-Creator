@@ -12,7 +12,13 @@
 if (isset($_REQUEST['GLOBALS']) OR isset($_REQUEST['absoluteurl']) OR isset($_REQUEST['amilogged']) OR isset($_REQUEST['theme_path'])) { exit; } 
 ########### End
 
-if(($theme_file_contents = file_get_contents($theme_path."index.htm")) === FALSE) {
+// Load a different template for the admin panel
+if (isset($_GET['p']) AND $_GET['p'] == "admin") {
+	$tempfile = "admin.htm";
+} else {
+	$tempfile = "index.htm";
+}
+if(($theme_file_contents = file_get_contents($theme_path.$tempfile)) === FALSE) {
 	echo "<p class=\"error\">".$L_failedopentheme."</p>";
 	exit;
 }

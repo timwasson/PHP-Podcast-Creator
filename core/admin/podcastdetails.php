@@ -151,39 +151,143 @@ if(isset($amilogged) AND $amilogged =="true") {
 			<p><label for="authoremail"><b>'.$L_authoremail.'</b></label></p>
 			<input name="authoremail" type="text" id="title" size="50" maxlength="255" value="'.$author_email.'">';
 
-
-
-
-		include ("$absoluteurl"."components/xmlparser/loadparser.php");
-		
-		
-		if (file_exists("$absoluteurl"."components/feed_languages/feed_languages.xml")) {
-
-			$xml = file_get_contents("$absoluteurl"."components/feed_languages/feed_languages.xml");
-			//Set up the parser object
-			$parser = new XMLParser($xml);
-		
-			//Parse the XML file with categories data...
-			$parser->Parse();
-		
-		}
-
-
-		// define variables
-		$arr = NULL;
-		$arrid = NULL;
-		$n = 0;
-
-		foreach($parser->document->language as $singlelanguage)
-		{
-			//echo $singlelanguage->id[0]->tagData."<br>";
-			//echo $singlelanguage->description[0]->tagData;
-
-			$arr[] .= $singlelanguage->description[0]->tagData;
-			$arrid[] .= $singlelanguage->id[0]->tagData;
-			$n++;
-		}
-
+	
+		$arr = ["aa" => "aa (afar)",
+			"ab" => "ab (abkhazian)",
+			"af" => "af (afrikaans)",
+			"am" => "am (amharic)",
+			"ar" => "ar (arabic)",
+			"as" => "as (assamese)",
+			"ay" => "ay (aymara)",
+			"az" => "az (azerbaijani)",
+			"ba" => "ba (bashkir)",
+			"be" => "be (byelorussian)",
+			"bg" => "bg (bulgarian)",
+			"bh" => "bh (bihari)",
+			"bi" => "bi (bislama)",
+			"bn" => "bn (bengali)",
+			"bo" => "bo (tibetan)",
+			"br" => "br (breton)",
+			"ca" => "ca (catalan)",
+			"co" => "co (corsican)",
+			"cs" => "cs (czech)",
+			"cy" => "cy (welsh)",
+			"da" => "da (danish)",
+			"de" => "de (german)",
+			"dz" => "dz (bhutani)",
+			"el" => "el (greek)",
+			"en" => "en (english)",
+			"eo" => "eo (esperanto)",
+			"es" => "es (spanish)",
+			"et" => "et (estonian)",
+			"eu" => "eu (basque)",
+			"fa" => "fa (persian)",
+			"fi" => "fi (finnish)",
+			"fj" => "fj (fiji)",
+			"fo" => "fo (faeroese)",
+			"fr" => "fr (french)",
+			"fy" => "fy (frisian)",
+			"ga" => "ga (irish)",
+			"gd" => "gd (gaelic)",
+			"gl" => "gl (galician)",
+			"gn" => "gn (guarani)",
+			"gu" => "gu (gujarati)",
+			"ha" => "ha (hausa)",
+			"hi" => "hi (hindi)",
+			"hr" => "hr (croatian)",
+			"hu" => "hu (hungarian)",
+			"hy" => "hy (armenian)",
+			"ia" => "ia (interlingua)",
+			"ie" => "ie (interlingue)",
+			"ik" => "ik (inupiak)",
+			"in" => "in (indonesian)",
+			"is" => "is (icelandic)",
+			"it" => "it (italian)",
+			"iw" => "iw (hebrew)",
+			"ja" => "ja (japanese)",
+			"ji" => "ji (yiddish)",
+			"jw" => "jw (javanese)",
+			"ka" => "ka (georgian)",
+			"kk" => "kk (kazakh)",
+			"kl" => "kl (greenlandic)",
+			"km" => "km (cambodian)",
+			"kn" => "kn (kannada)",
+			"ko" => "ko (korean)",
+			"ks" => "ks (kashmiri)",
+			"ku" => "ku (kurdish)",
+			"ky" => "ky (kirghiz)",
+			"la" => "la (latin)",
+			"ln" => "ln (lingala)",
+			"lo" => "lo (laothian)",
+			"lt" => "lt (lithuanian)",
+			"lv" => "lv (latvian)",
+			"mg" => "mg (malagasy)",
+			"mi" => "mi (maori)",
+			"mk" => "mk (macedonian)",
+			"ml" => "ml (malayalam)",
+			"mn" => "mn (mongolian)",
+			"mo" => "mo (moldavian)",
+			"mr" => "mr (marathi)",
+			"ms" => "ms (malay)",
+			"mt" => "mt (maltese)",
+			"my" => "my (burmese)",
+			"na" => "na (nauru)",
+			"ne" => "ne (nepali)",
+			"nl" => "nl (dutch)",
+			"no" => "no (norwegian)",
+			"oc" => "oc (occitan)",
+			"om" => "om (oromo)",
+			"or" => "or (oriya)",
+			"pa" => "pa (punjabi)",
+			"pl" => "pl (polish)",
+			"ps" => "ps (pashto)",
+			"pt" => "pt (portuguese)",
+			"qu" => "qu (quechua)",
+			"rm" => "rm (rhaeto-romance)",
+			"rn" => "rn (kirundi)",
+			"ro" => "ro (romanian)",
+			"ru" => "ru (russian)",
+			"rw" => "rw (kinyarwanda)",
+			"sa" => "sa (sanskrit)",
+			"sd" => "sd (sindhi)",
+			"sg" => "sg (sangro)",
+			"sh" => "sh (serbo-croatian)",
+			"si" => "si (singhalese)",
+			"sk" => "sk (slovak)",
+			"sl" => "sl (slovenian)",
+			"sm" => "sm (samoan)",
+			"sn" => "sn (shona)",
+			"so" => "so (somali)",
+			"sq" => "sq (albanian)",
+			"sr" => "sr (serbian)",
+			"ss" => "ss (siswati)",
+			"st" => "st (sesotho)",
+			"su" => "su (sudanese)",
+			"sv" => "sv (swedish)",
+			"sw" => "sw (swahili)",
+			"ta" => "ta (tamil)",
+			"te" => "te (tegulu)",
+			"tg" => "tg (tajik)",
+			"th" => "th (thai)",
+			"ti" => "ti (tigrinya)",
+			"tk" => "tk (turkmen)",
+			"tl" => "tl (tagalog)",
+			"tn" => "tn (setswana)",
+			"to" => "to (tonga)",
+			"tr" => "tr (turkish)",
+			"ts" => "ts (tsonga)",
+			"tt" => "tt (tatar)",
+			"tw" => "tw (twi)",
+			"uk" => "uk (ukrainian)",
+			"ur" => "ur (urdu)",
+			"uz" => "uz (uzbek)",
+			"vi" => "vi (vietnamese)",
+			"vo" => "vo (volapuk)",
+			"wo" => "wo (wolof)",
+			"xh" => "xh (xhosa)",
+			"yo" => "yo (yoruba)",
+			"zh" => "zh (chinese)",
+			"zu" => "zu (zulu)"];
 
 		## FEED LANGUAGES LIST
 
@@ -196,21 +300,13 @@ if(isset($amilogged) AND $amilogged =="true") {
 		natcasesort($arr); // Natcasesort orders more naturally and is different from "sort", which is case sensitive
 
 		foreach ($arr as $key => $val) {
+			$PG_mainbody .= '<option value="' . $key . '"';
 
-
-
-			$PG_mainbody .= '
-				<option value="' . $arrid[$key] . '"';
-
-			if ($feed_language == $arrid[$key]) {
+			if ($feed_language == $key) {
 				$PG_mainbody .= ' selected';
 			}
 
-			$PG_mainbody .= '>' . $val . '</option>
-				';	
-
-
-
+			$PG_mainbody .= '>' . $val . '</option>';
 		}
 		$PG_mainbody .= '</select>';	
 

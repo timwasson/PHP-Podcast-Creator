@@ -134,109 +134,20 @@ if(isset($amilogged) AND $amilogged =="true") {
 
 			</select>';
 
-		##### SCRIPT LANGUAGE
-		include ("$absoluteurl"."components/xmlparser/loadparser.php");
-		
-		//if (file_exists("$absoluteurl"."components/podcastgen_languages/podcastgen_languages.xml")) {
-		
-			$xml = "<PodcastGenerator>
-
-	<language>
-		<id>ca</id>
-		<description>Català</description>
-	</language>
-
-<language>
-	<id>cy</id>
-	<description>Cymraeg</description>
-</language>
-
-	<language>
-		<id>de</id>
-		<description>Deutsch</description>
-	</language>
-
-	<language>
-		<id>en</id>
-		<description>English</description>
-	</language>
-	
-	<language>
-		<id>es</id>
-		<description>Español</description>
-	</language>
-	
-	<language>
-		<id>et</id>
-		<description>Eesti</description>
-	</language>
-	
-	<language>
-		<id>fa</id>
-		<description>فارسی</description>
-	</language>
-	
-	
-	<language>
-		<id>fr</id>
-		<description>Français</description>
-	</language>
-	
-	<language>
-		<id>it</id>
-		<description>Italiano</description>
-	</language>
-	
-	<language>
-		<id>hu</id>
-		<description>Magyar</description>
-	</language>
-	
-	<language>
-		<id>ja</id>
-		<description>日本語</description>
-	</language>
-	
-	<language>
-		<id>pt</id>
-		<description>Português</description>
-	</language>
-
-	<language>
-		<id>th</id>
-		<description>ไทย</description>
-	</language>	
-	
-	<language>
-		<id>tr</id>
-		<description>Türkçe</description>
-	</language>
-	
-	
-</PodcastGenerator>";
-			//Set up the parser object
-			$parser = new XMLParser($xml);
-		
-			//Parse the XML file with categories data...
-			$parser->Parse();
-		
-		//}
-
-
-		// define variables
-		$arr = NULL;
-		$arrid = NULL;
-		$n = 0;
-
-		foreach($parser->document->language as $singlelanguage)
-		{
-			//echo $singlelanguage->id[0]->tagData."<br>";
-			//echo $singlelanguage->description[0]->tagData;
-
-			$arr[] .= $singlelanguage->description[0]->tagData;
-			$arrid[] .= $singlelanguage->id[0]->tagData;
-			$n++;
-		}
+		$arr = ["ca" => "Català",
+			"cy" => "Cymraeg",
+			"de" => "Deutsch",
+			"en" => "English",
+			"es" => "Español",
+			"et" => "Eesti",
+			"fa" => "فارسی",
+			"fr" => "Français",
+			"it" => "Italiano",
+			"hu" => "Magyar",
+			"ja" => "日本語",
+			"pt" => "Português",
+			"th" => "ไทย",	
+			"tr" => "Türkçe"];
 
 		## SCRIPT LANGUAGES LIST
 		$PG_mainbody .= '<h4>'.$L_podcastgenlang.'</h4>
@@ -248,8 +159,8 @@ if(isset($amilogged) AND $amilogged =="true") {
 
 		foreach ($arr as $key => $val) {
 			$PG_mainbody .= '
-				<option value="' . $arrid[$key] . '"';
-			if ($scriptlang == $arrid[$key]) {
+				<option value="' . $key . '"';
+			if ($scriptlang == $key) {
 				$PG_mainbody .= ' selected';
 			}
 			$PG_mainbody .= '>' . $val . '</option>';	

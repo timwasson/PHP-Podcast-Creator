@@ -114,6 +114,7 @@ if (!empty($file_array)) { //if directory is not empty
 								$episode_details .= @$ThisFileInfo['audio']['sample_rate'] ;
 								$episode_details .= " $L_episode_hz";
 								$episode_date .= " <i class=\"icon-info-sign\" rel=\"tooltip\" data-toggle=\"tooltip\" title=\"".$episode_details."\"></i> ";
+								$episode_date .= " <a href=\"".$url.$upload_dir.$file_multimediale[0].".".$podcast_filetype."\" class=\"track\"><i class=\"icon-play-circle\"></i></a> ";
 							} 
 							$episode_details .= " - File Size: ".$file_size." ".$L_bytes;
 						} 
@@ -159,7 +160,7 @@ if (!empty($file_array)) { //if directory is not empty
 
 							if($podcast_filetype=="mp3") {
 								//Update the tracks on the right-hand side.
-								$trackfeed .= "<li><a href=\"".$url.$upload_dir.$key."\" rel=\"tooltip\" title=\"".$filepubdate."\" class=\"track\">".$text_title."</a></li>\r";
+								$trackfeed .= "<li><a href=\"".$url.$upload_dir.$key."\" rel=\"tooltip\" title=\"".$filepubdate."\" class=\"track icon-volume-up\">".$text_title."</a></li>\r";
 								//$PG_mainbody .= $trackfeed;
 
 							} else {

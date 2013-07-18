@@ -39,6 +39,12 @@ $(document).ready(function(){
 
 	// Create click handlers for the different tracks
 	$(".track").click(function(e) {
+		// Remove all the previously .
+		$(".track.icon-volume-up").removeClass("icon-volume-up");
+		
+		// Add the speaker to this thing.
+		$(this).addClass("icon-volume-up");
+		
 		my_trackName.text($(this).text());
 		my_jPlayer.jPlayer("setMedia", {
 			mp3: $(this).attr("href")

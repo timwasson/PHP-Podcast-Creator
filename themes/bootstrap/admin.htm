@@ -4,7 +4,6 @@
 	
 	<title>-----PG_PAGETITLE-----</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	-----PG_METATAGS-----
 
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
@@ -23,51 +22,26 @@
 		</header>
 		<div class="row">
 			<div class="span9">
-				
-					<!-- <h2>-----PG_PODCASTSUBTITLE-----</h2>
-					<p>-----PG_PODCASTDESC-----</p> -->
+
 					-----PG_MAINBODY-----
 				
 			</div>
 			<aside class="span3">
 				
-				-----PG_TRACKLIST-----
 				-----PG_ADMINMENU-----
 				
 			</aside>
 		</div>
 		<footer class="row">
-			<div class="span12"><a href="?p=admin" accesskey="A" title="-----PG_MENUADMIN----- (A)">-----PG_MENUADMIN-----</a></div>
+			<div class="span12">
+				
+			</div>
 		</footer>
 	</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 	-----PG_JSLOAD-----
-	<script>
-	$(function() {
-        $("[rel='tooltip']").tooltip();
-        
-        //Hack to fix the affix widths.
-        function playerFix() {
-        	var player = "#jp_container";
-        	var width = $(player).parent().width();
-        	
-        	$(player).css({"width":width})
-        	
-        	if($(window).width() > 767) {
-		    	$(player).affix({offset:200}).css({"top":0});
-	        } else {
-		        // remove the affix
-		        $(player).removeData('affix').removeClass("affix affix-top affix-bottom");
-	        }
-        }
-        
-        $(window).resize(function() {
-        	playerFix();
-        });
-        playerFix();
-    });
-	</script>
+
 </body>
 
 </html>

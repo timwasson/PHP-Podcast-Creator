@@ -92,7 +92,7 @@ if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined vari
 				$trackfeed .= "<li><a href=\"".$url.$upload_dir.$key."\" rel=\"tooltip\" title=\"".$filepubdate."\" class=\"track icon-volume-up\">".$text_title."</a></li>\r";
 				//$PG_mainbody .= $trackfeed;
 
-			} else {
+			} elseif($isvideo == "yes") {
 				$PG_mainbody .= '
 				<div id="jp_container_1" class="jp-video">
 					<div class="jp-type-single">
@@ -172,6 +172,68 @@ if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined vari
 				});
 				//]]>
 				</script>'; 
+		} elseif($podcast_filetype=="mp3" AND isset($_GET['p']) AND $_GET['p']=="episode") {
+			$PG_mainbody .= '
+				<div id="jp_container">
+					<div id="jquery_jplayer"></div>
+					<p>
+						<span class="track-name">&nbsp;</span>
+						<span class="jp-current-time"></span> | <span class="jp-duration"></span>
+						
+					</p>
+					<div class="jp-progress progress">
+						<div class="jp-seek-bar progress">
+							<div class="jp-play-bar bar"></div>
+						</div>
+					</div>
+					
+					<div class="btn-holder">
+					
+						<div class="btn-group">
+							<a class="jp-play btn" href="#"><i class="icon-play"></i></a>
+							<a class="jp-pause btn" href="#"><i class="icon-pause"></i></a>
+							<a class="jp-stop btn" href="#"><i class="icon-stop"></i></a>
+						</div>
+					
+					
+						<div class="volume-holder">
+							<a class="jp-mute" href="#"><i class="icon-volume-off"></i></a>
+							<a class="jp-unmute" href="#"><i class="icon-volume-down"></i></a>
+							
+							<div class="jp-volume-bar">
+								<div class="jp-volume-bar-value"></div>
+							</div>
+			
+							<a class="jp-volume-max" href="#"><i class="icon-volume-up"></i></a>
+						</div>
+					</div>
+				</div>';
+			$loadjavascripts .= '
+				<script type="text/javascript">
+				//<![CDATA[
+				$(document).ready(function(){
+					$("#jquery_jplayer").jPlayer({
+						ready: function () {
+							$(this).jPlayer("setMedia", {
+								mp3: "'.$url.$upload_dir.$file_multimediale[0].'.'.$podcast_filetype.'"
+							});
+						},
+						play: function() { // To avoid multiple jPlayers playing together.
+							$(this).jPlayer("pauseOthers");
+						},
+						size: {
+							width: "100%",
+							height: "auto"
+						},
+						
+						swfPath: "/components/player/js",
+						supplied: "mp3",
+						keyEnabled: true
+					});
+				});
+
+				//]]>
+				</script>';
 		}
 
 		$PG_mainbody .= "</article>";

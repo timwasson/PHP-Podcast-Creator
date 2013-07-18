@@ -101,6 +101,7 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 							} else {
 								$PG_mainbody .= '<img src="http://placehold.it/100x100&text=No+Image">';
 							}
+						$file_multimediale[0] = urlencode($file_multimediale[0]);
 						$PG_mainbody .= '</td>
 							<td>'.$text_title.'</td>
 							<td>'.$episode_date.'</td>

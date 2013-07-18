@@ -60,6 +60,8 @@ if (isset($_GET['p']) and $_GET['p'] == "admin" and isset($_GET['do']) and $_GET
 $loadjavascripts .= '<script type="text/javascript" src="/components/player/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="/themes/bootstrap/js/player.js"></script>';
 
+//if(empty($trackfeed)) { $trackfeed =""; } else { $trackfeed = $trackfeed; }
+
 $theme_file_contents = str_replace("-----PG_JSLOAD-----", $loadjavascripts, $theme_file_contents); 
 # Othere Theme elements replacing
 $theme_file_contents = str_replace("-----PG_MAINBODY-----", $PG_mainbody, $theme_file_contents);
@@ -70,7 +72,7 @@ $theme_file_contents = str_replace("-----PG_PODCASTDESC-----", $podcast_descript
 $theme_file_contents = str_replace("-----PG_MENUHOME-----", $L_menu_home, $theme_file_contents); 
 $theme_file_contents = str_replace("-----PG_MENUADMIN-----", $L_menu_admin, $theme_file_contents); 
 $theme_file_contents = str_replace("-----PG_ADMINMENU-----", $admmenu, $theme_file_contents);
-$theme_file_contents = str_replace("-----PG_TRACKLIST-----", $trackfeed, $theme_file_contents); 
+$theme_file_contents = str_replace("-----PG_TRACKLIST-----", $trackfeed, $theme_file_contents);
 
 #FOOTER
 $theme_file_contents = str_replace("-----PG_FOOTER-----", $definefooter, $theme_file_contents);

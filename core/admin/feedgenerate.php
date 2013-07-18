@@ -3,7 +3,7 @@
 # PODCAST GENERATOR
 #
 # Created by Alberto Betella
-# http://podcastgen.sourceforge.net
+# Improved by Tim Wasson
 # 
 # This is Free Software released under the GNU/GPL License.
 ############################################################
@@ -41,7 +41,7 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 	if (isset($_GET['do']) AND $_GET['do']=="generate") {	// do not show following text if included in other php files
 
 		$PG_mainbody .= "<h3>$L_generate</h3>";
-		$PG_mainbody .= "<p><span class=\"admin_hints\">$L_admin_genfeed</span></p>";
+		$PG_mainbody .= "<p>".$L_admin_genfeed."</p>";
 	}
 
 	### DEFINE FEED FILENAME
@@ -363,15 +363,15 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 
 	############
 
-	$PG_mainbody .= "<br /><b>$L_feedgenerated</b><br />";
+	$PG_mainbody .= "<p><strong>".$L_feedgenerated."</strong></p>";
 
 	if ($recent_episode_in_feed == "0") {
 
-		$PG_mainbody .= "<br /><i>$L_allepisodesindexed</i><br /><span class=\"admin_hints\">$L_allepisodesindexed_hint</span>";	
+		$PG_mainbody .= "<p><span class=\"badge\">$L_allepisodesindexed</span><p>$L_allepisodesindexed_hint</p>";	
 
 	} else {
 
-		$PG_mainbody .= "<br /><i>$recent_count $L_episodes</i>";	
+		$PG_mainbody .= "<p><span class=\"badge badge-important\">".$recent_count."</span> ".$L_episodes."</i>";	
 
 	}
 

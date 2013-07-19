@@ -211,7 +211,7 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 				<input type="submit" value="'.$L_send.'" class="btn btn-primary">
 			</div>
 			
-			<!-- <div class="progress" id="fileProgress"><div class="bar" style="width:50%"></div></div> -->
+			<div class="progress" id="fileProgress"><div class="bar"></div></div>
 
 		</form>
 		

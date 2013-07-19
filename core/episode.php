@@ -15,7 +15,19 @@ if (isset($_REQUEST['GLOBALS']) OR isset($_REQUEST['absoluteurl']) OR isset($_RE
 $PG_mainbody = NULL; //erase variable which contains episodes data
 
 if (isset($_GET['name']) AND $_GET['name'] != NULL ) {
+
+	// Get the file in light of no extension here. Removed the extension for cleaner URL rewrites. 
 	$file_multimediale = $_GET['name'];
+	$handle = opendir ($absoluteurl.$upload_dir);
+
+	while (($filename = readdir ($handle)) !== false)
+	{
+		$filemain = explode(".",$filename);		
+		if ($filemain[0]==$file_multimediale)
+		{
+			$file_multimediale = $filename;
+		}
+	}
 		
 	// Get the date this file was made.
 	$value = filemtime("$absoluteurl"."$upload_dir$file_multimediale");

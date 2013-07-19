@@ -267,15 +267,16 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 							$filetime = filemtime ("$absoluteurl"."$upload_dir$file_multimediale[0].$podcast_filetype");
 							$filepubdate = date ('r', $filetime);
 
+							$eplink = $link.urlencode($file_multimediale[0]);
 
 							$single_file.="<item>
 								<title>$text_title</title>
 								<itunes:subtitle>$text_shortdesc</itunes:subtitle>
 								<itunes:summary><![CDATA[ $text_longdesc ]]></itunes:summary>
 								<description>$text_shortdesc</description>
-								<link>$link$key</link>
+								<link>".$eplink."</link>
 								<enclosure url=\"$url$upload_dir$key\" length=\"$file_size\" type=\"$filemimetype\"/>
-								<guid>$link$key</guid>
+								<guid>".$eplink."</guid>
 								";
 
 

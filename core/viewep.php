@@ -68,7 +68,7 @@ if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined vari
 
 			$PG_mainbody .= '<article>';
 
-			$PG_mainbody .= '<h3><a href="/episode/'.urlencode($file_multimediale[0]).'">'.$text_title.'</a>';
+			$PG_mainbody .= '<h3><a href="/episode/'.urlencode($file_multimediale[0]).'.html">'.$text_title.'</a>';
 
 			if ($podcast_filetype=="mpg" OR $podcast_filetype=="mpeg" OR $podcast_filetype=="mov" OR $podcast_filetype=="mp4" OR $podcast_filetype=="wmv" OR $podcast_filetype=="3gp" OR $podcast_filetype=="mp4" OR $podcast_filetype=="avi" OR $podcast_filetype=="flv" OR $podcast_filetype=="m4v") { // if it is a video
 

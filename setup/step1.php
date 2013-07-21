@@ -22,7 +22,7 @@ $arr = NULL;
 $arrid = NULL;
 $n = 0;
 
-$arr = ["ca" => "Català",
+$arr = array("ca" => "Català",
 			"cy" => "Cymraeg",
 			"de" => "Deutsch",
 			"en" => "English",
@@ -35,7 +35,7 @@ $arr = ["ca" => "Català",
 			"ja" => "日本語",
 			"pt" => "Português",
 			"th" => "ไทย",	
-			"tr" => "Türkçe"];
+			"tr" => "Türkçe");
 
 
 ## SCRIPT LANGUAGES LIST

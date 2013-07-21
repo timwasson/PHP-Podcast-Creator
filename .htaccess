@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule ^([^/]*)/([^/]*)$ /?p=$1&name=$2 [L]
+RewriteRule ^([^/]*)/([^/]*).html$ /?p=$1&name=$2 [L]

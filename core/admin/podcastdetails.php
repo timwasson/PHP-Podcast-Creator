@@ -152,7 +152,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 			<input name="authoremail" type="text" id="title" size="50" maxlength="255" value="'.$author_email.'">';
 
 	
-		$arr = ["aa" => "aa (afar)",
+		$arr = array("aa" => "aa (afar)",
 			"ab" => "ab (abkhazian)",
 			"af" => "af (afrikaans)",
 			"am" => "am (amharic)",
@@ -287,7 +287,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 			"xh" => "xh (xhosa)",
 			"yo" => "yo (yoruba)",
 			"zh" => "zh (chinese)",
-			"zu" => "zu (zulu)"];
+			"zu" => "zu (zulu)");
 
 		## FEED LANGUAGES LIST
 

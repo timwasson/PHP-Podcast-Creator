@@ -267,7 +267,7 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 							$filetime = filemtime ("$absoluteurl"."$upload_dir$file_multimediale[0].$podcast_filetype");
 							$filepubdate = date ('r', $filetime);
 
-							$eplink = $link.urlencode($file_multimediale[0]);
+							$eplink = $link.urlencode($file_multimediale[0]).".html";
 
 							$single_file.="<item>
 								<title>$text_title</title>

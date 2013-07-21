@@ -134,7 +134,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 
 			</select>';
 
-		$arr = ["ca" => "Català",
+		$arr = array("ca" => "Català",
 			"cy" => "Cymraeg",
 			"de" => "Deutsch",
 			"en" => "English",
@@ -147,7 +147,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 			"ja" => "日本語",
 			"pt" => "Português",
 			"th" => "ไทย",	
-			"tr" => "Türkçe"];
+			"tr" => "Türkçe");
 
 		## SCRIPT LANGUAGES LIST
 		$PG_mainbody .= '<h4>'.$L_podcastgenlang.'</h4>

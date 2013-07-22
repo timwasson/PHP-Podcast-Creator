@@ -1,4 +1,4 @@
-# Podcast-Generator
+# PHP Podcast Creator
 
 Built with PHP, XML, and jQuery. 
 

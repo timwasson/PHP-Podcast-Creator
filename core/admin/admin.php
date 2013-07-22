@@ -74,10 +74,6 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 
 			include("$absoluteurl"."core/admin/delete.php");
 		} 
-		elseif (isset($_GET['do']) AND $_GET['do']=="itunesimg") {
-
-			include("$absoluteurl"."core/admin/itunesimg.php");
-		}
 		elseif (isset($_GET['do']) AND $_GET['do']=="itunescat") {
 
 			include("$absoluteurl"."core/admin/itunescategories.php");

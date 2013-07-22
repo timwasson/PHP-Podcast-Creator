@@ -25,33 +25,18 @@ if(isset($_POST['ftpfile'])) {
 if (isset($userfile) AND $userfile!=NULL AND isset($_POST['title']) AND $_POST['title']!=NULL AND isset($_POST['description']) AND $_POST['description']!=NULL){ //001
 
 	$file = $userfile; //episode file
-
 	$img = $_FILES['image'] ['name']; // image file
-	
 	$existentimage = $_POST['existentimage'];
-	
 	$title = $_POST['title'];
-
 	$description = $_POST['description'];
 
-	if (isset($_POST['category']) AND $_POST['category'] != NULL) {
-		$category = $_POST['category'];
-	}
-
 	$long_description = $_POST['long_description'];
-
 	$keywords = $_POST['keywords'];
-
 	$explicit = $_POST['explicit'];
-
 	$auth_name = $_POST['auth_name'];
-
 	$auth_email = $_POST['auth_email'];
 
-
-
 	// echo "<br /><br /><br />$file - err $errore - temp: $temporaneo<br /><br /><br />";
-
 	$filesuffix = NULL; // declare variable for duplicated filenames
 	$image_new_name = NULL; // declare variable for image name
 
@@ -62,9 +47,6 @@ if (isset($userfile) AND $userfile!=NULL AND isset($_POST['title']) AND $_POST['
 	$longdescmax =4000; #set max characters variable. iTunes specifications by Apple say "max 4000 characters" for long description field
 
 	if (strlen($long_description)<$longdescmax) { // 002 (if long description IS NOT too long, go on executing...
-		####
-
-
 
 		############### cleaning/depurate input
 		###############

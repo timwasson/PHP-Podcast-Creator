@@ -97,6 +97,11 @@ $explicit_podcast = "no"; //does your podcast contain explicit language? ("yes",
 
 // END OF CONFIGURATION
 
+// beginning of mySQL integration
+$db_user = "";	// The user that has access to your database
+$db_pass = "";	// The password for the user that has access to your database
+$database = "";	
+
 ?>';
 
 $createcf = fopen("$absoluteurl"."config.php",'w'); //open config file

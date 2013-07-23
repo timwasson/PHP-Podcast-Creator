@@ -90,6 +90,9 @@ if(isset($amilogged) AND $amilogged =="true") { //if logged
 	$explicit_podcast = "'.$explicit_podcast.'"; //does your podcast contain explicit language? ("yes", "no" or "clean")
 
 	// END OF CONFIGURATION
+	$db_user = "'..'";	// The user that has access to your database
+	$db_pass = "'..'";	// The password for the user that has access to your database
+	$database = "'..'";	
 
 	?>';
 

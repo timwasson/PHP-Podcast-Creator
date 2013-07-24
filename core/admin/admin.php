@@ -26,7 +26,9 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 	if(isset($amilogged) AND $amilogged =="true") {
 		
 		if(empty($_GET['do'])) {
-			$PG_mainbody .= "This is just intro text for the admin panel.";
+			$PG_mainbody .= '<h2>Feed Downloads</h2>
+				<div id="chart_div" style="width: 100%; height: 300px;"></div>
+				<p>This is the total number of feed downloads you\'ve received. </p>';
 		}
 		
 		$admmenu .= '

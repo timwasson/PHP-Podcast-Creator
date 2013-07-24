@@ -21,6 +21,8 @@ While waiting for the official release of the original Podcast Generator 2.0, I 
 - HTML5 audio/video player
 - Significant structural changes that make updates and upgrades easier
 - Clean URLs using URL rewrites
+- Feed download tracking
+- mySQL integration (currently only for feed tracking)
 
 In an effort to streamline the original Generator, I removed categories, archives, freebox, the default themes, and several other components. I removed the reliance on prototype/scriptaculous and replaced that functionality with jQuery (via CDN). I improved error checking, and implemented Twitter Bootstrap (also via CDN) as the main theme for easy customization. 
 
@@ -31,9 +33,11 @@ Upload all the files to your server. Create a directory called "media" in the ro
 
 Download jPlayer (http://jplayer.org/) and put it in /components/player (so the structure should be /components/player/jquery.player.min.js). Download tinyMCE (http://www.tinymce.com/) and extract it into /components/tinymce (so the structure should be /components/tinymce/js/tinymce/jquery.tinymce.min.js). 
 
-After that, just load your website and walk through the installation. 
+After that, just load your website and walk through the installation.
+
+## Coming Soon
+- Individual episode download tracking
+- Abandon the XML file storage for mySQL storage
 
 ## Notes
 The jPlayer video implementation still needs a little help, so any HTML5 video gurus are welcome to fork this project to work on optimizing this.
-
-While the original developer used a series of XML files in lieu of a database to store data, I do plan on moving away from this technique and instead store episode data in a mySQL database. This will happen in an upcoming release. 

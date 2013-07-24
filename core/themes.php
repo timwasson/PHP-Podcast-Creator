@@ -1,6 +1,6 @@
 <?php
 ############################################################
-# PODCAST GENERATOR
+# PHP Podcast Creator
 #
 # Created by Alberto Betella
 # Improved by Tim Wasson
@@ -39,6 +39,63 @@ $theme_file_contents = str_replace("-----PG_PAGETITLE-----", $page_title, $theme
 # LOAD JAVASCRIPTS IN THE HEADER IF PAGE REQUIRES - REPLACES "-----PG_JSLOAD-----" IN THE HEADER OF THE THEME PAGE
 if (isset($_GET['p']) and $_GET['p'] == "admin") {
 	$loadjavascripts = "<script src=\"/core/admin/custom.js\"></script>";
+}
+if (isset($_GET['p']) and $_GET['p'] == "admin" and empty($_GET['do'])) {
+	
+	// This loads all the Google Chart on the front page of the admin panel for the total number of Feed downloads.
+	$loadjavascripts .= '
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          [\'Month\', \'Downloads\'],';
+    
+    /* Open a connection */
+	$mysqli = new mysqli($server, $db_user, $db_pass, $database);
+	
+	/* check connection */
+	if (mysqli_connect_errno()) {
+	    printf("Connect failed: %s\n", mysqli_connect_error());
+	    exit();
+	}
+   
+	$i = -6;
+	while ($i <= 0):
+	    
+	    $query = "SELECT * FROM feed WHERE YEAR(time) = YEAR(CURRENT_DATE + INTERVAL ".$i." MONTH) AND MONTH(time) = MONTH(CURRENT_DATE + INTERVAL ".$i." MONTH)";
+		if ($stmt = $mysqli->prepare($query)) {
+		
+		    /* execute query */
+		    $stmt->execute();
+		
+		    /* store result */
+		    $stmt->store_result();
+
+			$loadjavascripts .= '["'.date("F",strtotime($i." Months")).'",'.$stmt->num_rows.'],';
+			
+		    /* close statement */
+		    $stmt->close();
+		}
+		
+	    $i++;
+	endwhile;
+	
+	$mysqli->close();
+	
+	$loadjavascripts .= '
+        ]);
+
+        var options = {
+          title: \'Feed Downloads\',
+          colors: [\'#c00\']
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById(\'chart_div\'));
+        chart.draw(data, options);
+      }
+    </script>';
 }
 if (isset($_GET['p']) and $_GET['p'] == "admin" and isset($_GET['do']) and $_GET['do'] == "upload" or $_GET['do'] == "edit") {
 

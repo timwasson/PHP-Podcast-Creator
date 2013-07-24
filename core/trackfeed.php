@@ -1,7 +1,7 @@
 <?
 // Copyright 2013, Tim Wasson, PHP Podcast Creator
-// Keep track of podcast subscribers. 
-//echo "trying...";
+// An extremely basic way to keep track of podcast subscribers. 
+
 include("../config.php"); 
 
 mysql_connect($server,$db_user,$db_pass);

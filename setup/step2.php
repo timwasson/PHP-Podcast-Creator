@@ -12,15 +12,21 @@ include ('checkconfigexistence.php');
 
 $PG_mainbody = NULL; //define
 
+$PG_mainbody = "<h2>mySQL Setup</h2>";
 
-$PG_mainbody .= '<h3>'.$SL_checkperm.'</h3>
-	<p>'.$SL_step1.'</p>
-	<form method="post" action="index.php?step=3">
-	<br />
-	<input type="hidden" name="setuplanguage" value="'.$_POST['setuplanguage'].'">
-	<input type="submit" value="'.$SL_next.'" class="btn btn-primary">
+$PG_mainbody .= "<p>This is set up your mySQL login and password. For now this doesn't work.</p>";
+
+$PG_mainbody .= "<form action=\"index.php?step=3\" method=\"post\">
+	<input type=\"text\">
+	<input type=\"text\">
+	<input type=\"text\">
+	<input type=\"hidden\" name=\"setuplanguage\" value=\"".$setuplang."\">
+	<div class=\"form-actions\">
+		<input type=\"submit\" class=\"btn btn-primary\">
+	</div>
 	</form>
-	';
+";
+
 
 
 //print output

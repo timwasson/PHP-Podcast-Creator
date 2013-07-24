@@ -111,7 +111,7 @@ $SL_pgsetuptext = $SL_pg." ".$podcastgen_version." ".$SL_pgsetup;
 	
 	<div class="row">
 		<div class="span12">
-			<span class="label label-warning">Podcast Generator</span> Powered by <a href="https://github.com/timwasson/Podcast-Generator" title="Podcast Generator: open source podcast publishing solution">Podcast Generator</a>, an open source podcast publishing solution.
+			<span class="label label-warning">PHP Podcast Creator</span> Powered by <a href="https://github.com/timwasson/Podcast-Generator" title="PHP Podcast Creator: open source podcast publishing solution">Podcast Generator</a>, an open source podcast publishing solution.
 		</div>
 	</div>
 </div>

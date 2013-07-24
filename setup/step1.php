@@ -65,9 +65,12 @@ foreach ($arr as $key => $val) {
 		}
 
 $PG_mainbody .= '</select>
-	<br />
+	
+	<div class="form-actions">
 	<input type="submit" value="'.$SL_next.'" class="btn btn-primary">
+	</div>
 	</form>
+	
 	</fieldset>';
 
 

@@ -1,4 +1,4 @@
 RewriteEngine On
-RewriteRule ^([^/]*)/([^/]*).html$ /?p=$1&name=$2 [L]
+RewriteRule ^episode/([^/]*)$ /?p=episode&name=$1 [L]
 
 RewriteRule ^feed.xml$ /core/trackfeed.php [L]

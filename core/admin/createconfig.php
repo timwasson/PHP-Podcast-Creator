@@ -21,9 +21,8 @@ if(isset($amilogged) AND $amilogged =="true") { //if logged
 	$configfiletocreate = '<?php
 
 	#################################################################
-	# Podcast Generator
-	# http://podcastgen.sourceforge.net
-	# developed by Alberto Betella
+	# PHP Podcast Creator
+	# developed by Tim Wasson
 	#
 	# Config.php file created automatically - v.'.$podcastgen_version.'
 
@@ -79,7 +78,7 @@ if(isset($amilogged) AND $amilogged =="true") { //if logged
 	$itunes_category[1] = "'.$itunes_category[1].'";
 	$itunes_category[2] = "'.$itunes_category[2].'";
 
-	$link = $url."?p=episode&amp;name="; // permalink URL of single episode (appears in the <link> and <guid> tags in the feed)
+	$link = $url."episode/"; // permalink URL of single episode (appears in the <link> and <guid> tags in the feed)
 
 	$feed_language = "'.$feed_language.'"; // Language used in the XML feed (can differ from the script language).
 
@@ -90,9 +89,9 @@ if(isset($amilogged) AND $amilogged =="true") { //if logged
 	$explicit_podcast = "'.$explicit_podcast.'"; //does your podcast contain explicit language? ("yes", "no" or "clean")
 
 	// END OF CONFIGURATION
-	$db_user = "'..'";	// The user that has access to your database
-	$db_pass = "'..'";	// The password for the user that has access to your database
-	$database = "'..'";	
+	$db_user = "'.$db_user.'";	// The user that has access to your database
+	$db_pass = "'.$db_pass.'";	// The password for the user that has access to your database
+	$database = "'.$database.'";	
 
 	?>';
 

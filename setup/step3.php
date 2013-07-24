@@ -10,7 +10,12 @@
 
 include ('checkconfigexistence.php');
 
+
+
 $PG_mainbody = NULL; //define
+$PG_mainbody .= '<h3>'.$SL_checkperm.'</h3>
+	<p>'.$SL_step1.'</p>
+	';
 
 include	('set_permissions.php');
 

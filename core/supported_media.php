@@ -1,9 +1,9 @@
 <?php
 ############################################################
-# PODCAST GENERATOR
+# PHP Podcast Creator
 #
 # Created by Alberto Betella
-# http://podcastgen.sourceforge.net
+# Used by Tim Wasson
 # 
 # This is Free Software released under the GNU/GPL License.
 ############################################################

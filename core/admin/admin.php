@@ -27,8 +27,11 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 		
 		if(empty($_GET['do'])) {
 			$PG_mainbody .= '<h2>Feed Downloads</h2>
-				<div id="chart_div" style="width: 100%; height: 300px;"></div>
-				<p>This is the total number of feed downloads you\'ve received. </p>';
+				<div id="feeddown" style="width: 100%; height: 300px;"></div>
+				<p>This is the total number of feed downloads you\'ve received. </p>
+				<h2>Episode Downloads</h2>
+				<div id="epdown" style="width: 100%; height: 300px;"></div>
+				<p>These are downloads of individual downloads per episode.</p>';
 		}
 		
 		$admmenu .= '

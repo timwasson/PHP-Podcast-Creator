@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!-- generator="Podcast Generator .1" -->
+		<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xml:lang="en" version="2.0">
+	<channel>
+		<title>Atomicast</title>
+		<link>http://pcg.localhost:904/</link>
+		<description>The world's most useless podcast ever made.</description>
+		<generator>Podcast Generator .1 - http://podcastgen.sourceforge.net</generator>
+	<lastBuildDate>Wed, 24 Jul 2013 15:36:05 -0500</lastBuildDate>
+		<language>en</language>
+		<copyright>Copyright 2013</copyright>
+		<itunes:image href="http://pcg.localhost:904/images/itunes_image.jpg" />
+		<image>
+		<url>http://pcg.localhost:904/images/itunes_image.jpg</url>
+		<title>Atomicast</title>
+		<link>http://pcg.localhost:904/</link>
+		</image>
+		<itunes:summary>The world's most useless podcast ever made.</itunes:summary>
+		<itunes:subtitle>Useless, totally useless crap.</itunes:subtitle>
+		<itunes:author>Atomicast</itunes:author>
+		<itunes:owner>
+		<itunes:name>Atomicast</itunes:name>
+		<itunes:email>mail@atomicast.com</itunes:email>
+		</itunes:owner>
+		<itunes:explicit>yes</itunes:explicit>
+		<itunes:category text="Comedy">
+			</itunes:category>
+			<itunes:category text="Society &amp; Culture">
+			</itunes:category>
+			<itunes:category text="TV &amp; Film">
+			</itunes:category>
+			<item>
+								<title>sdaf</title>
+								<itunes:subtitle>sadf</itunes:subtitle>
+								<itunes:summary><![CDATA[ sadf ]]></itunes:summary>
+								<description>sadf</description>
+								<link>http://pcg.localhost:904/episode/2013-07-19_untitled_session_1_mixdown</link>
+								<enclosure url="http://pcg.localhost:904/media/2013-07-19_untitled_session_1_mixdown.mp3" length="3632978" type="audio/mpeg"/>
+								<guid>http://pcg.localhost:904/episode/2013-07-19_untitled_session_1_mixdown</guid>
+								<itunes:duration>5:19</itunes:duration>
+									<author>mail@atomicast.com (Atomicast)</author>
+									<itunes:author>Atomicast</itunes:author>
+									<itunes:explicit>no</itunes:explicit>
+									<pubDate>Fri, 19 Jul 2013 15:16:21 -0500</pubDate>
+								</item><item>
+								<title>Test from FTP</title>
+								<itunes:subtitle>This is a test from FTP</itunes:subtitle>
+								<itunes:summary><![CDATA[ This is a test from FTP ]]></itunes:summary>
+								<description>This is a test from FTP</description>
+								<link>http://pcg.localhost:904/episode/Atomicast+Reboot+2</link>
+								<enclosure url="http://pcg.localhost:904/media/Atomicast Reboot 2.mp3" length="22046011" type="audio/mpeg"/>
+								<guid>http://pcg.localhost:904/episode/Atomicast+Reboot+2</guid>
+								<itunes:duration>45:55</itunes:duration>
+									<author>mail@atomicast.com (Atomicast)</author>
+									<itunes:author>Atomicast</itunes:author>
+									<itunes:explicit>no</itunes:explicit>
+									<pubDate>Tue, 09 Jul 2013 10:24:05 -0500</pubDate>
+								</item><item>
+								<title>FTP test</title>
+								<itunes:subtitle>This is an FTP test</itunes:subtitle>
+								<itunes:summary><![CDATA[ This is an FTP test ]]></itunes:summary>
+								<description>This is an FTP test</description>
+								<link>http://pcg.localhost:904/episode/01+Breath+Rudiment</link>
+								<enclosure url="http://pcg.localhost:904/media/01 Breath Rudiment.mp3" length="6215319" type="audio/mpeg"/>
+								<guid>http://pcg.localhost:904/episode/01+Breath+Rudiment</guid>
+								<itunes:duration>3:10</itunes:duration>
+									<author>mail@atomicast.com (Atomicast)</author>
+									<itunes:author>Atomicast</itunes:author>
+									<itunes:explicit>no</itunes:explicit>
+									<pubDate>Fri, 30 Nov 2012 12:52:22 -0600</pubDate>
+								</item></channel></rss>

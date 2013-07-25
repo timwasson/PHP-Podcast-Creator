@@ -1,6 +1,6 @@
 <?php
 ############################################################
-# PODCAST GENERATOR
+# PHP Podcast Creator
 #
 # Created by Alberto Betella
 # Improved by Tim Wasson

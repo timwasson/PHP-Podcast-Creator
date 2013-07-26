@@ -8,23 +8,25 @@
 # This is Free Software released under the GNU/GPL License.
 ############################################################
 
+//Changing over to managing these variables through sessions. 
+session_start();
+
 include ('set_path.php'); //define URL and absolute path on the server
-include ('../core/admin/VERSION.php'); //define Podcast Generator Version
 
 include ('checkconfigexistence.php');
 
 ################ LAGUAGES: 1/2
 //assigned below in english before language choice, when language has been chosen they will be read in the language files and the below variables "overwritten" (see 2/2)
-$SL_pg = "Podcast Generator";
+$SL_pg = "PHP Podcast Creator";
 $SL_pgsetup = "- Setup"; 
 $SL_welcome = "Welcome!";
 $SL_next = "Next";
 ################ 
 
 ################ LAGUAGES: 2/2
-if (isset($_POST['setuplanguage'])) {
+if (isset($_SESSION['setuplanguage'])) {
 
-  $setuplang = $_POST['setuplanguage'];	
+  $setuplang = $_SESSION['setuplanguage'];	
 	//	echo "lang/setup_".$setuplang;
 
 	if (file_exists("lang/setup_".$setuplang.".php")) {
@@ -111,7 +113,7 @@ $SL_pgsetuptext = $SL_pg." ".$podcastgen_version." ".$SL_pgsetup;
 	
 	<div class="row">
 		<div class="span12">
-			<span class="label label-warning">PHP Podcast Creator</span> Powered by <a href="https://github.com/timwasson/Podcast-Generator" title="PHP Podcast Creator: open source podcast publishing solution">Podcast Generator</a>, an open source podcast publishing solution.
+			Powered by <a href="https://github.com/timwasson/Podcast-Generator" title="PHP Podcast Creator: open source podcast publishing solution" class="label label-info">PHP Podcast Creator</a>, an open source podcast publishing solution.
 		</div>
 	</div>
 </div>

@@ -34,7 +34,7 @@ $configfiletocreate = '<?php
 
 $podcastgen_version = "'.$podcastgen_version.'"; // Version
 
-$scriptlang = "'.$setuplang.'";
+$scriptlang = "'.$_SESSION['setuplanguage'].'";
 
 $url = "'.$currenturl.'"; // Complete URL of the script (Trailing slash REQUIRED)
 
@@ -98,9 +98,10 @@ $explicit_podcast = "no"; //does your podcast contain explicit language? ("yes",
 // END OF CONFIGURATION
 
 // beginning of mySQL integration
-$db_user = "";	// The user that has access to your database
-$db_pass = "";	// The password for the user that has access to your database
-$database = "";	
+$db_user = "'.$_SESSION['db_user'].'";	// The user that has access to your database
+$db_pass = "'.$_SESSION['db_pass'].'";	// The password for the user that has access to your database
+$database = "'.$_SESSION['database'].'";	// Database Obviously
+$server = "'.$_SESSION['server'].'"; // Most of the time this is localhost
 
 ?>';
 

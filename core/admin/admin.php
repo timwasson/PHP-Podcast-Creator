@@ -24,16 +24,7 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 	}
 	// check if user is already logged in
 	if(isset($amilogged) AND $amilogged =="true") {
-		
-		if(empty($_GET['do'])) {
-			$PG_mainbody .= '<h2>Feed Downloads</h2>
-				<div id="feeddown" style="width: 100%; height: 300px;"></div>
-				<p>This is the total number of feed downloads you\'ve received. </p>
-				<h2>Episode Downloads</h2>
-				<div id="epdown" style="width: 100%; height: 300px;"></div>
-				<p>These are downloads of individual downloads per episode.</p>';
-		}
-		
+	
 		$admmenu .= '
 		<ul class="nav nav-list"> 
 			<li class="nav-header">'.$L_admin_episodes.'</li>
@@ -96,11 +87,21 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 			if (isset($firsttimehere) AND $firsttimehere == "yes") { // if it's the first time (parameter specified in config.php)
 
 				$PG_mainbody .= '
-				<div class="topseparator"> 
-				<h3>'.$L_welcome.'</h3>
-				<p><i>'.$L_firstadminmsg.'</i> <a href="?p=admin&do=changedetails"><b>'.$L_startnow.'</b></a></p>
+				<h2>'.$L_welcome.'</h2>
+				<div class="alert">
+				<p><i class="icon-thumbs-up"></i> '.$L_firstadminmsg.' <a href="?p=admin&do=changedetails" class="btn btn-mini btn-success"><strong><i class="icon-arrow-right"></i> '.$L_startnow.'</strong></a></p>
 
-				</div>';	
+				</div>';
+				
+				$PG_mainbody .= '
+				<h3>Feed Downloads</h3>
+				<div id="feeddown" style="width: 100%; height: 300px;"></div>
+				<p>This is the total number of feed downloads you\'ve received. </p>
+				
+				<h3>Episode Downloads</h3>
+				<div id="epdown" style="width: 100%; height: 300px;"></div>
+				<p>These are downloads of individual downloads per episode.</p>';
+				
 			}
 		}
 	}

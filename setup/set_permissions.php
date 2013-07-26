@@ -98,9 +98,12 @@ $script_directory = "../";
 			$PG_mainbody .=  "<p>$SL_canproceed</p>";
 
 			$PG_mainbody .= '
-				<form method="post" action="index.php?step=4">
+			<form method="post" action="index.php?step=4">
+			<div class="form-actions">
+				
 				<input type="hidden" name="setuplanguage" value="'.$_POST['setuplanguage'].'">
 				<input type="submit" value="'.$SL_next.'" class="btn btn-primary">
+				</div>
 				</form>
 				';
 
@@ -127,8 +130,10 @@ $script_directory = "../";
 			$PG_mainbody .= '
 				<form method="post" action="index.php?step=3">
 				<br />
+				<div class="form-actions">
 				<input type="hidden" name="setuplanguage" value="'.$_POST['setuplanguage'].'">
 				<input type="submit" value="'.$SL_reload1.'" class="btn btn-primary">
+				</div>
 				</form>
 				';
 

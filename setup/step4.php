@@ -31,8 +31,10 @@ $PG_mainbody .= '<p><b>'.$SL_enteruserandpwd.'</b></p>
 
 
 $PG_mainbody .= '
+	<div class="form-actions">
 	<input type="hidden" name="setuplanguage" value="'.$_POST['setuplanguage'].'">
 	<input type="submit" value="'.$SL_next.'" class="btn btn-primary">
+	</div>
 	</form>';
 
 //print output

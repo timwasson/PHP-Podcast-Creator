@@ -83,7 +83,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 		########## recent in home
 		$PG_mainbody .= '<h4>'.$L_howmanyrecent.'</h4>
 
-			<select name="recent" id="recent">';
+			<select name="recent" id="recent" class="form-control">';
 			
 			
 			$i = 1;
@@ -98,7 +98,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 		########## recent in feed
 		$PG_mainbody .= '<h4>'.$L_howmanyrecentinfeed.'</h4>
 
-			<select name="recentinfeed" id="recentinfeed">';
+			<select name="recentinfeed" id="recentinfeed" class="form-control">';
 			$i = 1;
 			while ($i <= 50) {
 				$PG_mainbody .= '<option value=\''.$i.'\'';
@@ -114,7 +114,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 		########## date format
 		$PG_mainbody .= '<h4>'.$L_selectdateformat.'</h4>
 
-			<select name="selectdateformat" id="selectdateformat">
+			<select name="selectdateformat" id="selectdateformat" class="form-control">
 
 			<option value=\'d-m-Y\'';
 		if ($dateformat == "d-m-Y") { $PG_mainbody .= ' selected'; }
@@ -153,7 +153,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 		$PG_mainbody .= '<h4>'.$L_podcastgenlang.'</h4>
 			<p><span class="admin_hints">'.$L_pglanghint.'</span></p>
 			';
-		$PG_mainbody .= '<select name="scriptlanguage">';
+		$PG_mainbody .= '<select name="scriptlanguage" class="form-control">';
 
 		natcasesort($arr); // Natcasesort orders more naturally and is different from "sort", which is case sensitive
 
@@ -165,7 +165,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 			}
 			$PG_mainbody .= '>' . $val . '</option>';	
 		}
-		$PG_mainbody .= '</select></fieldset>';	
+		$PG_mainbody .= '</select></fieldset><br>';	
 		$PG_mainbody .= '<div class="form-actions">
 			<input type="submit" name="'.$L_send.'" value="'.$L_send.'" class="btn btn-primary">
 			</div>';

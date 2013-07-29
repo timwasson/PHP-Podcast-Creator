@@ -123,10 +123,11 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 
 
 		$PG_mainbody .= '
-			<input name="title" id="title" type="text" size="50" maxlength="255" placeholder="'.$L_title.'*"  value="'.$text_title.'">
+			<input name="title" id="title" type="text" size="50" maxlength="255" placeholder="'.$L_title.'*"  value="'.$text_title.'" class="form-control">
 			
+			<br>
 
-			<textarea name="description" id="description" type="text" size="50" maxlength="255" class="span9" rows="4" placeholder="'.$L_shortdesc.'*">'.$text_shortdesc.'</textarea>
+			<textarea name="description" id="description" type="text" size="50" maxlength="255" class="form-control" rows="4" placeholder="'.$L_shortdesc.'*">'.$text_shortdesc.'</textarea>
 			<div class="alert alert-info"><span class="help cdown"><span id="countdown">255</span> '.$L_remainchar.' '.$L_maxchardesc.'</span></div>';
 		
 		if($mode=="edit") {
@@ -184,7 +185,7 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 
 			<h4>'.$L_itunes_keywords.'</h4>
 				
-			<textarea id="keywords" name="keywords" type="text" size="50" maxlength="255">'.$text_keywordspg.'</textarea><br />
+			<textarea id="keywords" name="keywords" type="text" size="50" maxlength="255" class="form-control">'.$text_keywordspg.'</textarea><br />
 			<small><span class="help-block">'.$L_separatekeywords.'<span id="wordcount">0</span> '.$L_words.'</span></small>
 
 			<h4>'.$L_explicitcontent.'</h4>
@@ -201,9 +202,9 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 			<h4>'.$L_author.'</h4>
 			<p>'.$L_authorhint.'</p>
 
-			<input name="auth_name" type="text" id="auth_name" size="50" maxlength="255" placeholder="'.$L_authorname.'" value="'.$text_authornamepg.'">
+			<input name="auth_name" type="text" id="auth_name" size="50" maxlength="255" placeholder="'.$L_authorname.'" value="'.$text_authornamepg.'" class="form-control">
 			<br />
-			<input name="auth_email" type="text" id="auth_email" size="50" maxlength="255" placeholder="'.$L_authoremail.'" value="'.$text_authoremailpg.'">
+			<input name="auth_email" type="text" id="auth_email" size="50" maxlength="255" placeholder="'.$L_authoremail.'" value="'.$text_authoremailpg.'" class="form-control">
 
 			</fieldset>
 </div>

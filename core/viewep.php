@@ -104,23 +104,23 @@ if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined vari
 												
 								<div class="jp-progress">
 									<div class="jp-seek-bar progress">
-										<div class="jp-play-bar bar"></div>
+										<div class="jp-play-bar progress-bar"></div>
 									</div>
 								</div>
 												
 								<div class="jp-controls-holder">
 													
 									<div class="btn-group">
-										<a class="jp-play btn" href="#"><i class="icon-play"></i></a>
-										<a class="jp-pause btn" href="#"><i class="icon-pause"></i></a>
-										<a class="jp-stop btn" href="#"><i class="icon-stop"></i></a>
+										<a class="jp-play btn btn-primary" href="#"><i class="icon-play"></i></a>
+										<a class="jp-pause btn btn-primary" href="#"><i class="icon-pause"></i></a>
+										<a class="jp-stop btn btn-primary" href="#"><i class="icon-stop"></i></a>
 									</div>
 						
 									<div class="btn-group">
-										<a class="jp-full-screen btn" tabindex="1" title="full screen"><i class="icon-resize-full"></i></a>
-										<a class="jp-restore-screen btn" tabindex="1" title="restore screen">restore screen</a>
-										<a class="jp-repeat btn" tabindex="1" title="repeat"><i class="icon-retweet"></i></a>
-										<a class="jp-repeat-off btn" tabindex="1" title="repeat off"><i class="icon-long-arrow-right"></i></a>
+										<a class="jp-full-screen btn btn-primary" tabindex="1" title="full screen"><i class="icon-resize-full"></i></a>
+										<a class="jp-restore-screen btn btn-primary" tabindex="1" title="restore screen">restore screen</a>
+										<a class="jp-repeat btn btn-primary" tabindex="1" title="repeat"><i class="icon-retweet"></i></a>
+										<a class="jp-repeat-off btn btn-primary" tabindex="1" title="repeat off"><i class="icon-long-arrow-right"></i></a>
 									</div>
 													
 									<div class="volume-holder">
@@ -149,8 +149,7 @@ if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined vari
 					$("#jquery_jplayer_'.$recent_count.'").jPlayer({
 						ready: function () {
 							$(this).jPlayer("setMedia", {
-								m4v: "'.$url.$upload_dir.$file_multimediale[0].'.'.$podcast_filetype.'",
-								poster: "'.$url.'"
+								m4v: "'.$url.$upload_dir.$file_multimediale[0].'.'.$podcast_filetype.'"
 							});
 						},
 						play: function() { // To avoid multiple jPlayers playing together.
@@ -167,9 +166,7 @@ if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined vari
 					});
 				});
 				
-				$("#jquery_jplayer_'.$recent_count.'").bind($.jPlayer.event.play, function() { 
-					$(this).jPlayer("pauseOthers"); // pause all players except this one.
-				});
+				
 				//]]>
 				</script>'; 
 		} elseif($podcast_filetype=="mp3" AND isset($_GET['p']) AND $_GET['p']=="episode") {
@@ -183,16 +180,16 @@ if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined vari
 					</p>
 					<div class="jp-progress progress">
 						<div class="jp-seek-bar progress">
-							<div class="jp-play-bar bar"></div>
+							<div class="jp-play-bar progress-bar"></div>
 						</div>
 					</div>
 					
 					<div class="btn-holder">
 					
 						<div class="btn-group">
-							<a class="jp-play btn" href="#"><i class="icon-play"></i></a>
-							<a class="jp-pause btn" href="#"><i class="icon-pause"></i></a>
-							<a class="jp-stop btn" href="#"><i class="icon-stop"></i></a>
+							<a class="jp-play btn btn-primary" href="#"><i class="icon-play"></i></a>
+							<a class="jp-pause btn btn-primary" href="#"><i class="icon-pause"></i></a>
+							<a class="jp-stop btn btn-primary" href="#"><i class="icon-stop"></i></a>
 						</div>
 					
 					

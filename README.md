@@ -22,6 +22,7 @@ While waiting for the official release of the original Podcast Generator 2.0, I 
 - Significant structural changes that make updates and upgrades easier
 - Clean URLs using URL rewrites
 - Feed download tracking
+- Episode download tracking
 - mySQL integration (currently only for feed tracking)
 
 In an effort to streamline the original Generator, I removed categories, archives, freebox, the default themes, and several other components. I removed the reliance on prototype/scriptaculous and replaced that functionality with jQuery (via CDN). I improved error checking, and implemented Twitter Bootstrap (also via CDN) as the main theme for easy customization. 
@@ -36,8 +37,8 @@ Download jPlayer (http://jplayer.org/) and put it in /components/player (so the 
 After that, just load your website and walk through the installation.
 
 ## Coming Soon
-- Individual episode download tracking
 - Abandon the XML file storage for mySQL storage
+- Front-end rewrite to make page generation faster and less resource-intensive
 
 ## Notes
 The jPlayer video implementation still needs a little help, so any HTML5 video gurus are welcome to fork this project to work on optimizing this.

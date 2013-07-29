@@ -14,19 +14,17 @@ if (isset($_REQUEST['GLOBALS']) OR isset($_REQUEST['absoluteurl']) OR isset($_RE
 
 // define login form
 $loginform ='
-	<form class="form" id="login" action="?p=admin" method="post">
-		<div class="control-group">
-			<div class="input-prepend">
-	    		<span class="add-on"><i class="icon-user"></i></span>
-				<input type="text" id="user" name="user" placeholder="'.$L_user.'">
-			</div>
+	<form class="form-horizontal" id="login" action="?p=admin" method="post">
+		<div class="input-group">
+	    	<span class="input-group-addon"><i class="icon-user"></i></span>
+			<input type="text" id="user" name="user" placeholder="'.$L_user.'" class="form-control">
 		</div>
-		<div class="control-group">
-			<div class="input-prepend">
-				<span class="add-on"><i class="icon-lock"></i></span>
-				<input type="password" name="password" id="password" placeholder="'.$L_password.'">
-			</div>
+		<br>
+		<div class="input-group">
+			<span class="input-group-addon"><i class="icon-lock"></i></span>
+			<input type="password" name="password" id="password" placeholder="'.$L_password.'" class="form-control">
 		</div>
+		<br>
 		<div class="form-actions">
 			<input type="submit" class="btn btn-primary" value="'.$L_login.'">
 		</div>
@@ -45,15 +43,16 @@ if(isset($_GET['action']) AND $_GET['action'] == "logout" ){
 // check if user is already logged in (Thanks to Pavel Urusov for the MD5 password encoding suggestion)
 if(isset($_SESSION["user_session"]) AND $_SESSION["user_session"]==$username AND md5($_SESSION["password_session"])==$userpassword){ //if so, keep displaying the page
 
-	$PG_mainbody .= '<div class="alert alert-success">
-		'.$L_welcome.' <em>'.$username.'</em> ';
+	$PG_mainbody .= '<div class="navbar">
+	<p class="navbar-text pull-right">
+		'.$L_welcome.' <em>'.$username.'</em></p>';
 
 	if (isset($_GET['do']) AND $_GET['do'] != NULL) {
 
-		$PG_mainbody .= '<div class="btn-group pull-right"><a href="?p=admin" class="btn btn-mini"><i class="icon-reply"></i> '.$L_menu_backadmin.'</a><a href="?p=admin&action=logout" class="btn btn-mini"><i class="icon-signout"></i> '.$L_logout.'</a></div>';
+		$PG_mainbody .= '<ul class="nav navbar-nav"><li><a href="?p=admin"><i class="icon-reply"></i> '.$L_menu_backadmin.'</a></li><li><a href="?p=admin&action=logout"><i class="icon-signout"></i> '.$L_logout.'</a></li></ul>';
 	}
 	else {
-		$PG_mainbody .= '<a href="?p=admin&action=logout" class="btn btn-mini pull-right"><i class="icon-signout"></i> '.$L_logout.'</a>';
+		$PG_mainbody .= '<ul class="nav navbar-nav"><li><a href="?p=admin&action=logout" class="pull-right"><i class="icon-signout"></i> '.$L_logout.'</a></li></ul>';
 	}
 	$PG_mainbody .= '</div>';
 
@@ -70,7 +69,7 @@ if(isset($_SESSION["user_session"]) AND $_SESSION["user_session"]==$username AND
 
 		if(isset($_POST["user"]) AND isset($_POST["password"])){ //if user and pwd are not correct
 			//display AGAIN login form if usr/pwd not correct
-			$PG_mainbody .= '<div class="alert alert-error">'.$L_notvalid.'</div>'.$loginform;
+			$PG_mainbody .= '<div class="alert alert-danger">'.$L_notvalid.'</div>'.$loginform;
 
 		}else{ 
 			//display login form

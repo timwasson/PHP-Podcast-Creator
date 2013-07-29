@@ -31,16 +31,16 @@ $trackfeed = '<div id="jp_container">
 					</p>
 					<div class="jp-progress progress">
 						<div class="jp-seek-bar progress">
-							<div class="jp-play-bar bar"></div>
+							<div class="jp-play-bar progress-bar"></div>
 						</div>
 					</div>
 					
 					<div class="btn-holder">
 					
 						<div class="btn-group">
-							<a class="jp-play btn" href="#"><i class="icon-play"></i></a>
-							<a class="jp-pause btn" href="#"><i class="icon-pause"></i></a>
-							<a class="jp-stop btn" href="#"><i class="icon-stop"></i></a>
+							<a class="jp-play btn btn-primary" href="#"><i class="icon-play"></i></a>
+							<a class="jp-pause btn btn-primary" href="#"><i class="icon-pause"></i></a>
+							<a class="jp-stop btn btn-primary" href="#"><i class="icon-stop"></i></a>
 						</div>
 					
 					

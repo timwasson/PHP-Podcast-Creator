@@ -134,22 +134,22 @@ if(isset($amilogged) AND $amilogged =="true") {
 
 		$PG_mainbody .=	'<br /><br />
 			<p><label for="title"><b>'.$L_podcastitle.'</b></label></p>
-			<input name="title" type="text" id="title" size="50" maxlength="255" value="'.$podcast_title.'">
+			<input name="title" type="text" id="title" size="50" maxlength="255" value="'.$podcast_title.'" class="form-control">
 			<br /><br />
 			<p><label for="subtitle"><b>'.$L_podcastsubtitle.'</b></label></p>
-			<input name="subtitle" type="text" id="title" size="50" maxlength="255" value="'.$podcast_subtitle.'">
+			<input name="subtitle" type="text" id="title" size="50" maxlength="255" value="'.$podcast_subtitle.'" class="form-control">
 			<br /><br />
 			<p><label for="description"><b>'.$L_podcastdesc.'</b></label></p>
-			<textarea name="description" cols="50" rows="3">'.$podcast_description.'</textarea>	
+			<textarea name="description" cols="50" rows="3" class="form-control">'.$podcast_description.'</textarea>	
 			<br /><br />
 			<p><label for="copyright_notice"><b>'.$L_copyrightnotice.'</b></label></p>
-			<input name="copyright_notice" type="text" id="title" size="50" maxlength="255" value="'.$copyright.'">	
+			<input name="copyright_notice" type="text" id="title" size="50" maxlength="255" value="'.$copyright.'" class="form-control">	
 			<br /><br />
 			<p><label for="authorname"><b>'.$L_authorname.'</b></label></p>
-			<input name="authorname" type="text" id="title" size="50" maxlength="255" value="'.$author_name.'">	
+			<input name="authorname" type="text" id="title" size="50" maxlength="255" value="'.$author_name.'" class="form-control">	
 			<br /><br />
 			<p><label for="authoremail"><b>'.$L_authoremail.'</b></label></p>
-			<input name="authoremail" type="text" id="title" size="50" maxlength="255" value="'.$author_email.'">';
+			<input name="authoremail" type="text" id="title" size="50" maxlength="255" value="'.$author_email.'" class="form-control">';
 
 	
 		$arr = array("aa" => "aa (afar)",
@@ -294,7 +294,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 		$PG_mainbody .= '<br /><br /><p><label for="feedlanguage"><b>'.$L_feedlang.'</b></label></p>
 			<p><span class="admin_hints">'.$L_feedlanguagehint.'</span></p>
 			';
-		$PG_mainbody .= '<select name="feedlanguage">';
+		$PG_mainbody .= '<select name="feedlanguage" class="form-control">';
 
 
 		natcasesort($arr); // Natcasesort orders more naturally and is different from "sort", which is case sensitive

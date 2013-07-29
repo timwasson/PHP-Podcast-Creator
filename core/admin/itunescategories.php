@@ -397,7 +397,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 		## CATEGORY 1
 
 		$PG_mainbody .= "<p><strong>".$L_itunes_cat1."</strong></p>";
-		$PG_mainbody .= '<select name="category1">';
+		$PG_mainbody .= '<select name="category1" class="form-control">';
 
 
 		natcasesort($arr); // Natcasesort orders more naturally and is different from "sort", which is case sensitive
@@ -423,7 +423,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 		## CATEGORY 2
 
 		$PG_mainbody .= "<br /><br /><p><b>$L_itunes_cat2</b></p>";
-		$PG_mainbody .= '<select name="category2">';
+		$PG_mainbody .= '<select name="category2" class="form-control">';
 
 
 		natcasesort($arr); // Natcasesort orders more naturally and is different from "sort", which is case sensitive
@@ -445,7 +445,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 		## CATEGORY 3
 
 		$PG_mainbody .= "<br /><br /><p><b>$L_itunes_cat3</b></p>";
-		$PG_mainbody .= '<select name="category3">';
+		$PG_mainbody .= '<select name="category3" class="form-control">';
 
 
 		natcasesort($arr); // Natcasesort orders more naturally and is different from "sort", which is case sensitive

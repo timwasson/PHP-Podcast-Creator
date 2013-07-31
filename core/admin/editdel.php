@@ -130,18 +130,24 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 } //end if admin
 
 $PG_mainbody .= '
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-	    <h3 id="myModalLabel">'.$L_deleteconfirmation.'</h3>
-	</div>
-	<div class="modal-body">
-	    <p>You cannot undo this.</p>
-	</div>
-	<div class="modal-footer">
-	    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-	    <a id="delurl" class="btn btn-danger" href=""><i class="icon-warning-sign"></i> '.$L_delete.'</a>
-	</div>
-</div>';
+
+<!-- Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">'.$L_deleteconfirmation.'</h4>
+        </div>
+        <div class="modal-body">
+         <p>You cannot undo this.</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn btn-link" data-dismiss="modal">Close</a>
+          <a id="delurl" class="btn btn-danger" href=""><i class="icon-warning-sign"></i> '.$L_delete.'</a>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->';
 
 ?>

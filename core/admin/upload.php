@@ -215,14 +215,18 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 			<div class="progress" id="fileProgress"><div class="bar"></div></div>
 
 		</form>
-		
-	<div id="uploadFiles" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-header">
-	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-	    <h3 id="myModalLabel">Uploaded Files</h3>
-	  </div>
-	  <div class="modal-body">
-	    <p>These are files that have been uploaded via FTP but not yet included in your feed. Select the file you\'d like associated with this episode. <strong>File names should contain no special characters. Only lower-case letters, numbers, and underscores. <em>The only period in the file name should be between the file name and the extension.</em></strong></p><ul>';
+
+<!-- Modal -->
+  <div class="modal fade" id="uploadFiles">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Uploaded Files</h4>
+        </div>
+        <div class="modal-body">
+         <p>These are files that have been uploaded via FTP but not yet included in your feed. Select the file you\'d like associated with this episode. <strong>File names should contain no special characters. Only lower-case letters, numbers, and underscores. <em>The only period in the file name should be between the file name and the extension.</em></strong></p>
+         <ul>';
 	
 	// This chunk of code checks for uploaded files that don't have a database file associated with them. These can then be inserted 
 	$handle = opendir ($absoluteurl.$upload_dir);
@@ -250,12 +254,14 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 		}
 	}
 	$PG_mainbody .= '</ul>
-	  </div>
-	  <div class="modal-footer">
-	    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-	    <button class="btn btn-primary">Save changes</button>
-	  </div>
-	</div>';
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn btn-link" data-dismiss="modal">Close</a>
+          <!-- <a href="#" class="btn btn-primary">Save changes</a> -->
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->';
 
 } // end else . if GET variable "c" is not = "ok"
 ?>

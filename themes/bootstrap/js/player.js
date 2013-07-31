@@ -39,11 +39,13 @@ $(document).ready(function(){
 
 	// Create click handlers for the different tracks
 	$(".track").click(function(e) {
-		// Remove all the previously .
-		$(".track.icon-volume-up").removeClass("icon-volume-up");
+		// Remove all the previously playing track nonsense.
+		$(".now-playing").remove();
+		$(".track.active").removeClass("active");
 		
 		// Add the speaker to this thing.
-		$(this).addClass("icon-volume-up");
+		$(this).prepend("<span class=\"badge now-playing\"><i class=\"icon-volume-up\"></i></span>");
+		$(this).addClass("active");
 		
 		my_trackName.text($(this).text());
 		my_jPlayer.jPlayer("setMedia", {

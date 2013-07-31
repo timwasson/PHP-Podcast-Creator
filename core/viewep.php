@@ -89,7 +89,7 @@ if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined vari
 
 			if($podcast_filetype=="mp3" AND $_GET['p']!="episode") {
 				//Update the tracks on the right-hand side.
-				$trackfeed .= "<li><a href=\"".$url.$upload_dir.$key."\" rel=\"tooltip\" title=\"".$filepubdate."\" class=\"track icon-volume-up\">".$text_title."</a></li>\r";
+				$trackfeed .= "<a href=\"".$url.$upload_dir.$key."\" rel=\"tooltip\" title=\"".$filepubdate."\" class=\"track list-group-item\">".$text_title."</a>\r";
 				//$PG_mainbody .= $trackfeed;
 
 			} elseif($isvideo == "yes") {

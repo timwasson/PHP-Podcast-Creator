@@ -18,14 +18,15 @@ While waiting for the official release of the original Podcast Generator 2.0, I 
 
 ### New Features:
 - HTML5 progress uploads (compatible with modern [not IE] browsers)
-- HTML5 audio/video player
+- HTML5 audio/video player (jPlayer)
 - Significant structural changes that make updates and upgrades easier
 - Clean URLs using URL rewrites
 - Feed download tracking
 - Episode download tracking
 - mySQL integration (currently only for feed tracking)
+- Bootstrap 3 integration for mobile-first compatibility
 
-In an effort to streamline the original Generator, I removed categories, archives, freebox, the default themes, and several other components. I removed the reliance on prototype/scriptaculous and replaced that functionality with jQuery (via CDN). I improved error checking, and implemented Twitter Bootstrap (also via CDN) as the main theme for easy customization. 
+In an effort to streamline the original Generator, I removed categories, archives, freebox, the default themes, and several other components. I removed the reliance on prototype/scriptaculous and replaced that functionality with jQuery (via CDN). I improved error checking, and implemented Twitter Bootstrap 3 (also via CDN) as the main theme for easy customization. 
 
 I swapped out the web player with jPlayer for yummy HTML5 audio and video. I implemented FontAwesome (also via CDN) for quick and easy icons. I removed a lot of clutter and cleaned up the files to make additions and modifications easier. I updated the RTE. 
 

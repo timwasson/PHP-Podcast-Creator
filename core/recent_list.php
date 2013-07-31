@@ -37,11 +37,11 @@ $trackfeed = '<div id="jp_container">
 					
 					<div class="btn-holder">
 					
-						<div class="btn-group">
+						
 							<a class="jp-play btn btn-primary" href="#"><i class="icon-play"></i></a>
 							<a class="jp-pause btn btn-primary" href="#"><i class="icon-pause"></i></a>
 							<a class="jp-stop btn btn-primary" href="#"><i class="icon-stop"></i></a>
-						</div>
+						
 					
 					
 						<div class="volume-holder">
@@ -55,8 +55,7 @@ $trackfeed = '<div id="jp_container">
 							<a class="jp-volume-max" href="#"><i class="icon-volume-up"></i></a>
 						</div>
 					</div>
-					<ul class="nav nav-list">
-						<li class="nav-header">Select a track</li>';
+					<ul class="list-group">';
 
 // Open podcast directory
 $handle = opendir ($absoluteurl.$upload_dir);

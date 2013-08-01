@@ -3,7 +3,7 @@
 # PODCAST GENERATOR
 #
 # Created by Alberto Betella
-# http://podcastgen.sourceforge.net
+# Improved by Tim Wasson
 # 
 # This is Free Software released under the GNU/GPL License.
 ############################################################
@@ -18,16 +18,16 @@ $L_addextrainfo = "add extra information to this episode";
 $L_adding = "Adding...";
 $L_addnewcat = "Add a new category:";
 $L_admin_categories = "Categories";
-$L_admin_changeconf = "Change Podcast Generator Configuration";
+$L_admin_changeconf = "PHP Podcast Generator Configuration";
 $L_admin_donation = "If you like Podcast Generator please consider making a donation:"; 
 $L_admin_donation1 = "Donate to this project"; 
 $L_admin_editdel = "Edit/Delete Podcasts";
 $L_admin_episodes = "Episodes";
-$L_admin_feed_validate = "Validate this feed with w3c validation service";
+$L_admin_feed_validate = "W3C Validation";
 $L_admin_freebox = "FreeBox";
-$L_admin_genfeed = "Manually regenerate xml feed";
+$L_admin_genfeed = "Regenerate XML feed";
 $L_admin_itunessettings = "iTunes Settings";
-$L_admin_podcastdetails = "Your podcast details";
+$L_admin_podcastdetails = "Podcast Details";
 $L_admin_selecttheme = "Select Theme";
 $L_admin_themes = "Themes and aspect";
 $L_admin_upload = "New Podcast"; 
@@ -69,7 +69,7 @@ $L_cat_notexist = "The category doesn't exist...";
 $L_cat_subscribe = "Subscribe to this category";
 $L_cat_subscribe_itunes = "Subscribe to this category with iTunes";
 $L_change = "Change";
-$L_changecat = "iTunes Categories & Image"; 
+$L_changecat = "iTunes Configuration"; 
 $L_changepodcastdetails = "Change your podcast details (e.g. title, description, author...)";
 $L_changepodcastdetails ="Change your podcast details";
 $L_change_itunesimage = "Change iTunes image";
@@ -142,7 +142,7 @@ $L_filerenamed = "New Name:";
 $L_filesent = "File sent successfully.";
 $L_filetoedit = "File to edit:";
 $L_file_ext = "File extension:";
-$L_firstadminmsg = "This is probably the first time you are logging in to manage your podcast. You should set up your podcast publishing preferences.";
+$L_firstadminmsg = "Congratulations on your new podcast! Please set up your publishing preferences.";
 $L_footer_pgdesc = ", an open source podcast publishing solution.";
 $L_footer_poweredby = "Powered by"; 
 $L_foundmedia = "Media file found:";
@@ -161,7 +161,7 @@ $L_htmlaccepted = "(HTML tags accepted)";
 $L_ignored = "(ignored)";
 $L_image = "Image";
 $L_imagecurrent = "Current image:";
-$L_imageformat = "Upload a SMALL image (suggested dimensions: 150x150 pixels). Accepted formats: png, gif e jpg.";
+$L_imageformat = "Upload an image (suggested dimensions: 1400x1400 pixels). Accepted formats: png, jpg.";
 $L_imagehint = "You can associate an image to this episode; it will appear on the recent podcast page and on the details page.";
 $L_imagenew = "New image:";
 $L_imagenewhint = "Specify a new image if you want to replace the old one.";
@@ -212,7 +212,7 @@ $L_opendesc_error = "error when opening the description file";
 $L_operating_system = "Operating System:";
 $L_origfilename = "Original filename:";
 $L_password = "Password";
-$L_pgconfig = "Podcast Generator Configuration";
+$L_pgconfig = "Configuration";
 $L_pglanghint = "Choose among available languages *";
 $L_pglangtranslate = "* Volunteer to translate Podcast Generator into your native language";
 $L_pgnews = "Podcast Generator News";
@@ -248,7 +248,7 @@ $L_serverconf = "Your server configuration";
 $L_setting = "Setting...";
 $L_shortdesc = "Short Description";
 $L_startnow = "Do it!";
-$L_submit_itunes_store = "Submit your podcast to the iTunes Store";
+$L_submit_itunes_store = "Submit to iTunes";
 $L_subscribenewsfeed = "Subscribe to the news feed";
 $L_tempfile = "Temp file:";
 $L_themechanged = "Theme changed!";

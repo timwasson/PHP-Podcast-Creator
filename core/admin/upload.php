@@ -1,6 +1,6 @@
 <?php
 ############################################################
-# PODCAST GENERATOR
+# PHP Podcast Creator
 #
 # Created by Alberto Betella
 # Improved by Tim Wasson
@@ -28,14 +28,14 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 		//If this has been uploaded via the web.
 		include("$absoluteurl"."core/admin/sendfile.php");
 	}
-	$PG_mainbody .= "</div>";
+	//$PG_mainbody .= "</div>";
 
 } elseif (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['do']=="edit" AND isset($_GET['c']) AND $_GET['c']=="ok") { 
 	
 	//For editing an older episode.
 	$PG_mainbody .= '<h3>'.$L_editpodcast.'</h3>';
 	include("$absoluteurl"."core/admin/sendchanges.php");
-	$PG_mainbody .= '</div>';
+	//$PG_mainbody .= '</div>';
 
 } else {
 	// If we're in edit mode as opposed to new podcast mode.
@@ -138,11 +138,16 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 			<input type="hidden" name="userfile" value="'.$_GET['name'].'">';
 		} else {
 			$PG_mainbody .= '<h4>'.$L_file.'*</h4>
-			<div class="well"><input name="userfile" id="userfile" type="file">
-				<input name="ftpfile" id="ftpfile" type="hidden">
-				<p class="pull-right">
-					<a href="#uploadFiles" data-toggle="modal">or check for files uploaded via FTP</a>
-				</p>
+			<div class="well"><input name="userfile" id="userfile" type="file" style="float:left;">
+			
+			<p style="text-align:right"><a href="#uploadFiles" data-toggle="modal">Check FTP </a>
+			
+			<a data-toggle="popover" title="FTP Uploads" data-content="If you can\'t upload via the automatic uploader, you can drop a file into the /media/ folder via FTP. It will show up here for you to add it as an episode." id="ftpexpl" data-placement="left"><i class="icon-question-sign"></i></a></p>
+
+			
+					
+				
+				<input name="ftpfile" id="ftpfile" type="hidden">				
 			</div>';
 		}
 				
@@ -209,10 +214,10 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 			</fieldset>
 </div>
 			<div class="form-actions">
-				<input type="submit" value="'.$L_send.'" class="btn btn-primary">
+				<input type="submit" value="'.$L_send.'" class="btn btn-primary" id="submitep">
 			</div>
 			
-			<div class="progress" id="fileProgress"><div class="bar"></div></div>
+			<div class="progress" id="fileProgress"><div class="progress-bar"></div></div>
 
 		</form>
 
@@ -250,9 +255,12 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 				if (!file_exists("$filedescr")) { //if database file exists 
 					$PG_mainbody .= "<li><a class=\"ftpupload\" data-ftpurl=\"".$key."\">".$key."</a></li>";
 				}
+			} else {
+				$PG_mainbody .= "<li>No uploaded files.</li>";
 			}
 		}
-	}
+	} 
+
 	$PG_mainbody .= '</ul>
         </div>
         <div class="modal-footer">

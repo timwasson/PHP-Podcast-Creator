@@ -43,18 +43,18 @@ if(isset($_GET['action']) AND $_GET['action'] == "logout" ){
 // check if user is already logged in (Thanks to Pavel Urusov for the MD5 password encoding suggestion)
 if(isset($_SESSION["user_session"]) AND $_SESSION["user_session"]==$username AND md5($_SESSION["password_session"])==$userpassword){ //if so, keep displaying the page
 
-	$PG_mainbody .= '<div class="navbar">
-	<p class="navbar-text pull-right">
-		'.$L_welcome.' <em>'.$username.'</em></p>';
+	$PG_mainbody .= '
+<div class="navbar">
+	<ul class="nav navbar-nav pull-right">
+		<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">'.$username.' <i class="icon-caret-down"></i></a>';
 
-	if (isset($_GET['do']) AND $_GET['do'] != NULL) {
-
-		$PG_mainbody .= '<ul class="nav navbar-nav"><li><a href="?p=admin"><i class="icon-reply"></i> '.$L_menu_backadmin.'</a></li><li><a href="?p=admin&action=logout"><i class="icon-signout"></i> '.$L_logout.'</a></li></ul>';
-	}
-	else {
-		$PG_mainbody .= '<ul class="nav navbar-nav"><li><a href="?p=admin&action=logout" class="pull-right"><i class="icon-signout"></i> '.$L_logout.'</a></li></ul>';
-	}
-	$PG_mainbody .= '</div>';
+	$PG_mainbody .= '<ul class="dropdown-menu">
+						<li><a href="?p=admin"><i class="icon-reply"></i> '.$L_menu_backadmin.'</a></li>
+						<li><a href="?p=admin&action=logout"><i class="icon-signout"></i> '.$L_logout.'</a></li></ul>';
+	$PG_mainbody .= '
+		</li>
+	</ul>
+</div>';
 
 }else{
 

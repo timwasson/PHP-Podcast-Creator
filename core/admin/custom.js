@@ -120,10 +120,13 @@ $(function() {
 	
 	function progressupdate(p){
 		pr = Math.round(p);
-		$("#fileProgress .bar").css({ "width": pr+"%" }).text(pr+"%");
+		$("#fileProgress .progress-bar").css({ "width": pr+"%" }).text(pr+"%");
 		//console.log("progress"+p);
 	}
 	// End Progress bar
+	
+	// Hide progress bar, show it upon submission. 
+	$("#fileProgress").hide();
 	
 	// Simple error checking 
 	$("#uploadform").submit(function() {
@@ -141,9 +144,14 @@ $(function() {
 		if(error == 1) {
 			alert("Looks like you've got some errors you need to fix.");
 			return false;
+		} else {
+			$("#fileProgress").show();
+			$("#submitep").addClass("disabled").after(' <i class="icon-spinner icon-spin icon-large"></i> ');
 		}
 	});
-
+	
+	// FTP popover
+	$("#ftpexpl").popover();
 	
 	//Update the deletion URL
 	$(".delep").on("click",function() {

@@ -1,6 +1,6 @@
 <?php
 ############################################################
-# PODCAST GENERATOR
+# PHP Podcast Creator
 #
 # Created by Alberto Betella
 # Improved by Tim Wasson
@@ -29,31 +29,31 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 		<div class="panel">
 			<div class="panel-heading" style="margin-bottom:-16px;">'.$L_admin_episodes.'</div>
 			<ul class="list-group list-group-flush">
-				<li class="list-group-item"><a href="?p=admin&do=upload">'.$L_admin_upload.'</a></li>
-				<li class="list-group-item"><a href="?p=admin&do=editdel">'.$L_admin_editdel.'</a></li>
-				<li class="list-group-item"><a href="?p=admin&do=generate">'.$L_admin_genfeed.'</a></li>
+				<li class="list-group-item"><a href="?p=admin&do=upload"><i class="icon-plus"></i> '.$L_admin_upload.'</a></li>
+				<li class="list-group-item"><a href="?p=admin&do=editdel"><i class="icon-edit"></i> '.$L_admin_editdel.'</a></li>
+				<li class="list-group-item"><a href="?p=admin&do=generate"><i class="icon-refresh"></i> '.$L_admin_genfeed.'</a></li>
 			</ul>
 		</div>
 		
 		<div class="panel">
 			<div class="panel-heading" style="margin-bottom:-16px;">'.$L_admin_itunessettings.'</div>
 			<ul class="list-group list-group-flush">
-				<li class="list-group-item"><a href="?p=admin&do=itunescat">'.$L_changecat.'</a></li>
-				<li class="list-group-item"><a href="https://phobos.apple.com/WebObjects/MZFinance.woa/wa/publishPodcast?feedURL='.$url.$feed_dir.'feed.xml" target="_blank">'.$L_submit_itunes_store.'</a></li>
+				<li class="list-group-item"><a href="?p=admin&do=itunescat"><i class="icon-music"></i> '.$L_changecat.'</a></li>
+				<li class="list-group-item"><a href="https://phobos.apple.com/WebObjects/MZFinance.woa/wa/publishPodcast?feedURL='.$url.$feed_dir.'feed.xml" target="_blank"><i class="icon-arrow-right"></i> '.$L_submit_itunes_store.'</a></li>
 			</ul>
 		</div>
 		
 		<div class="panel">
 		<div class="panel-heading" style="margin-bottom:-16px;">'.$L_admin_podcastdetails.'</div>
 			<ul class="list-group list-group-flush">
-				<li class="list-group-item"><a href="?p=admin&do=changedetails">'.$L_changepodcastdetails.'</a></li>
-				<li class="list-group-item"><a href="http://validator.w3.org/feed/check.cgi?url='.$url.'feed.xml" target="_blank">'.$L_admin_feed_validate.'</a></li>
+				<li class="list-group-item"><a href="?p=admin&do=changedetails"><i class="icon-info-sign"></i> '.$L_changepodcastdetails.'</a></li>
+				<li class="list-group-item"><a href="http://validator.w3.org/feed/check.cgi?url='.$url.'feed.xml" target="_blank"><i class="icon-ok"></i> '.$L_admin_feed_validate.'</a></li>
 			</ul>
 		</div>
 		<div class="panel">
 			<div class="panel-heading" style="margin-bottom:-16px;">'.$L_pgconfig.'</div>
 			<ul class="list-group list-group-flush">
-				<li class="list-group-item"><a href="?p=admin&do=config">'.$L_admin_changeconf.'</a></li>
+				<li class="list-group-item"><a href="?p=admin&do=config"><i class="icon-cog"></i> '.$L_admin_changeconf.'</a></li>
 			</ul>
 		</div>';
 
@@ -97,7 +97,7 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 				$PG_mainbody .= '
 				<h2>'.$L_welcome.'</h2>
 				<div class="alert alert-info">
-				<p><i class="icon-thumbs-up"></i> '.$L_firstadminmsg.' <br><a href="?p=admin&do=changedetails" class="btn btn-primary"><strong><i class="icon-arrow-right"></i> '.$L_startnow.'</strong></a></p>
+				<p><i class="icon-thumbs-up"></i> '.$L_firstadminmsg.' </p><p><a href="?p=admin&do=changedetails" class="btn btn-primary"><strong><i class="icon-arrow-right"></i> '.$L_startnow.'</strong></a></p>
 
 				</div>';
 				

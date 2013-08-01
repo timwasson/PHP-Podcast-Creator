@@ -1,43 +1,122 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>PHP Podcast Creator</title>
+<!DOCTYPE html>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>PHP Podcast Creator</h1>
-        <p>Built with PHP, XML, and jQuery. </p>
+<head>
+	
+	<title>PHP Podcast Creator</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/css/custom.css" rel="stylesheet">
+</head>
 
-        <p class="view"><a href="https://github.com/timwasson/PHP-Podcast-Creator">View the Project on GitHub <small>timwasson/PHP-Podcast-Creator</small></a></p>
+<body data-spy="scroll" data-target="#mainmenu" data-offset="50">
 
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="navbar navbar-fixed-top" id="mainmenu">
+					<!-- .navbar-toggle is used as the toggle for collapsed navbar content -->
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
 
-        <ul>
-          <li><a href="https://github.com/timwasson/PHP-Podcast-Creator/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/timwasson/PHP-Podcast-Creator/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/timwasson/PHP-Podcast-Creator">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h3>Any easy to use, PHP-based system to manage your podcast.</h3>
+					<!-- Be sure to leave the brand out there if you want it shown -->
+					<a class="navbar-brand" href="#">Podcast Creator</a>
 
-		<p>Just setting up my GitHub page. </p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/timwasson">timwasson</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
+					<!-- Place everything within .navbar-collapse to hide it until above 768px -->
+					<div class="nav-collapse collapse navbar-responsive-collapse">
+						<ul class="nav navbar-nav">
+							<li><a href="#home">Home</a></li>
+							<li><a href="#about">About</a></li>
+							<li><a href="#features">Features</a></li>
+							<li><a href="#installation">Installation</a></li>
+							<li><a href="#upgrading">Upgrading</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<header class="row" id="home">
+			<div class="col-lg-12 col-sm-12">
+				<h1>PHP Podcast Creator</h1>
+			</div>
+		</header>
+		<div class="row">
+			<div class="col-lg-9 col-sm-9">
+				<h2 id="about">About PHP Podcast Creator</h2>
+				<p>PHP Podcast Creator is an official fork of Podcast Generator version 1.4. In many ways, it is an upgrade of version 1.4. PHP Podcast Creator (PPC) embraces all of the thinking of the modern web, including embracing HTML5, CSS3, and HTML5 audio/video players. It uses recent open-source projects as the framework, including Twitter Bootstrap 3, jQuery, jPlayer and updated versions of tinyMCE for use as a rich text editor. It takes a philosophically different approach to programming, trying to dramatically reduce the amount of files and dependencies for cleaner, easier-to-maintain code. While it still does utilize a mySQL-less approach to storing and retrieving episodes, this functionality will be removed in later editions and rely on mySQL for data storage. It already utilizes mySQL for tracking episode and feed downloads.</p>
+				<p>However, in some ways, some may consider this a downgrade from Podcast Generator 1.4. Many components were removed in the interest of fewer dependencies, including freebox (which made it easy to modify items in the right-hand menu), categories (it is not possible to categorize podcasts in PPC), archives (this will be making a return to PPC when it makes the leap to mySQL), and multiple themes.</p>
+				<p>If you know PHP, CSS and HTML, you'll be able to modify this project all you want and make it your own.</p>
+				<h3>Why would I choose PHP Podcast Creator over Podcast Generator?</h3>
+				<p>With Podcast Generator moving to version 2, there may be less of an incentive to move on to PHP Podcast Creator. They share some similarities now, like utilizing Bootstrap for theming and UI. PPC offers new whiz-bang features like HTML5 media players and download tracking, but PG offers easier customization with options like freebox and categories. I would encourage you to download both options, try them out, and check out the code that drives them before making your decision.</p>	
+				<h2 id="features">Features</h2>
+				<h3>Shared with Podcast Generator</h3>
+				<ul>
+					<li><strong>Very easy to install</strong> (Web Setup Wizard) - Just load up website and PPC does the rest of the installation for you. For more information, see the Installation section. </li>
+					<li><strong>Free and open source</strong> - It's free. It always will be. If you really want to buy me a beer for me troubles, I won't stop you. </li>
+					<li><strong>Supports ANY media filetype</strong> (mp3, ogg, mpg, m4v, mov, pdf, etc...) and allows to create mixed audio and video podcasts - I would recommend only using MP3 and MP4, but it does support other media types. </li>
+					<li><strong>The XML feed is fully compatible with aggregators</strong> (e.g. Juice and iTunes), meets the w3c standards and supports iTunes specific tags - However your listeners want to subscribe, they'll be able to. </li>
+					<li><strong>User friendly web administration interface</strong> - upload, edit, delete episodes. You can also edit your feed information and make some modifications to your website.</li>
+					<li><strong>Multilanguage support</strong> - Any help translating the new additions would be appreciated!</li>
+					<li><strong>Web player</strong> - It utilizes jPlayer for the web player, so it'll play audio and video, on all devices (as long as the mobile device supports the codec you used in your media)</li>
+					<li><strong>Easy FTP support</strong> for episodes too large to upload via HTTP. You can upload via FTP and add the media to your feed if it's too large for HTTP uploads.</li>
+				</ul>
+				<h3>New Features:</h3>
+				<ul>
+					<li><strong>HTML5 progress uploads</strong> (compatible with modern [not IE] browsers) - Get feedback on the percentage uploaded and remaining.</li>
+					<li><strong>HTML5 audio/video player (jPlayer)</strong> - It plays the most common formats necessary for today (MP3, MP4, M4V)</li>
+					<li><strong>Significant structural changes</strong> that make updates and upgrades easier. Mass file deletion and combining means this will be easier and faster modifications.</li>
+					<li><strong>Clean URLs using URL rewrites</strong> - Clean up those dynamic URLs, help with SEO and ease of passing links around to friends.</li>
+					<li><strong>Feed download tracking</strong> - Every time an episode is downloaded, it tracks IP address, host, time and referrer.</li>
+					<li><strong>Episode download tracking</strong> - Each time your feed is pinged, it tracks the person or program pinging it. Tracking information is displayed in a beautiful graph from Google Chart APIs.</li>
+					<li><strong>mySQL integration</strong> (currently only for feed tracking). mySQL will be utilized for episode information soon as well, but for now it's only used for download tracking.</li>
+					<li><strong>Bootstrap 3 integration</strong> for mobile-first compatibility - Cutting edge integration with modern web frameworks, like Bootstrap. Of course your podcast website will work on all devices and is responsive.</li>
+				</ul>
+				<h2 id="installation">Installation</h2>
+				<p>I tried to make it as easy as possible for ya.</p>
+				<ul>
+					<li><strong>Upload all the files</strong> to your root directory.</li>
+					<li><strong>Create a "media" and "images" folder</strong> in your root directory.</li>
+					<li><strong>CHMOD</strong> your root directory, "media" and "images" folder to 755.</li>
+					<li><strong>Download jPlayer</strong> (<a href="http://jplayer.org/">http://jplayer.org/</a>) and put it in /components/player (so the structure should be /components/player/jquery.player.min.js). </li>
+					<li><strong>Download tinyMCE</strong> (<a href="http://www.tinymce.com">http://www.tinymce.com/</a>) and extract it into /components/tinymce (so the structure should be /components/tinymce/js/tinymce/jquery.tinymce.min.js).</li>
+					<li><strong>Set up your database</strong> in whatever tool you're most comfortable with. Keep your username, password and database information handy.</li>
+					<li><strong>Load up your website</strong> in your favorite browser. Walk through the installation steps. </li>
+					<li><strong>Log into your admin panel</strong> using the username and password you set up when you installed.</li>
+					<li><strong>Delete</strong> your /setup folder. It's a security risk. Please delete it. <strong>PLEASE</strong>.</li>
+					<li><strong>Finish configuring</strong>. Set up your iTunes categories and images, set up your title, copyright, etc., and you should be ready to rock and roll.</li>
+				</ul>
+				<h2 id="upgrading">Upgrading</h2>
+				<p>If you want to upgrade from Podcast Generator, it shouldn't really be THAT difficult. This is untested, as I do not have a site running PG 1.4 to test, but you should just need to go through the following steps:</p>
+				<ul>
+					<li><strong>Make a backup</strong>. This is probably the most important step. Please don't complain if you lose everything if you didn't follow this step.</li>
+					<li><strong>Delete a bunch of stuff</strong>. Scary, I know, but delete everything other than config.php and the stuff in your /media folder.</li>
+					<li><strong>Reinstall</strong>. Rename your "config.php" file to "config.bk.php". Load up your site and walk through the installation wizard.</li>
+					<li><strong>Follow the standard install instructions</strong> to complete your installation. Log into your site.</li>
+					<li><strong>Remake your config.php file</strong> by logging into the admin panel, and go to PHP Podcast Generator Config, as well as iTunes config. If you've forgotten anything that you'd set up previously, you can look it up in your "config.bk.php" file (you kept that, right?!)</li>
+					<li><strong>That's IT!</strong> You should be done. Your theme won't transfer over unfortunately, so you'll need to start from scratch there, but since you're moving to a responsive site and fantastic framework, you'll probably want to rethink your layout anyway.</li>
+				</ul>
+				<p>If you're moving from PG to PPC and want to email me with tips and tricks, I welcome your input.</p>
+			</div>
+			<aside class="col-lg-3 col-sm-3">
+				<div class="list-group" data-spy="affix" data-offset="0">
+					<a href="https://github.com/timwasson/PHP-Podcast-Creator/zipball/master" class="list-group-item"><i class="icon-download"></i> Download <strong>ZIP File</strong></a>
+					<a href="https://github.com/timwasson/PHP-Podcast-Creator/tarball/master" class="list-group-item"><i class="icon-download"></i> Download <strong>TAR Ball</strong></a>
+					<a href="https://github.com/timwasson/PHP-Podcast-Creator" class="list-group-item"><i class="icon-github-alt"></i> View On <strong>GitHub</strong></a>
+				</div>
+			</aside>
+		</div>
+		<footer class="row">
+			
+		</footer>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
+	<script>
+		
+	</script>
+	</body>
+
 </html>

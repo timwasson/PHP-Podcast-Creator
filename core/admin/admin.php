@@ -101,7 +101,10 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 
 				</div>';
 				
-				$PG_mainbody .= '
+				
+				
+			}
+			$PG_mainbody .= '
 				<h3>Feed Downloads</h3>
 				<div id="feeddown" style="width: 100%; height: 300px;"></div>
 				<p>This is the total number of feed downloads you\'ve received. </p>
@@ -109,8 +112,6 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 				<h3>Episode Downloads</h3>
 				<div id="epdown" style="width: 100%; height: 300px;"></div>
 				<p>These are downloads of individual downloads per episode.</p>';
-				
-			}
 		}
 	}
 }

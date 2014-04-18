@@ -78,7 +78,7 @@ if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined vari
 			$episode_date .= "<a href=\"".$url.$upload_dir.$file_multimediale[0].".".$podcast_filetype."\" title=\"$L_donloadthis\"><i class=\"icon-download\"></i></a>";
 			$PG_mainbody .= '</h3><p>'.$episode_date.'</p>';
 			if(isset($text_imgpg) AND $text_imgpg!=NULL AND file_exists("$img_dir$text_imgpg")) {
-				$PG_mainbody .= "<img src=\"$img_dir$text_imgpg\" class=\"episode_image\" alt=\"$text_title\" />";
+				$PG_mainbody .= "<img src=\"/".$img_dir.$text_imgpg."\" class=\"episode_image\" alt=\"".$text_title."\" />";
 			}
 
 			if(isset($text_longdesc) AND $text_longdesc!=NULL ) { // if is set long description

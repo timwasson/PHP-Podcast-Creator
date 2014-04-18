@@ -17,7 +17,7 @@ $PG_mainbody = NULL; //erase variable which contains episodes data
 if (isset($_GET['name']) AND $_GET['name'] != NULL ) {
 
 	// Get the file in light of no extension here. Removed the extension for cleaner URL rewrites. 
-	$file_multimediale = $_GET['name'];
+	$file_multimediale = $_GET['name'].".mp3";
 	$handle = opendir ($absoluteurl.$upload_dir);
 
 	while (($filename = readdir ($handle)) !== false)

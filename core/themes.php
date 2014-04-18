@@ -64,7 +64,7 @@ if (isset($_GET['p']) and $_GET['p'] == "admin" and isset($_GET['do']) and $_GET
 	";
 }
 $loadjavascripts .= '<script type="text/javascript" src="/components/player/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="/themes/bootstrap/js/player.js"></script>';
+<script type="text/javascript" src="/'.$theme_path.'js/player.js"></script>';
 
 //if(empty($trackfeed)) { $trackfeed =""; } else { $trackfeed = $trackfeed; }
 

@@ -30,6 +30,9 @@ if (isset($_GET['p'])) {
 
 	if ($_GET['p']=="admin") {
 		include("$absoluteurl"."core/admin/admin.php");
+		include("$absoluteurl"."core/themes.php");
+    
+    echo $theme_file_contents;
 	}
 
 	elseif ($_GET['p']=="episode") {
@@ -37,15 +40,11 @@ if (isset($_GET['p'])) {
 	}
 
 	else {
-		include("$absoluteurl"."core/recent_list.php");
+		include("$absoluteurl"."core/appview.php");
 	}
 }
 else { // if no p= specifies, e.g. just index.php with no GET
-	include("$absoluteurl"."core/recent_list.php");
+	include("$absoluteurl"."core/appview.php");
 }
-
-include("$absoluteurl"."core/themes.php");
-
-echo $theme_file_contents;
 
 ?>

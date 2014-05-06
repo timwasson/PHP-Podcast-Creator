@@ -34,17 +34,15 @@ if (isset($_GET['p'])) {
     
     echo $theme_file_contents;
 	}
-
-	elseif ($_GET['p']=="episode") {
-		include("$absoluteurl"."core/episode.php");
-	}
-
-	else {
-		include("$absoluteurl"."core/appview.php");
-	}
 }
 else { // if no p= specifies, e.g. just index.php with no GET
-	include("$absoluteurl"."core/appview.php");
+	$output = file_get_contents($theme_path."/app.html");
+  
+  $output = str_replace("{{ title }}", $podcast_title, $output);
+  
+  $output = str_replace("{{ subtitle }}", $podcast_subtitle, $output);
+  
+  echo $output;
 }
 
 ?>

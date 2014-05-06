@@ -61,13 +61,13 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 	######
 
 	$head_feed ="<?xml version=\"1.0\" encoding=\"$feed_encoding\"?>
-	<!-- generator=\"Podcast Generator $podcastgen_version\" -->
+	<!-- generator=\"PHP Podcast Creator" -->
 		<rss xmlns:itunes=\"http://www.itunes.com/dtds/podcast-1.0.dtd\" xml:lang=\"$feed_language\" version=\"2.0\">
 	<channel>
 		<title>$podcast_title</title>
 		<link>$url</link>
 		<description>$podcast_description</description>
-		<generator>Podcast Generator $podcastgen_version - http://podcastgen.sourceforge.net</generator>
+		<generator>PHP Podcast Creator</generator>
 	<lastBuildDate>".date("r")."</lastBuildDate>
 		<language>$feed_language</language>
 		<copyright>$copyright</copyright>
@@ -267,7 +267,7 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 							$filetime = filemtime ("$absoluteurl"."$upload_dir$file_multimediale[0].$podcast_filetype");
 							$filepubdate = date ('r', $filetime);
 
-							$eplink = $link.urlencode($file_multimediale[0]);
+							$eplink = $url."#/".urlencode($file_multimediale[0])."/";
 
 							$single_file.="<item>
 								<title>$text_title</title>
@@ -324,7 +324,9 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 								$single_file.= "<itunes:explicit>$text_explicitpg</itunes:explicit>
 									";
 							}
-
+              if ($text_imgpg!=NULL) {
+                $single_file .="<itunes:image href=\"".$url."images/".$text_imgpg."\" />";
+              }
 
 							$single_file.= "<pubDate>$filepubdate</pubDate>
 								</item>";
@@ -354,7 +356,7 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 
 	$tail_feed ="</channel></rss>";
 
-	####
+	#### Write the RSS feed.
 	$fp1 = fopen("$feedfilename", "w+"); //Apri il file in lettura e svuotalo (w+)
 	fclose($fp1);
 
@@ -363,6 +365,59 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 	fclose($fp);
 
 	############
+	
+	// Write the JSON feed for the front-end
+	//header('Content-Type: application/json');
+  $feed = new DOMDocument();
+  $feed->load($url."feed.xml");
+  $json = array();
+  
+  $json['title'] = $feed->getElementsByTagName('channel')->item(0)->getElementsByTagName('title')->item(0)->firstChild->nodeValue;
+  $json['description'] = $feed->getElementsByTagName('channel')->item(0)->getElementsByTagName('description')->item(0)->firstChild->nodeValue;
+  $json['link'] = $feed->getElementsByTagName('channel')->item(0)->getElementsByTagName('link')->item(0)->firstChild->nodeValue;
+  $json['bimage'] = $feed->getElementsByTagNameNS('http://www.itunes.com/dtds/podcast-1.0.dtd', 'image')->item(0)->getAttribute('href');
+  
+  $json['email'] = $feed->getElementsByTagNameNS('http://www.itunes.com/dtds/podcast-1.0.dtd', 'email')->item(0)->firstChild->nodeValue;
+  
+  $items = $feed->getElementsByTagName('channel')->item(0)->getElementsByTagName('item');
+  
+  $json['item'] = array();
+  $i = 0;
+  
+  
+  foreach($items as $item) {
+  
+    $title = $item->getElementsByTagName('title')->item(0)->firstChild->nodeValue;
+    $description = $item->getElementsByTagNameNS('http://www.itunes.com/dtds/podcast-1.0.dtd', 'summary')->item(0)->firstChild->nodeValue;
+    if($item->getElementsByTagNameNS('http://www.itunes.com/dtds/podcast-1.0.dtd', 'image')->item(0)) {
+    $image = $item->getElementsByTagNameNS('http://www.itunes.com/dtds/podcast-1.0.dtd', 'image')->item(0)->getAttribute('href');
+    } else {
+    $image = $json['bimage'];
+    }
+    
+    $pubDate = $item->getElementsByTagName('pubDate')->item(0)->firstChild->nodeValue;
+    $guid = $item->getElementsByTagName('guid')->item(0)->firstChild->nodeValue;
+    $enclosure = $item->getElementsByTagName('enclosure')->item(0)->getAttribute('url');
+    
+    $json['item'][$i]['title'] = $title;
+    $json['item'][$i]['description'] = str_replace("\n", "<br />",$description);
+    $json['item'][$i]['pubdate'] = date('F jS\, Y',strtotime($pubDate));
+    $json['item'][$i]['guid'] = $guid;   
+    $json['item'][$i]['enclosure'] = $enclosure;
+    $json['item'][$i]['image'] = $image;
+    $json['item'][$i]['pid'] = $i;
+    //$json['item'][$i]['brief'] = substr($description, 0, 50);
+    
+    $i++;
+    
+    //echo $enclosure;
+      
+  }
+  $fp = fopen($absoluteurl."feed.json", "a+"); //testa xml
+	fwrite($fp, json_encode($json)); 
+	fclose($fp);
+  
+//echo json_encode($json);
 
 	$PG_mainbody .= "<p><strong>".$L_feedgenerated."</strong></p>";
 

@@ -11,6 +11,8 @@ core/admin/custom-ck.js
 
 feed.xml
 
+feed.json
+
 images/*
 
 setup/*

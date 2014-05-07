@@ -18,8 +18,8 @@ if (isset($_GET['p']) AND $_GET['p'] == "admin") {
 } else {
 	$tempfile = "index.htm";
 }
-if(($theme_file_contents = file_get_contents($theme_path.$tempfile)) === FALSE) {
-	echo "<p class=\"error\">".$L_failedopentheme."</p>";
+if(($theme_file_contents = file_get_contents($absoluteurl.$theme_path.$tempfile)) === FALSE) {
+	echo "<p class=\"error\">".$L_failedopentheme."</p>".$absoluteurl.$theme_path.$tempfile;
 	exit;
 }
 

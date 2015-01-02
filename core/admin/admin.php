@@ -25,7 +25,7 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 	// check if user is already logged in
 	if(isset($amilogged) AND $amilogged =="true") {
 	
-		$admmenu .= '
+		$admmenu = '
 		<div class="panel">
 			<div class="panel-heading" style="margin-bottom:-16px;">'.$L_admin_episodes.'</div>
 			<ul class="list-group list-group-flush">

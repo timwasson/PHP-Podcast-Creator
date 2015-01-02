@@ -36,18 +36,18 @@ if (isset($_GET['file']) AND $_GET['file']!=NULL) {
   $PG_mainbody .= "Total Downloads: ".$result->num_rows;
   
   $PG_mainbody .= "<table class=\"table table-striped\">";
-  $PG_mainbody .= "<tr><th>Download Date</th><th>IP</th><th>Agent</th></tr>";
+  $PG_mainbody .= "<tr><th>Download Date</th><th>IP</th><th>Agent</th><th>Location</th></tr>";
   
   if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
       //print_r($row['MONTH(time)']);
-      $PG_mainbody .= "<tr><td>".$row['MONTH(time)']."/".$row['DAY(time)']."/".$row['YEAR(time)']."</td><td>". $row["ip"]. "</td><td>". $row[agent]. "</td></tr>";
+      $dataloc = json_decode(file_get_contents("http://ip-api.com/json/".$row['ip']));
+      $PG_mainbody .= "<tr><td>".$row['MONTH(time)']."/".$row['DAY(time)']."/".$row['YEAR(time)']."</td><td>". $row["ip"]. "</td><td>". $row["agent"]. "</td><td>".$dataloc->city.", ".$dataloc->region.", ".$dataloc->country."</td></tr>";
     }
   }
   
   $PG_mainbody .= "</table>";
-	
 } else { 
 	$PG_mainbody .="Hi.";
 }

@@ -1,5 +1,5 @@
 <?
-$loadjavascripts .= '
+$loadjavascripts = '
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
@@ -146,7 +146,7 @@ $loadjavascripts .= '
   
   /* Generate the better table for totals */
   sort($files, SORT_NATURAL | SORT_FLAG_CASE);
-  $dltbrow .= "<table class=\"table table-striped\">";
+  $dltbrow = "<table class=\"table table-striped\">";
   $dltbrow .= "<tr><th>File</th><th>Downloads</th></tr>";
   foreach ($files as $file) {
     $sql = "SELECT DISTINCT file, YEAR(time), MONTH(time), DAY(time), ip FROM media WHERE file = '".$file."'";
@@ -157,7 +157,7 @@ $loadjavascripts .= '
       
       // output data of each row
       //while($row = $result->fetch_assoc()) {
-        $dltbrow .= "<tr><td><a href=\"?p=admin&do=epdlinfo&file=".$file."\">". $file. "</a></td><td>". $result->num_rows. " " . $row["time"]."</td></tr>";
+        $dltbrow .= "<tr><td><a href=\"?p=admin&do=epdlinfo&file=".$file."\">". $file. "</a></td><td>". $result->num_rows. "</td></tr>";
       //}
     }
   }

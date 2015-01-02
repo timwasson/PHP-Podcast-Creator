@@ -265,6 +265,13 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
   							$filepubdate = date ('r', $filetime);
   
   							$eplink = $url."#/".urlencode($file_multimediale[0])."/";
+  							
+  							if($bbrytrack == true) {
+    							$hlurl = str_replace("http://", "", $url);
+    							$encurl = $bbryurl.$hlurl.$upload_dir.$key;
+  							} else {
+    							$encurl = $url.$upload_dir.$key;
+  							}
   
   							$single_file.="<item>
   								<title>$text_title</title>
@@ -272,7 +279,7 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
   								<itunes:summary><![CDATA[ $text_longdesc ]]></itunes:summary>
   								<description>$text_shortdesc</description>
   								<link>".$eplink."</link>
-  								<enclosure url=\"$url$upload_dir$key\" length=\"$file_size\" type=\"$filemimetype\"/>
+  								<enclosure url=\"".$encurl."\" length=\"$file_size\" type=\"$filemimetype\"/>
   								<guid>".$eplink."</guid>
   								";
   

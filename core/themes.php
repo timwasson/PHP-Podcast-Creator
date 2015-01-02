@@ -38,14 +38,9 @@ $theme_file_contents = str_replace("-----PG_PAGETITLE-----", $page_title, $theme
 ###############################
 # LOAD JAVASCRIPTS IN THE HEADER IF PAGE REQUIRES - REPLACES "-----PG_JSLOAD-----" IN THE HEADER OF THE THEME PAGE
 if (isset($_GET['p']) and $_GET['p'] == "admin") {
-	$loadjavascripts = "<script src=\"/core/admin/custom.js\"></script>";
+	$loadjavascripts .= "<script src=\"/core/admin/custom.js\"></script>";
 }
-if (isset($_GET['p']) and $_GET['p'] == "admin" and empty($_GET['do'])) {
-	
-	// This loads all the Google Chart on the front page of the admin panel for the total number of Feed downloads.
-	include ("admin/showtrack.php");
-    
-}
+
 if (isset($_GET['p']) and $_GET['p'] == "admin" and isset($_GET['do']) and $_GET['do'] == "upload" or $_GET['do'] == "edit") {
 
 	$loadjavascripts .= "

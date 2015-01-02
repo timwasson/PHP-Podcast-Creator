@@ -16,7 +16,6 @@ if (isset($_REQUEST['GLOBALS']) OR isset($_REQUEST['absoluteurl']) OR isset($_RE
 if (isset($_GET['p'])) if ($_GET['p']=="admin") { session_start(); }
 
 if (!file_exists("config.php")) { //if config.php doesn't exist stop the script
-  header("HTTP/1.1 301 Moved Permanently");
 	header("Location: setup/"); // open setup script
 } 
 

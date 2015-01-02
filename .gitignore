@@ -3,6 +3,8 @@ media/*
 
 config.php
 
+components/getid3/*
+
 components/player/*
 
 components/tinymce/*

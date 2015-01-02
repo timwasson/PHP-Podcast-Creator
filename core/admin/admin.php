@@ -90,6 +90,10 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 
 			include("$absoluteurl"."core/admin/scriptconfig.php");
 		}
+		elseif (isset($_GET['do']) AND $_GET['do']=="epdlinfo") {
+
+			include("$absoluteurl"."core/admin/epdlinfo.php");
+		}
 		else {
 
 			if (isset($firsttimehere) AND $firsttimehere == "yes") { // if it's the first time (parameter specified in config.php)
@@ -104,15 +108,17 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 				
 				
 			}
+			
 			$PG_mainbody .= '
 				<h3>Feed Downloads</h3>
 				<div id="feeddown" style="width: 100%; height: 300px;"></div>
 				<p>This is the total number of feed downloads you\'ve received. </p>
 				
 				<h3>Episode Downloads</h3>
-				<div id="epdown" style="width: 100%; height: 300px;"></div>
-				<p>These are downloads of individual downloads per episode.</p>';
+				<div id="epdown" style="width: 100%; height: 300px;"></div>';
+include ("showtrack.php");
 		}
+		
 	}
 }
 ?>

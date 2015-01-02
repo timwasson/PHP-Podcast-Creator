@@ -2,7 +2,11 @@
 // Copyright 2013, Tim Wasson, PHP Podcast Creator
 // An extremely basic way to keep track of podcast subscribers. 
 
-include("../config.php"); 
+include("../config.php");
+
+/* Track in Analytics */
+require_once("ss-ga.class.php");
+
 
 $tfile = $_GET['file'];
 $folder = NULL;
@@ -51,7 +55,17 @@ if($_GET['log'] != "no") {
 	{
 		echo "Oops. ".mysql_error();
 	} else {
-	
+	  
+	  // Sent to Google Analytics
+	  $ssga = new ssga('UA-9248215-19','www.atomicast.com');
+	  $ssga->set_event('Downloads', 'Download Type', $tfile);
+	  
+	  $ssga->set_page( $tfile );
+    $ssga->set_page_title( 'Page Title' );
+
+		$ssga->send();
+		$ssga->reset();
+		
 		$feed = file_get_contents($absoluteurl.$folder.$tfile);
 			
 		if($ttable != "feed") {

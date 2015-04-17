@@ -247,6 +247,7 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 		# asort ($file_array);
 		arsort ($file_array); //the opposite of asort (inverse order)
 		$recent_count = 0; //set recents to zero
+		$no_results = true;
 		foreach ($file_array as $key => $value)	{
 			$file_multimediale = explode(".",$key); //divide filename from extension [1]=extension (if there is another point in the filename... it's a problem)
 			$fileData = checkFileType($file_multimediale[1],$podcast_filetypes,$filemimetypes);
@@ -254,11 +255,13 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 				$filedescr = "$absoluteurl"."$upload_dir$file_multimediale[0].xml"; //database file
 				if (!file_exists("$filedescr")) { //if database file exists 
 					$PG_mainbody .= "<li><a class=\"ftpupload\" data-ftpurl=\"".$key."\">".$key."</a></li>";
+					$no_results = false;
 				}
-			} else {
-				$PG_mainbody .= "<li>No uploaded files.</li>";
 			}
 		}
+		if($no_results == true) {
+      $PG_mainbody .= "<li>No uploaded files that are not currently associated with an episode.</li>";
+    }
 	} 
 
 	$PG_mainbody .= '</ul>

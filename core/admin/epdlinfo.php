@@ -29,7 +29,7 @@ if (isset($_GET['file']) AND $_GET['file']!=NULL) {
 	    exit();
 	}
 	
-	$sql = "SELECT DISTINCT file, YEAR(time), MONTH(time), DAY(time), ip, ref, agent FROM media WHERE file = '".$file."'";
+	$sql = "SELECT * FROM media WHERE file = '".$file."' GROUP BY file, time, ip, ref, agent";
 
   $result = $mysqli->query($sql);
     
@@ -42,8 +42,23 @@ if (isset($_GET['file']) AND $_GET['file']!=NULL) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
       //print_r($row['MONTH(time)']);
-      $dataloc = json_decode(file_get_contents("http://ip-api.com/json/".$row['ip']));
-      $PG_mainbody .= "<tr><td>".$row['MONTH(time)']."/".$row['DAY(time)']."/".$row['YEAR(time)']."</td><td>". $row["ip"]. "</td><td>". $row["agent"]. "</td><td>".$dataloc->city.", ".$dataloc->region.", ".$dataloc->country."</td></tr>";
+      
+      if(empty($row['city'])) {
+        //echo $row['city'];
+        
+        $dataloc = json_decode(file_get_contents("http://ip-api.com/json/".$row['ip']));
+        
+        $locu = "UPDATE media SET `lat`='".$dataloc->lat."', `long`='".$dataloc->lon."', `city`='".$dataloc->city."', `region`='".$dataloc->region."', `country`='".$dataloc->country."', `zip`='".$dataloc->zip."' WHERE `ip`='".$row['ip']."'";
+
+        if ($mysqli->query($locu)) {
+        //    echo "Record updated successfully";
+        } else {
+        //    echo "Error updating record: " . mysqli_error($mysqli);
+        }
+        
+      }
+      
+      $PG_mainbody .= "<tr><td>".date('n/j/Y',strtotime($row['time']))."</td><td>". $row["ip"]. "</td><td>". $row["agent"]. "</td><td>".$row["city"].", ".$row["region"].", ".$row["country"]."</td></tr>";
     }
   }
   

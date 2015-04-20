@@ -21,6 +21,7 @@ if (!file_exists("config.php")) { //if config.php doesn't exist stop the script
 	header("Location: setup/"); // open setup script
 } 
 
+
 include("config.php"); 
 
 if (!isset($defined)) include("$absoluteurl"."core/functions.php"); //LOAD ONCE

@@ -17,6 +17,6 @@ feed.json
 
 images/*
 
-setup/*
-
 themes/*
+
+setup/error_log

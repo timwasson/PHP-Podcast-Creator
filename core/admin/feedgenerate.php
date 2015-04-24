@@ -1,6 +1,6 @@
 <?php
 ############################################################
-# PODCAST GENERATOR
+# PHP PODCAST CREATOR
 #
 # Created by Alberto Betella
 # Improved by Tim Wasson
@@ -65,7 +65,7 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
   		<link>$url</link>
   		<description>$podcast_description</description>
   		<generator>PHP Podcast Creator</generator>
-  	<lastBuildDate>".date("r")."</lastBuildDate>
+      <lastBuildDate>".date("r")."</lastBuildDate>
   		<language>$feed_language</language>
   		<copyright>$copyright</copyright>
   		<itunes:image href=\"".$url.$img_dir."itunes_image.jpg\" />
@@ -151,210 +151,96 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
   
   
   
+  /* Open a connection */
+	$mysqli = new mysqli($server, $db_user, $db_pass, $database);
+	
+	/* check connection */
+	if (mysqli_connect_errno()) {
+	    printf("Connect failed: %s\n", mysqli_connect_error());
+	    exit();
+	}
+	
+	$sql = "SELECT * FROM Episodes";
+
+  $result = $mysqli->query($sql);
+  $single_file;
   
-  
-  
-  	// Open podcast directory
-  	$handle = opendir ($absoluteurl.$upload_dir);
-  	while (($filename = readdir ($handle)) !== false)
-  	{
-  
-  		if ($filename != '..' && $filename != '.' && $filename != 'index.htm' && $filename != '_vti_cnf')
-  		{
-  
-  			$file_array[$filename] = filemtime ($absoluteurl.$upload_dir.$filename);
-  		}
-  
-  	}
-  
-  	if (!empty($file_array)) { //if directory is not empty
-  
-  
-  		# asort ($file_array);
-  		arsort ($file_array); //the opposite of asort (inverse order)
-  
-  		$recent_count = 0; //set recents to zero
-  
-  
-  
-  		$single_file = NULL; //define and empty variable
-  
-  
-  		############# START CICLE ###################
-  		foreach ($file_array as $key => $value)
-  
-  		{
-  
-  
-  			if ($recent_count < $recent_episode_in_feed OR $recent_episode_in_feed == "All") { //ir recents are not more than specified in config.php
-  
-  
-  
-  				$file_multimediale = explode(".",$key); //divide filename from extension [1]=extension (if there is another point in the filename... it's a problem)
-  
-  
-  				$fileData = checkFileType($file_multimediale[1],$podcast_filetypes,$filemimetypes); 
-  
-  
-  				if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined variable $fileData[0]
-  
-  
-  					$podcast_filetype = $fileData[0];
-  
-  					###### Mimetype
-  					$filemimetype=$fileData[1]; //define mimetype to put in the feed
-  
-  
-  					if ($file_multimediale[1]=="$podcast_filetype") { // if the extension is the same as specified in config.php
-  
-  
-  
-  
-  						############
-  						$filedescr = "$absoluteurl"."$upload_dir$file_multimediale[0].xml"; //database file
-  
-  
-  
-  
-  						if (file_exists("$filedescr")) { //if database file exists 
-  
-  
-  							//$file_contents=NULL; 
-  
-  
-  							######## INCLUDE PARSER AND PARSE
-  							//load XML parser for PHP4 or PHP5
-  							require_once("$absoluteurl"."components/xmlparser/loadparser.php");
-  
-  							# READ the XML database file and parse the fields
-  							include("$absoluteurl"."core/readXMLdb.php");
-  
-  
-  
-  							### Here the output code for the episode is created
-  
-  							# Fields Legend (parsed from XML):
-  							# $text_title = episode title
-  							# $text_shortdesc = short description
-  							# $text_longdesc = long description
-  							# $text_imgpg = image (url) associated to episode
-  							# $text_categoriespg = categories
-  							# $text_keywordspg = keywords
-  							# $text_explicitpg = explicit podcast (yes or no)
-  							# $text_authornamepg = author's name
-  							# $text_authoremailpg = author's email
-  
-  
-  							//depuration of long description field, appearing in iTunes when you click the "circled i" next to the podcast description
-  
-  
-  							$text_longdesc = stripslashes($text_longdesc);
-  							$text_longdesc = strip_tags($text_longdesc);
-  
-  
-  
-  							#### CONTENT DEPURATION N.2
-  							$text_title = depurateContent($text_title); //title
-  							$text_shortdesc = depurateContent($text_shortdesc); //short desc
-  							$text_longdesc = depurateContent($text_longdesc); //long desc
-  							$text_keywordspg = depurateContent($text_keywordspg); //Keywords
-  							$text_authornamepg = depurateContent($text_authornamepg); //author's name
-  
-  							$file_size = filesize("$absoluteurl"."$upload_dir$file_multimediale[0].$podcast_filetype");
-  							$filetime = filemtime ("$absoluteurl"."$upload_dir$file_multimediale[0].$podcast_filetype");
-  							$filepubdate = date ('r', $filetime);
-  
-  							$eplink = $url."#/".urlencode($file_multimediale[0])."/";
+  if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+      
+      $file = $row['filename'];
+      $filename = explode(".", $file);
+      
+      // cut the tags out of the description
+      $description = strip_tags($row['description']);
+      
+      // cut it down to 4000 characters
+      $description = substr($description, 0, 4000);
+      
+      $eplink = $url."#/".urlencode($filename[0])."/";
   							
-  							if($bbrytrack == true) {
-    							$hlurl = str_replace("http://", "", $url);
-    							$encurl = $bbryurl.$hlurl.$upload_dir.$key;
-  							} else {
-    							$encurl = $url.$upload_dir.$key;
-  							}
-  
-  							$single_file.="<item>
-  								<title>$text_title</title>
-  								<itunes:subtitle>$text_shortdesc</itunes:subtitle>
-  								<itunes:summary><![CDATA[ $text_longdesc ]]></itunes:summary>
-  								<description>$text_shortdesc</description>
-  								<link>".$eplink."</link>
-  								<enclosure url=\"".$encurl."\" length=\"$file_size\" type=\"$filemimetype\"/>
-  								<guid>".$eplink."</guid>
-  								";
-  
-  
-  
-  							###### GETID3 - DURATION
-  							require_once("$absoluteurl"."components/getid3/getid3.php"); //read id3 tags in media files (e.g.title, duration)
-  							$getID3 = new getID3; //initialize getID3 engine
-  
-  							# File details (duration, bitrate, etc...)
-  							$ThisFileInfo = $getID3->analyze("$absoluteurl"."$upload_dir$file_multimediale[0].$podcast_filetype"); //read file tags
-  
-  							$file_duration = @$ThisFileInfo['playtime_string'];
-  
-  							if($file_duration!=NULL) { // display file duration
-  								$single_file.= "<itunes:duration>$file_duration</itunes:duration>
-  									";
-  							} 
-  
-  
-  							### AUTHOR
-  							if ($text_authornamepg==NULL OR $text_authornamepg==",") { //if author field is empty
-  
-  								$single_file.= "<author>$author_email ($author_name)</author>
-  									<itunes:author>$author_name</itunes:author>
-  									";
-  
-  							} 
-  
-  							else { //if author is present
-  
-  								$single_file.= "<author>$text_authoremailpg ($text_authornamepg)</author>
-  									<itunes:author>$text_authornamepg</itunes:author>
-  									";
-  							}
-  
-  
-  							## KEYWORDS
-  							if ($text_keywordspg!=NULL) { //if keywords are present
-  
-  								$single_file.= "<itunes:keywords>$text_keywordspg</itunes:keywords>";
-  
-  							} 
-  
-  							if ($text_explicitpg!=NULL) {
-  								$single_file.= "<itunes:explicit>$text_explicitpg</itunes:explicit>
-  									";
-  							}
-                if ($text_imgpg!=NULL) {
-                  $single_file .="<itunes:image href=\"".$url."images/".$text_imgpg."\" />";
-                }
-  
-  							$single_file.= "<pubDate>$filepubdate</pubDate>
-  								</item>";
-  
-  
-  							$recent_count++; // increment recent counter
-  
-  
-  						} 
-  					} 
-  				}
-  			}
+  		if($bbrytrack == true) {
+    	  $hlurl = str_replace("http://", "", $url);
+    	  $encurl = $bbryurl.$hlurl.$upload_dir.$file;
+  		} else {
+    	  $encurl = $url.$upload_dir.$file;
   		}
-  	}
+      
+      //Output the fucking shit to the fucking thingie.
+      $single_file.="<item>
+  		  <title>".$row['title']."</title>
+  		  <itunes:subtitle>".$row['subtitle']."</itunes:subtitle>
+  		  <itunes:summary><![CDATA[ ".$description." ]]></itunes:summary>
+  		  <description>".$description."</description>
+  		  <link>".$eplink."</link>
+  		  <enclosure url=\"".$encurl."\" length=\"".$row['filesize']."\" type=\"".$row['type']."\"/>
+  		  <guid>".$eplink."</guid>
+  		  ";
+  
+  		if(!empty($row['length'])) { // display file duration
+  		  $single_file.= "<itunes:duration>".$row['length']."</itunes:duration>
+  		  	";
+  		} 
   
   
+  		### AUTHOR
+  		if (empty($row['author'])) { //if author field is empty
+  
+  		  $single_file.= "<author>$author_email ($author_name)</author>
+  		  	<itunes:author>$author_name</itunes:author>
+  		  	";
+  
+  		} 
+  
+  		else { //if author is present
+  
+  		  $single_file.= "<author>".$row['authoremail']." (".$row['author'].")</author>
+  		  	<itunes:author>".$row['author']."</itunes:author>
+  		  	";
+  		}
   
   
+  		## KEYWORDS
+  		if (!empty($row['keywords'])) { //if keywords are present
   
+  		  $single_file.= "<itunes:keywords>".$row['keywords']."</itunes:keywords>";
   
-  	#########
-  	##########coda
+  		} 
   
+  		if ($row['explicit'] != NULL) {
+  		  $single_file.= "<itunes:explicit>".$row['explicit']."</itunes:explicit>
+  		  	";
+  		}
+      if (!empty($row['image'])) {
+        $single_file .="<itunes:image href=\"".$url."images/".$row['image']."\" />";
+      }
   
+  		$single_file.= "<pubDate>".date("r", strtotime($row['date']))."</pubDate>
+  		  </item>";
+      }
+    }
+    
   	$tail_feed ="</channel></rss>";
   
   	#### Write the RSS feed.
@@ -368,7 +254,7 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
   	// Write the JSON feed for the front-end
   	//header('Content-Type: application/json');
     $feed = new DOMDocument();
-    $feed->load($url."feed.xml");
+    $feed->load("feed.xml");
     $json = array();
     
     $json['title'] = $feed->getElementsByTagName('channel')->item(0)->getElementsByTagName('title')->item(0)->firstChild->nodeValue;

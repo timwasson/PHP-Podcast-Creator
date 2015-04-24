@@ -18,8 +18,8 @@ if (isset($_REQUEST['GLOBALS']) OR isset($_REQUEST['absoluteurl']) OR isset($_RE
 
 if (isset($_FILES['userfile']) AND $_FILES['userfile']!=NULL AND isset($_POST['title']) AND $_POST['title']!=NULL AND isset($_POST['description']) AND $_POST['description']!=NULL){ //001
 
-	$file= $_FILES['userfile'] ['name']; //episode file
-	$img= $_FILES['image'] ['name']; // image file
+	$file = $_FILES['userfile']['name']; //episode file
+	$img = $_FILES['image']['name']; // image file
 	$title = $_POST['title'];
 	$description = $_POST['description'];
 	$long_description = $_POST['long_description'];
@@ -41,12 +41,8 @@ if (isset($_FILES['userfile']) AND $_FILES['userfile']!=NULL AND isset($_POST['t
 	$longdescmax =4000; #set max characters variable. iTunes specifications by Apple say "max 4000 characters" for long description field
 
 	if (strlen($long_description)<$longdescmax) { // 002 (if long description IS NOT too long, go on executing...
-		####
-
-
 
 		############### cleaning/depurate input
-		###############
 		//$title = stripslashes($title);
 		$title = strip_tags($title);
 		$title = htmlspecialchars($title); 
@@ -68,7 +64,6 @@ if (isset($_FILES['userfile']) AND $_FILES['userfile']!=NULL AND isset($_POST['t
 
 
 		############## end input depuration
-		##############
 
 		#### INPUT DEPURATION N.2
 		$title = depurateContent($title); //title
@@ -147,7 +142,7 @@ $file_ext=explode(".",$file); // divide filename from extension
 $fileData = checkFileType($file_ext[1],$podcast_filetypes,$filemimetypes);
 
 if (isset($fileData[0])){ //avoids php notice if array [0] doesn't exist
-$podcast_filetype=$fileData[0];
+  $podcast_filetype=$fileData[0];
 }else {
 	$podcast_filetype=NULL;	
 }
@@ -259,79 +254,76 @@ if ($file_ext[1]==$podcast_filetype) { //003 (if file extension is accepted, go 
 		}
 
 		########## end IMAGE upload section
-		######################
-
-
-
-
-		############################################
-		#########################
-		########## CREATING XML FILE ASSOCIATED TO EPISODE
-
-
-		$file_desc = "$filenamechanged$filesuffix.xml"; // extension = XML
-
-		// $PG_mainbody .= "<br>Description filename: $file_desc<br>";
-
-		$xmlfiletocreate = '<?xml version="1.0" encoding="'.$feed_encoding.'"?>
-		<PodcastGenerator>
-			<episode>
-			<titlePG>
-			<![CDATA[ '.$title.' ]]>
-			</titlePG>
-			<shortdescPG>
-			<![CDATA[ '.$description.' ]]>
-			</shortdescPG>
-			<longdescPG>
-			<![CDATA[ '.$long_description.' ]]>
-			</longdescPG>
-			<imgPG>'.$image_new_name.'</imgPG>
-			<categoriesPG>
-			<category1PG>';
-		if(isset($category[0]) AND $category[0]!= NULL){
-			$xmlfiletocreate .=	$category[0];
-		}
-		$xmlfiletocreate .='</category1PG>
-			<category2PG>';
-		if(isset($category[1]) AND $category[1]!= NULL){
-			$xmlfiletocreate .=	$category[1];
-		}
-		$xmlfiletocreate .='</category2PG>
-			<category3PG>';
-		if(isset($category[2]) AND $category[2]!= NULL){
-			$xmlfiletocreate .=	$category[2];
-		}
-		$xmlfiletocreate .='</category3PG>
-			</categoriesPG>
-			<keywordsPG>'.$keywords.'</keywordsPG>
-			<explicitPG>'.$explicit.'</explicitPG>
-			<authorPG>
-			<namePG>'.$auth_name.'</namePG>
-			<emailPG>'.$auth_email.'</emailPG>
-			</authorPG>
-			</episode>
-			</PodcastGenerator>';
-
-		/////////////////////
-		// WRITE THE XML FILE
-		$fp = fopen($absoluteurl.$upload_dir.$file_desc,'a'); //open desc file or create it
-
-		fwrite($fp,$xmlfiletocreate);
-
-		fclose($fp);
-
-
-		########## END CREATION XML FILE
-		#########################
-		############################################
-
+		
+		// Put it all in the database
+		// Get mime type.
+		$fileData = checkFileType($file_ext[1],$podcast_filetypes,$filemimetypes); 
+  
+    if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined variable $fileData[0]
+      $podcast_filetype = $fileData[0];
+  		$filemimetype=$fileData[1]; //define mimetype to put in the feed
+    }
+    
+    // Get file size
+    $file_size = filesize($absoluteurl.$upload_dir.$filenamechanged.$filesuffix.".".$file_ext[1]);
+    
+    // Get duration.
+    require_once("$absoluteurl"."components/getid3/getid3.php"); //read id3 tags in media files (e.g.title, duration)
+    $getID3 = new getID3; //initialize getID3 engine
+  
+    # File details (duration, bitrate, etc...)
+    $ThisFileInfo = $getID3->analyze($absoluteurl.$upload_dir.$filenamechanged.$filesuffix.".".$file_ext[1]); //read file tags
+  
+    $file_duration = @$ThisFileInfo['playtime_string'];
+		
+		// Enter the basics into the database.
+    mysql_connect($server,$db_user,$db_pass);
+    		
+    // select the database
+    mysql_select_db($database) or die ("Could not select database because ".mysql_error());
+    	
+    $sql = "INSERT IGNORE INTO Episodes (
+    		id, 
+    		title,
+    		subtitle,
+    		description,
+    		author,
+    		authoremail,
+    		filename,
+    		keywords,
+    		explicit,
+    		image,
+    		type,
+    		filesize,
+    		length
+    		) VALUES (
+    		'',
+    		'".$title."',
+    		'".$description."',
+    		'".$long_description."',
+    		'".$auth_name."',
+    		'".$auth_email."',
+    		'".$filenamechanged.$filesuffix.".".$file_ext[1]."',
+    		'".$keywords."',
+    		'".$explicit."',
+    		'".$image_new_name."',
+    		'".$filemimetype."',
+    		'".$file_size."',
+    		'".$file_duration."'
+    		)";
+    $result = mysql_query($sql);
+    
+    $last_id = mysql_insert_id();
+    $PG_mainbody .= "<p>".$last_id."</p>";
+    	
+    if(!$result) {
+      echo "Oops. ".mysql_error();
+    }
 
 		$PG_mainbody .= "<p><b><font color=\"green\">$L_filesent</font></b></p>"; // If upload is successful.
 
 		########## REGENERATE FEED
-		include ("$absoluteurl"."core/admin/feedgenerate.php"); //(re)generate XML feed
-		##########
-
+		include ($absoluteurl."core/admin/feedgenerate.php"); //(re)generate XML feed
 
 		$PG_mainbody .= "<p><a href=\"$url\">$L_gohome</a> - <a href=\"?p=admin&do=upload\">$L_sendother</a></p>";
 

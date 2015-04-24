@@ -1,13 +1,13 @@
 <?php
 ############################################################
-# PODCAST GENERATOR
+# PHP PODCAST CREATOR
 #
 # Created by Alberto Betella
-# http://podcastgen.sourceforge.net
+# Improved by Tim Wasson
 # 
 # This is Free Software released under the GNU/GPL License.
 ############################################################
-//echo "Hello!";
+
 ########### Security code, avoids cross-site scripting (Register Globals ON)
 if (isset($_REQUEST['GLOBALS']) OR isset($_REQUEST['absoluteurl']) OR isset($_REQUEST['amilogged']) OR isset($_REQUEST['theme_path'])) { exit; } 
 ########### End
@@ -25,7 +25,7 @@ if(isset($_POST['ftpfile'])) {
 if (isset($userfile) AND $userfile!=NULL AND isset($_POST['title']) AND $_POST['title']!=NULL AND isset($_POST['description']) AND $_POST['description']!=NULL){ //001
 
 	$file = $userfile; //episode file
-	$img = $_FILES['image'] ['name']; // image file
+	$img = $_FILES['image']['name']; // image file
 	$existentimage = $_POST['existentimage'];
 	$title = $_POST['title'];
 	$description = $_POST['description'];
@@ -135,255 +135,62 @@ else { //if author's name doesn't exist unset also email field
 $auth_email = NULL; //ignore email
 }
 
-
-
 $PG_mainbody .= "<p><b>$L_processingchanges</b></p>";
 
-
-
-#show submitted data (debug purposes)
-#$PG_mainbody .= "Dati inseriti:</b><br><br>Titolo: <i>$title</i> <br>Descrizione breve: <i>$description</i> <br>Descrizione lunga: <i>$long_description</i>";
-###
-
-
-
-
-
-#$PG_mainbody .= "<p>$L_origfilename <i>$file</i></p>";
-
-
-
-$file_ext=explode(".",$file); // divide filename from extension
-
-
-
-// $PG_mainbody .= "<p>$L_file_ext <i>$file_ext[1]</i></p>"; //display file extension
-
-##############
-### processing file extension
-#$fileData = checkFileType($file_ext[1],$podcast_filetypes,$filemimetypes);
-
-#if (isset($fileData[0])){ //avoids php notice if array [0] doesn't exist
-#$podcast_filetype=$fileData[0];
-#}else {
-	#$podcast_filetype=NULL;	
-	#}
-
-	#if ($file_ext[1]==$podcast_filetype) { //003 (if file extension is accepted, go on....
-
-
-		##############
-		##############
-		### file name depuration!!!! Important... By default Podcastgen uses a "strict" depuration policy (just characters from a to z and numbers... no accents and other characters).
-
-		#if ($strictfilenamepolicy == "yes") {
-			#enable this to have a very strict filename policy
-
-			#$file_ext[0] = renamefilestrict ($file_ext[0]);
-
-			#}
-
-			#else {
-				# LESS strict renaming policy
-
-				#$file_ext[0] = renamefile ($file_ext[0]);
-
-				#}
-				##############
-				############## end filename depuration
-
-
-				#$filenamechanged = date('Y-m-d')."_".$file_ext[0]; //add date, to order files in mp3 players --- here the date is fixed Y-m-d to keep the order
-
-				#$uploadFile = $upload_dir . $filenamechanged.".".$file_ext[1] ;
-
-
-				#while (file_exists("$uploadFile")) { //cicle: if file already exists add an incremental suffix
-					#$filesuffix++;
-
-					# $PG_mainbody .= "$filesuffix"; //debug
-
-					#$uploadFile = $absoluteurl . $upload_dir . $filenamechanged . $filesuffix.".".$file_ext[1] ;
-
-					#}
-
-
-					#$PG_mainbody .= "$L_filerenamed <i>$filenamechanged$filesuffix.$file_ext[1]</i><br>";
-
-					#$uploadFile == NULL ;
-
-					#$PG_mainbody .= "<br>Uploaded file:$uploadFile<br>";
-
-					//move file from the temp directory to the upload directory
-					#if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadFile))
-					#{
-
-
-
-						########################
-						######### IMAGE upload section, if image is present
-
-						if ($img!=NULL) {
-
-							$PG_mainbody .= "<p><b>$L_imgpresent</b></p>";
-
-							$img_ext=explode(".",$img); // divide filename from extension
-
-							if ($img_ext[1]=="jpg" OR $img_ext[1]=="jpeg" OR $img_ext[1]=="gif"OR $img_ext[1]=="png" OR $img_ext[1]=="JPG" OR $img_ext[1]=="JPEG" OR $img_ext[1]=="GIF"OR $img_ext[1]=="PNG") { // control accepted image format
-
-								// $PG_mainbody .= "<p>$L_origfilename <i>$img</i></p>";
-
-								// Assign a new name to the image
-								$uploadFile2 = $absoluteurl.$img_dir.$file_ext[0].".".$img_ext[1];
-
-
-								//move file from the temp directory to the upload directory
-								if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile2))
-								{
-
-									$image_new_name = "$file_ext[0].$img_ext[1]";
-
-									// $PG_mainbody .= "$L_filerenamed <i>$nome_immagine</i>";
-
-									$PG_mainbody .= "<p><font color=\"green\">$L_imgsent</font></p>"; // If upload is successful.
-
-
-
-								}
-
-								else { // if IMAGE upload is not successful
-
-									$image_new_name = NULL;
-
-									$PG_mainbody .= "<p><font color=\"red\">$L_imgnotsent $L_ignored</font></p>";
-									// $temporaneo= $_FILES['image']['tmp_name'];
-									// $PG_mainbody .= "$L_tempfile $temporaneo";
-								}
-
-
-
-							}
-
-							else { // if the image extension is not valid: IGNORE the image
-
-							//	$image_new_name = NULL;
-							$image_new_name = $existentimage;
-
-								$PG_mainbody .= "<p>$L_imgnotvalidext $L_imgextok jpg, gif, png.</p>";
-
-
-							}
-
-						} else { // if image has not been changed
-						
-						$image_new_name = $existentimage;	
-						}
-
-						########## end IMAGE upload section
-						######################
-
-
-
-
-						############################################
-						#########################
-						########## CREATING XML FILE ASSOCIATED TO EPISODE
-
-
-						$file_desc = "$file_ext[0].xml"; // extension = XML
-
-						// $PG_mainbody .= "<br>Description filename: $file_desc<br>";
-
-						$xmlfiletocreate = '<?xml version="1.0" encoding="'.$feed_encoding.'"?>
-						<PodcastGenerator>
-							<episode>
-							<titlePG>
-							<![CDATA[ '.$title.' ]]>
-							</titlePG>
-							<shortdescPG>
-							<![CDATA[ '.$description.' ]]>
-							</shortdescPG>
-							<longdescPG>
-							<![CDATA[ '.$long_description.' ]]>
-							</longdescPG>
-							<imgPG>'.$image_new_name.'</imgPG>
-							<categoriesPG>
-							<category1PG>';
-						if(isset($category[0]) AND $category[0]!= NULL){
-							$xmlfiletocreate .=	$category[0];
-						}
-						$xmlfiletocreate .='</category1PG>
-							<category2PG>';
-						if(isset($category[1]) AND $category[1]!= NULL){
-							$xmlfiletocreate .=	$category[1];
-						}
-						$xmlfiletocreate .='</category2PG>
-							<category3PG>';
-						if(isset($category[2]) AND $category[2]!= NULL){
-							$xmlfiletocreate .=	$category[2];
-						}
-						$xmlfiletocreate .='</category3PG>
-							</categoriesPG>
-							<keywordsPG>'.$keywords.'</keywordsPG>
-							<explicitPG>'.$explicit.'</explicitPG>
-							<authorPG>
-							<namePG>'.$auth_name.'</namePG>
-							<emailPG>'.$auth_email.'</emailPG>
-							</authorPG>
-							</episode>
-							</PodcastGenerator>';
-
-						/////////////////////
-						// WRITE THE XML FILE
-						$fp = fopen($absoluteurl.$upload_dir.$file_desc,'w'); //open desc file or create it
-
-						fwrite($fp,$xmlfiletocreate);
-
-						fclose($fp);
-
-
-						########## END CREATION XML FILE
-						#########################
-						############################################
-
-
+// Put it all in the database
+		// Get mime type.
+		$fileData = checkFileType($file_ext[1],$podcast_filetypes,$filemimetypes); 
+  
+    if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined variable $fileData[0]
+      $podcast_filetype = $fileData[0];
+  		$filemimetype=$fileData[1]; //define mimetype to put in the feed
+    }
+    
+    // Get file size
+    $file_size = filesize($absoluteurl.$upload_dir.$filenamechanged.$filesuffix.".".$file_ext[1]);
+    
+    // Get duration.
+    require_once("$absoluteurl"."components/getid3/getid3.php"); //read id3 tags in media files (e.g.title, duration)
+    $getID3 = new getID3; //initialize getID3 engine
+  
+    # File details (duration, bitrate, etc...)
+    $ThisFileInfo = $getID3->analyze($absoluteurl.$upload_dir.$filenamechanged.$filesuffix.".".$file_ext[1]); //read file tags
+  
+    $file_duration = @$ThisFileInfo['playtime_string'];
+		
+		// Enter the basics into the database.
+    mysql_connect($server,$db_user,$db_pass);
+    		
+    // select the database
+    mysql_select_db($database) or die ("Could not select database because ".mysql_error());
+    	
+    $sql = "UPDATE Episodes SET 
+    		title = '".$title."',
+    		subtitle = '".$description."',
+    		description = '".$long_description."',
+    		author = '".$auth_name."',
+    		authoremail = '".$auth_email."',
+    		keywords = '".$keywords."',
+    		explicit = '".$explicit."',
+    		image = '".$image_new_name."',
+    		type = '".$filemimetype."'
+    		WHERE filename = '".$userfile."'";
+    $result = mysql_query($sql);
+    
+    $last_id = mysql_insert_id();
+    $PG_mainbody .= "<p>".$last_id."</p>";
+    	
+    if(!$result) {
+      echo "Oops. ".mysql_error();
+    }
+    
 						#	$PG_mainbody .= "<p><b><font color=\"green\">$L_filesent</font></b></p>"; // If upload is successful.
 
 						########## REGENERATE FEED
 						include ("$absoluteurl"."core/admin/feedgenerate.php"); //(re)generate XML feed
 						##########
 
-
 						$PG_mainbody .= "<p><a href=\"$url\">$L_gohome</a> - <a href=\"?p=admin&do=editdel\">$L_editotherepisodes</a></p>";
-
-						#}
-						#else //If upload is not successfull
-						#{
-
-							#$PG_mainbody .= "<p><b><font color=\"red\">$L_err_file $L_uploadfailed</font></b></p>";
-							#$PG_mainbody .= "<p><b>$L_err_file1</b></p>";
-							#$PG_mainbody .= "<p> - $L_err_file3</p>";
-							#$PG_mainbody .= "<p> - $L_err_file4</p>";
-
-							#$PG_mainbody .= "<p><b>$L_debuginfo</b> <a href=\"?p=admin&do=serverinfo\">$L_serverconf</a></p>";
-
-							#$PG_mainbody .= "<p>$L_err_file5 <a href=\"http://podcastgen.sourceforge.net/\" target=\"_blank\">$L_podcastgensite</a></p>";
-
-							#$PG_mainbody .= "<p><form>
-							#<INPUT TYPE=\"button\" VALUE=\"$L_back\" onClick=\"history.back()\">
-							#</form></p>";
-							#}
-
-
-							#} // 003 (if file extension is not accepted)
-							#else {
-								#$PG_mainbody .= "<p><i>$file_ext[1]</i> $L_notvalidext</p>";
-								#$PG_mainbody .= "<form>
-								#<INPUT TYPE=\"button\" VALUE=\"$L_back\" onClick=\"history.back()\">
-								#</form>";
-								#}
-
-
 
 							} // 002
 							else { //if long description is more than max characters allowed

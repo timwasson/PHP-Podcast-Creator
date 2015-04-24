@@ -155,8 +155,8 @@ if (file_exists($absoluteurl."config.php")) {
           $url = "'.$currenturl.'"; // Complete URL of the script (Trailing slash REQUIRED)
           $absoluteurl = "'.addslashes($absoluteurl).'"; // Absolute path on the server (Trailing slash REQUIRED)
           $theme_path = "themes/appview/";
-          $username = "'.$user.'";
-          $userpassword = "'.md5($pwd).'";
+          $username = "'.$_POST['username'].'";
+          $userpassword = "'.md5($_POST['password']).'";
           $max_upload_form_size = "104857600"; //e.g.: "30000000" (about 30MB)
           $upload_dir = "media/"; // "media/" the default folder (Trailing slash required). Set chmod 755
           $img_dir = "images/";  // (Trailing slash required). Set chmod 755
@@ -185,10 +185,10 @@ if (file_exists($absoluteurl."config.php")) {
           $explicit_podcast = "no"; //does your podcast contain explicit language? ("yes", "no" or "clean")
           // END OF CONFIGURATION
           // beginning of mySQL integration
-          $db_user = "'.$_SESSION['db_user'].'";	// The user that has access to your database
-          $db_pass = "'.$_SESSION['db_pass'].'";	// The password for the user that has access to your database
-          $database = "'.$_SESSION['database'].'";	// Database Obviously
-          $server = "'.$_SESSION['server'].'"; // Most of the time this is localhost
+          $db_user = "'.$_POST['db_user'].'";	// The user that has access to your database
+          $db_pass = "'.$_POST['db_pass'].'";	// The password for the user that has access to your database
+          $database = "'.$_POST['database'].'";	// Database Obviously
+          $server = "'.$_POST['server'].'"; // Most of the time this is localhost
           ?>';
         $createcf = fopen("$absoluteurl"."config.php",'w'); //open config file
         fwrite($createcf,$configfiletocreate); //write content into the config file

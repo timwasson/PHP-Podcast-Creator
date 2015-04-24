@@ -1,6 +1,6 @@
 <?php
 ############################################################
-# PODCAST GENERATOR
+# PHP PODCAST CREATOR
 #
 # Created by Alberto Betella
 # Improved by Tim Wasson
@@ -19,49 +19,48 @@ if (isset($_REQUEST['GLOBALS']) OR isset($_REQUEST['absoluteurl']) OR isset($_RE
 if (isset($_GET['file']) AND $_GET['file']!=NULL) {
 
 	$file = $_GET['file']; 
-	
-		$file = str_replace("/", "", $file); // Replace / in the filename.. avoid deleting of file outside media directory - AVOID EXPLOIT with register globals set to ON
-
+  $file = str_replace("/", "", $file); // Replace / in the filename.. avoid deleting of file outside media directory - AVOID EXPLOIT with register globals set to ON
 	$ext = $_GET['ext'];
 
-
-
-	if (file_exists("$absoluteurl$upload_dir$file.$ext")) {
-		unlink ("$upload_dir$file.$ext");
-		$PG_mainbody .="<p><b>$file.$ext</b> $L_deleted</p>";
-
+  // Delete the episode
+	if (file_exists($absoluteurl.$upload_dir.$file)) {
+		unlink ($upload_dir.$file.$ext);
+		$PG_mainbody .="<p><b>".$file.$ext."</b> ".$L_deleted."</p>";
 	}
 
-	if (file_exists("$absoluteurl$upload_dir$file.xml")) {
-
-		unlink ("$absoluteurl$upload_dir$file.xml"); // DELETE THE FILE
-
-	}
-
-
+  // Delete the image
 	if (isset($_GET['img']) AND $_GET['img']!=NULL) { 
-
 		$img = $_GET['img'];
-
-		if (file_exists("$absoluteurl$img_dir$img")) { // if associated image exists
-
-			unlink ("$absoluteurl$img_dir$img"); // DELETE IMAGE FILE
-
-			$PG_mainbody .="<p>$L_del_img</p>";
+		if (file_exists($absoluteurl.$img_dir.$img)) { // if associated image exists
+			unlink ($absoluteurl.$img_dir.$img); // DELETE IMAGE FILE
+			$PG_mainbody .="<p>".$L_del_img."</p>";
 		}
-
 	} //end if isset image
+	
+	// Remove the entry
+	$mysqli = new mysqli($server, $db_user, $db_pass, $database);
+	
+	/* check connection */
+	if (mysqli_connect_errno()) {
+	    printf("Connect failed: %s\n", mysqli_connect_error());
+	    exit();
+	}
+
+  $sql = "DELETE FROM Episodes WHERE filename='".$file."'";
+  
+  if ($mysqli->query($sql) === TRUE) {
+      $PG_mainbody .= "Record deleted successfully";
+  } else {
+      $PG_mainbody .= "Error deleting record: " . $conn->error;
+  }
 
 
-	########## REGENERATE FEED
-	include ("$absoluteurl"."core/admin/feedgenerate.php"); //(re)generate XML feed
-	##########
-
-	//$PG_mainbody .= '<p><a href=?p=admin&do=editdel>'.$L_delother.'</a></p>';
+	//REGENERATE FEED
+	include ($absoluteurl."core/admin/feedgenerate.php"); //(re)generate XML feed
 	
 	include("editdel.php");
 	
 } else { 
-	$PG_mainbody .="$L_deletenothing";
+	$PG_mainbody .= $L_deletenothing;
 }
 ?>

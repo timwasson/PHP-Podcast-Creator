@@ -197,13 +197,19 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
          <p>These are files that have been uploaded via FTP but not yet included in your feed. Select the file you\'d like associated with this episode. <strong>File names should contain no special characters. Only lower-case letters, numbers, and underscores. <em>The only period in the file name should be between the file name and the extension.</em></strong></p>
          <ul>';
 	
+	// Connect to the Database
+  mysql_connect($server,$db_user,$db_pass);
+            		
+  // select the database
+  mysql_select_db($database) or die ("Could not select database because ".mysql_error());
+	
 	// This chunk of code checks for uploaded files that don't have a database file associated with them. These can then be inserted 
 	$handle = opendir ($absoluteurl.$upload_dir);
 	while (($filename = readdir ($handle)) !== false)
 	{
 		if ($filename != '..' && $filename != '.' && $filename != 'index.htm' && $filename != '_vti_cnf' && $filename != '.DS_Store')
 		{
-			$file_array[$filename] = filemtime ($absoluteurl.$upload_dir.$filename);
+			$file_array[$filename] = filemtime($absoluteurl.$upload_dir.$filename);
 		}
 	}
 	
@@ -216,8 +222,13 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 			$file_multimediale = explode(".",$key); //divide filename from extension [1]=extension (if there is another point in the filename... it's a problem)
 			$fileData = checkFileType($file_multimediale[1],$podcast_filetypes,$filemimetypes);
 			if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined variable $fileData[0]
-				$filedescr = "$absoluteurl"."$upload_dir$file_multimediale[0].xml"; //database file
-				if (!file_exists("$filedescr")) { //if database file exists 
+        
+        $result = mysql_query("SELECT count(*) as total from Episodes WHERE filename = '".$key."'");
+        $data = mysql_fetch_assoc($result);
+        
+        //echo $key.": ".$data['total'];
+
+				if (empty($data['total'])) { //if database file exists 
 					$PG_mainbody .= "<li><a class=\"ftpupload\" data-ftpurl=\"".$key."\">".$key."</a></li>";
 					$no_results = false;
 				}

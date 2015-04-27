@@ -16,8 +16,50 @@ if (isset($_REQUEST['GLOBALS']) OR isset($_REQUEST['absoluteurl']) OR isset($_RE
 if ($amilogged != "true") { exit; }
 ###
 
+// Enter the basics into the database.
+mysql_connect($server,$db_user,$db_pass);
+    		
+// select the database
+mysql_select_db($database) or die ("Could not select database because ".mysql_error());
+    
+
 if(isset($_POST['ftpfile'])) {
 	$userfile = $_POST['ftpfile'];
+	
+	$fileext = explode(".", $userfile);
+	$fileData = checkFileType($fileext[1],$podcast_filetypes,$filemimetypes); 
+  
+  if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined variable $fileData[0]
+    $podcast_filetype = $fileData[0];
+    $filemimetype=$fileData[1]; //define mimetype to put in the feed
+  }
+  
+  // Get file size
+  $file_size = filesize($absoluteurl.$upload_dir.$userfile);
+  
+  // Get duration.
+  require_once("$absoluteurl"."components/getid3/getid3.php"); //read id3 tags in media files (e.g.title, duration)
+  $getID3 = new getID3; //initialize getID3 engine
+  
+  # File details (duration, bitrate, etc...)
+  $ThisFileInfo = $getID3->analyze($absoluteurl.$upload_dir.$userfile); //read file tags
+  
+  $file_duration = @$ThisFileInfo['playtime_string'];
+  
+	$sql = "INSERT IGNORE INTO Episodes (
+    		id, 
+    		filename,
+    		type,
+    		filesize,
+    		length
+    		) VALUES (
+    		'',
+    		'".$userfile."',
+    		'".$filemimetype."',
+    		'".$file_size."',
+    		'".$file_duration."'
+    		)";
+    $result = mysql_query($sql);
 } else {
 	$userfile = $_POST['userfile'];
 }
@@ -132,37 +174,12 @@ if (isset($userfile) AND $userfile!=NULL AND isset($_POST['title']) AND $_POST['
 
 }
 else { //if author's name doesn't exist unset also email field
-$auth_email = NULL; //ignore email
+  $auth_email = NULL; //ignore email
 }
 
 $PG_mainbody .= "<p><b>$L_processingchanges</b></p>";
 
 // Put it all in the database
-		// Get mime type.
-		$fileData = checkFileType($file_ext[1],$podcast_filetypes,$filemimetypes); 
-  
-    if ($fileData != NULL) { //This IF avoids notice error in PHP4 of undefined variable $fileData[0]
-      $podcast_filetype = $fileData[0];
-  		$filemimetype=$fileData[1]; //define mimetype to put in the feed
-    }
-    
-    // Get file size
-    $file_size = filesize($absoluteurl.$upload_dir.$filenamechanged.$filesuffix.".".$file_ext[1]);
-    
-    // Get duration.
-    require_once("$absoluteurl"."components/getid3/getid3.php"); //read id3 tags in media files (e.g.title, duration)
-    $getID3 = new getID3; //initialize getID3 engine
-  
-    # File details (duration, bitrate, etc...)
-    $ThisFileInfo = $getID3->analyze($absoluteurl.$upload_dir.$filenamechanged.$filesuffix.".".$file_ext[1]); //read file tags
-  
-    $file_duration = @$ThisFileInfo['playtime_string'];
-		
-		// Enter the basics into the database.
-    mysql_connect($server,$db_user,$db_pass);
-    		
-    // select the database
-    mysql_select_db($database) or die ("Could not select database because ".mysql_error());
     	
     $sql = "UPDATE Episodes SET 
     		title = '".$title."',
@@ -184,35 +201,35 @@ $PG_mainbody .= "<p><b>$L_processingchanges</b></p>";
       echo "Oops. ".mysql_error();
     }
     
-						#	$PG_mainbody .= "<p><b><font color=\"green\">$L_filesent</font></b></p>"; // If upload is successful.
+		#	$PG_mainbody .= "<p><b><font color=\"green\">$L_filesent</font></b></p>"; // If upload is successful.
 
-						########## REGENERATE FEED
-						include ("$absoluteurl"."core/admin/feedgenerate.php"); //(re)generate XML feed
-						##########
+		########## REGENERATE FEED
+		include ("$absoluteurl"."core/admin/feedgenerate.php"); //(re)generate XML feed
+		##########
 
-						$PG_mainbody .= "<p><a href=\"$url\">$L_gohome</a> - <a href=\"?p=admin&do=editdel\">$L_editotherepisodes</a></p>";
+		$PG_mainbody .= "<p><a href=\"$url\">$L_gohome</a> - <a href=\"?p=admin&do=editdel\">$L_editotherepisodes</a></p>";
 
-							} // 002
-							else { //if long description is more than max characters allowed
+		  } // 002
+		  else { //if long description is more than max characters allowed
 
-								$PG_mainbody .= "<b>$L_longdesctoolong</b><p>$L_longdescmaxchar $longdescmax $L_characters - $L_actualenght <font color=red>".strlen($long_description)."</font> $L_characters.</p>
-									<form>
-									<INPUT TYPE=\"button\" VALUE=\"$L_back\" onClick=\"history.back()\">
-									</form>";
-							}
-							#### end of long desc lenght checking
+		  	$PG_mainbody .= "<b>$L_longdesctoolong</b><p>$L_longdescmaxchar $longdescmax $L_characters - $L_actualenght <font color=red>".strlen($long_description)."</font> $L_characters.</p>
+		  		<form>
+		  		<INPUT TYPE=\"button\" VALUE=\"$L_back\" onClick=\"history.back()\">
+		  		</form>";
+		  }
+		  #### end of long desc lenght checking
 
 
-						} //001 
-						else { //if file, description or title not present...
-							$PG_mainbody .= '<p>'.$L_nofield.'
-								<br />
-								<form>
-								<INPUT TYPE="button" VALUE='.$L_back.' onClick="history.back()">
-								</form>
-								</p>
-								';
-						}
+		} //001 
+		else { //if file, description or title not present...
+		  $PG_mainbody .= '<p>'.$L_nofield.'
+		  	<br />
+		  	<form>
+		  	<INPUT TYPE="button" VALUE='.$L_back.' onClick="history.back()">
+		  	</form>
+		  	</p>
+		  	';
+		}
 
 
 ?>

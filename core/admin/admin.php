@@ -105,8 +105,6 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 
 				</div>';
 				
-				
-				
 			}
 			
 			$PG_mainbody .= '
@@ -116,9 +114,8 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 				
 				<h3>Episode Downloads</h3>
 				<div id="epdown" style="width: 100%; height: 300px;"></div>';
-include ("showtrack.php");
+        include ("showtrack.php");
 		}
-		
 	}
 }
 ?>

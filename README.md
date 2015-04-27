@@ -1,6 +1,6 @@
 # PHP Podcast Creator
 
-Built with PHP, XML, and jQuery. 
+Built with PHP, mySQL, and jQuery. 
 
 This is an unofficial porting of Podcast Generator 1.4, which you can find here: http://podcastgen.sourceforge.net/index.php?lang=en
 

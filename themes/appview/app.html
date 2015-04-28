@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>{{ title }}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="/themes/appview/css/custom.css" />
+	<link rel="shortcut icon" href="themes/appview/favicon.ico?v=1.2"> 
+</head>
+<body>
+	<div class="menu">
+	  <section>
+  	  <img src="/themes/appview/img/logo.png" class="logo" />
+  	  
+  	  <div class="ext-bar">
+    	  <a href="https://itunes.apple.com/us/podcast/atomicast/id925486047#" class="itunes">iTunes</a><!--
+    	  --><a href="http://www.stitcher.com/podcast/atomicast" class="stitcher">Stitcher</a><!--
+    	  --><a href="http://www.twitter.com/atomicast" class="social"><i class="fa fa-twitter"></i></a><!--
+    	  --><a href="http://www.facebook.com/atomicast" class="social"><i class="fa fa-facebook"></i></a><!--
+    	  --><a href="http://www.google.com/+Atomicast" class="social" rel="publisher"><i class="fa fa-google-plus"></i></a>
+  	  </div>
+    	<h1>{{ title }}</h1>
+    	<h2>{{ subtitle }}</h2>
+    	<ul>
+    	  <li class="eplink"><a href="#episodes"><i class="fa fa-headphones"></i> Episodes</a></li>
+    	  <li class="radio"><a href="#radio"><i class="fa fa-microphone"></i> Atomicast Radio</a></li>
+        <li class="rss"><a href="http://atomicast.com/feed.xml"><i class="fa fa-rss"></i> RSS Feed</a></li>
+        <li class="email"><a href="mailto:atomicast1@gmail.com"><i class="fa fa-envelope"></i> Email us</a></li>
+    	</ul>
+  	</section>
+	</div>
+	<div class="episodes">
+	  <h2><i class="fa fa-bars" id="main-menu"></i> Episodes</h2>
+  	<ul id="ep-list">
+  	</ul>
+	</div>
+	
+	<div class="ep_info">
+	  <h2><i class="fa fa-angle-left"> <span>Back</span></i> Information</h2>
+	  <article>
+	    <div id="ep_bg"><img></div>
+  	  <h1><span></span></h1>
+  	  <section>
+    	  <div id="ep_desc"></div>
+    	  <div class="linkbar">
+      	  <a href="#play"><i class="fa fa-headphones"></i>Listen Now</a><a href="#download" data-dtype="download"><i class="fa fa-download"></i>Download</a>
+    	  </div>
+  	  </section>
+    </article>
+	      
+	</div>
+	<div id="jp_container">
+    <div id="jquery_jplayer"></div>
+		<p class="timer">
+		  <span class="track-name">&nbsp;</span>
+		</p>
+		<ul class="music-controls">
+		  <li><a class="jp-play" href="#"><i class="fa fa-play"></i></a></li>
+      <li><a class="jp-pause" href="#"><i class="fa fa-pause"></i></a></li>
+      <!--<li><a class="jp-stop btn btn-primary" href="#"><i class="fa fa-stop"></i></a></li>-->
+		</ul>
+
+		<div class="jp-progress">
+		  <input type="range" min="0" max="100" id="playProc" style="width:100%">
+		</div>
+		
+		<div class="timedur">
+  		<span class="jp-current-time"></span> | <span class="jp-duration"></span>
+		</div>
+  </div>
+  <audio id="ep_audio" src=""></audio>
+</body>
+
+<script type="text/javascript" src="themes/appview/js/js.js"></script>
+
+</html>

@@ -18,6 +18,6 @@ feed.json
 
 images/*
 
-themes/*
+themes/appview/imgszr/imagecache/*
 
 setup/error_log

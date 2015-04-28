@@ -1,6 +1,6 @@
 <?php
 ############################################################
-# PODCAST GENERATOR
+# PHP PODCAST CREATOR
 #
 # Created by Alberto Betella
 # Improved by Tim Wasson
@@ -71,325 +71,81 @@ if(isset($amilogged) AND $amilogged =="true") {
 	}
 	else { // if action not set
 
-		include ("$absoluteurl"."components/xmlparser/loadparser.php");
-		
-		//if (file_exists("$absoluteurl"."components/itunes_categories/itunes_categories.xml")) {
+		  $itunes_cats = array(
+			"Arts",
+			"Arts:Design",
+			"Arts:Fashion &amp; Beauty",
+			"Arts:Food",
+			"Arts:Literature",
+			"Arts:Performing Arts",
+			"Arts:Visual Arts",
+			"Business",
+			"Business:Business News",
+			"Business:Careers",
+			"Business:Investing",
+			"Business:Management &amp; Marketing",
+			"Business:Shopping",
+			"Comedy",
+			"Education",
+			"Education:Education Technology",
+			"Education:Higher Education",
+			"Education:K-12",
+			"Education:Language Courses",
+			"Education:Training",
+			"Games &amp; Hobbies",
+			"Games &amp; Hobbies:Automotive",	
+			"Games &amp; Hobbies:Aviation",
+			"Games &amp; Hobbies:Hobbies",
+			"Games &amp; Hobbies:Other Games",
+			"Games &amp; Hobbies:Video Games",
+			"Government &amp; Organizations",
+			"Government &amp; Organizations:Local",
+			"Government &amp; Organizations:National",
+			"Government &amp; Organizations:Non-Profit",
+			"Government &amp; Organizations:Regional",
+			"Health",
+			"Health:Alternative Health",
+			"Health:Fitness &amp; Nutrition",
+			"Health:Self-Help",
+			"Health:Sexuality",
+			"Kids &amp; Family",
+			"Music",
+			"News &amp; Politics",
+			"Religion &amp; Spirituality",
+			"Religion &amp; Spirituality:Buddhism",
+			"Religion &amp; Spirituality:Christianity",
+			"Religion &amp; Spirituality:Hinduism",
+			"Religion &amp; Spirituality:Islam",
+			"Religion &amp; Spirituality:Judaism",
+			"Religion &amp; Spirituality:Other",
+			"Religion &amp; Spirituality:Spirituality",
+			"Science &amp; Medicine",
+			"Science &amp; Medicine:Medicine",
+			"Science &amp; Medicine:Natural Sciences",
+			"Science &amp; Medicine:Social Sciences",
+			"Society &amp; Culture",
+			"Society &amp; Culture:History",
+			"Society &amp; Culture:Personal Journals",
+			"Society &amp; Culture:Philosophy",
+			"Society &amp; Culture:Places &amp; Travel",
+			"Sports &amp; Recreation",
+			"Sports &amp; Recreation:Amateur",
+			"Sports &amp; Recreation:College &amp; High School",
+			"Sports &amp; Recreation:Outdoor",
+			"Sports &amp; Recreation:Professional",
+			"Technology",
+			"Technology:Gadgets",
+			"Technology:Tech News",
+			"Technology:Podcasting",
+			"Technology:Software How-To",
+			"TV &amp; Film");
 
-			$xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-		<PodcastGenerator>
-			
-			<category>
-				<id></id>
-				<description></description>
-			</category>
-			<category>
-				<id>Arts</id>
-				<description>Arts</description>
-			</category>
-			<category>
-				<id>Arts:Design</id>
-				<description>Arts:Design</description>
-			</category>
-			<category>
-				<id>Arts:Fashion &amp; Beauty</id>
-				<description>Arts:Fashion &amp; Beauty</description>
-			</category>
-			<category>
-				<id>Arts:Food</id>
-				<description>Arts:Food</description>
-			</category>
-			<category>
-				<id>Arts:Literature</id>
-				<description>Arts:Literature</description>
-			</category>
-			<category>
-				<id>Arts:Performing Arts</id>
-				<description>Arts:Performing Arts</description>
-			</category>
-			<category>
-				<id>Arts:Visual Arts</id>
-				<description>Arts:Visual Arts</description>
-			</category>
-		
-			<category>
-				<id>Business</id>
-				<description>Business</description>
-			</category>
-			<category>
-				<id>Business:Business News</id>
-				<description>Business:Business News</description>
-			</category>
-			<category>
-				<id>Business:Careers</id>
-				<description>Business:Careers</description>
-			</category>
-			<category>
-				<id>Business:Investing</id>
-				<description>Business:Investing</description>
-			</category>
-			<category>
-				<id>Business:Management &amp; Marketing</id>
-				<description>Business:Management &amp; Marketing</description>
-			</category>
-			<category>
-				<id>Business:Shopping</id>
-				<description>Business:Shopping</description>
-			</category>
-		
-			<category>
-				<id>Comedy</id>
-				<description>Comedy</description>
-			</category>
-		
-			<category>
-				<id>Education</id>
-				<description>Education</description>
-			</category>
-			<category>
-				<id>Education:Education Technology</id>
-				<description>Education:Education Technology</description>
-			</category>
-			<category>
-				<id>Education:Higher Education</id>
-				<description>Education:Higher Education</description>
-			</category>
-			<category>
-				<id>Education:K-12</id>
-				<description>Education:K-12</description>
-			</category>
-			<category>
-				<id>Education:Language Courses</id>
-				<description>Education:Language Courses</description>
-			</category>
-			<category>
-				<id>Education:Training</id>
-				<description>Education:Training</description>
-			</category>
-		
-			<category>
-				<id>Games &amp; Hobbies</id>
-				<description>Games &amp; Hobbies</description>
-			</category>
-			<category>
-				<id>Games &amp; Hobbies:Automotive</id>
-				<description>Games &amp; Hobbies:Automotive</description>
-			</category>
-			<category>
-				<id>Games &amp; Hobbies:Aviation</id>
-				<description>Games &amp; Hobbies:Aviation</description>
-			</category>
-			<category>
-				<id>Games &amp; Hobbies:Hobbies</id>
-				<description>Games &amp; Hobbies:Hobbies</description>
-			</category>
-			<category>
-				<id>Games &amp; Hobbies:Other Games</id>
-				<description>Games &amp; Hobbies:Other Games</description>
-			</category>
-			<category>
-				<id>Games &amp; Hobbies:Video Games</id>
-				<description>Games &amp; Hobbies:Video Games</description>
-			</category>
-		
-			<category>
-				<id>Government &amp; Organizations</id>
-				<description>Government &amp; Organizations</description>
-			</category>
-			<category>
-				<id>Government &amp; Organizations:Local</id>
-				<description>Government &amp; Organizations:Local</description>
-			</category>
-			<category>
-				<id>Government &amp; Organizations:National</id>
-				<description>Government &amp; Organizations:National</description>
-			</category>
-			<category>
-				<id>Government &amp; Organizations:Non-Profit</id>
-				<description>Government &amp; Organizations:Non-Profit</description>
-			</category>
-			<category>
-				<id>Government &amp; Organizations:Regional</id>
-				<description>Government &amp; Organizations:Regional</description>
-			</category>
-		
-			<category>
-				<id>Health</id>
-				<description>Health</description>
-			</category>
-			<category>
-				<id>Health:Alternative Health</id>
-				<description>Health:Alternative Health</description>
-			</category>
-			<category>
-				<id>Health:Fitness &amp; Nutrition</id>
-				<description>Health:Fitness &amp; Nutrition</description>
-			</category>
-			<category>
-				<id>Health:Self-Help</id>
-				<description>Health:Self-Help</description>
-			</category>
-			<category>
-				<id>Health:Sexuality</id>
-				<description>Health:Sexuality</description>
-			</category>
-		
-			<category>
-				<id>Kids &amp; Family</id>
-				<description>Kids &amp; Family</description>
-			</category>
-		
-			<category>
-				<id>Music</id>
-				<description>Music</description>
-			</category>
-		
-			<category>
-				<id>News &amp; Politics</id>
-				<description>News &amp; Politics</description>
-			</category>
-		
-			<category>
-				<id>Religion &amp; Spirituality</id>
-				<description>Religion &amp; Spirituality</description>
-			</category>
-			<category>
-				<id>Religion &amp; Spirituality:Buddhism</id>
-				<description>Religion &amp; Spirituality:Buddhism</description>
-			</category>
-			<category>
-				<id>Religion &amp; Spirituality:Christianity</id>
-				<description>Religion &amp; Spirituality:Christianity</description>
-			</category>
-			<category>
-				<id>Religion &amp; Spirituality:Hinduism</id>
-				<description>Religion &amp; Spirituality:Hinduism</description>
-			</category>
-			<category>
-				<id>Religion &amp; Spirituality:Islam</id>
-				<description>Religion &amp; Spirituality:Islam</description>
-			</category>
-			<category>
-				<id>Religion &amp; Spirituality:Judaism</id>
-				<description>Religion &amp; Spirituality:Judaism</description>
-			</category>
-			<category>
-				<id>Religion &amp; Spirituality:Other</id>
-				<description>Religion &amp; Spirituality:Other</description>
-			</category>
-			<category>
-				<id>Religion &amp; Spirituality:Spirituality</id>
-				<description>Religion &amp; Spirituality:Spirituality</description>
-			</category>
-		
-			<category>
-				<id>Science &amp; Medicine</id>
-				<description>Science &amp; Medicine</description>
-			</category>
-			<category>
-				<id>Science &amp; Medicine:Medicine</id>
-				<description>Science &amp; Medicine:Medicine</description>
-			</category>
-			<category>
-				<id>Science &amp; Medicine:Natural Sciences</id>
-				<description>Science &amp; Medicine:Natural Sciences</description>
-			</category>
-			<category>
-				<id>Science &amp; Medicine:Social Sciences</id>
-				<description>Science &amp; Medicine:Social Sciences</description>
-			</category>
-		
-			<category>
-				<id>Society &amp; Culture</id>
-				<description>Society &amp; Culture</description>
-			</category>
-			<category>
-				<id>Society &amp; Culture:History</id>
-				<description>Society &amp; Culture:History</description>
-			</category>
-			<category>
-				<id>Society &amp; Culture:Personal Journals</id>
-				<description>Society &amp; Culture:Personal Journals</description>
-			</category>
-			<category>
-				<id>Society &amp; Culture:Philosophy</id>
-				<description>Society &amp; Culture:Philosophy</description>
-			</category>
-			<category>
-				<id>Society &amp; Culture:Places &amp; Travel</id>
-				<description>Society &amp; Culture:Places &amp; Travel</description>
-			</category>
-		
-			<category>
-				<id>Sports &amp; Recreation</id>
-				<description>Sports &amp; Recreation</description>
-			</category>
-			<category>
-				<id>Sports &amp; Recreation:Amateur</id>
-				<description>Sports &amp; Recreation:Amateur</description>
-			</category>
-			<category>
-				<id>Sports &amp; Recreation:College &amp; High School</id>
-				<description>Sports &amp; Recreation:College &amp; High School</description>
-			</category>
-			<category>
-				<id>Sports &amp; Recreation:Outdoor</id>
-				<description>Sports &amp; Recreation:Outdoor</description>
-			</category>
-			<category>
-				<id>Sports &amp; Recreation:Professional</id>
-				<description>Sports &amp; Recreation:Professional</description>
-			</category>
-		
-			<category>
-				<id>Technology</id>
-				<description>Technology</description>
-			</category>
-			<category>
-				<id>Technology:Gadgets</id>
-				<description>Technology:Gadgets</description>
-			</category>
-			<category>
-				<id>Technology:Tech News</id>
-				<description>Technology:Tech News</description>
-			</category>
-			<category>
-				<id>Technology:Podcasting</id>
-				<description>Technology:Podcasting</description>
-			</category>
-			<category>
-				<id>Technology:Software How-To</id>
-				<description>Technology:Software How-To</description>
-			</category>
-		
-			<category>
-				<id>TV &amp; Film</id>
-				<description>TV &amp; Film</description>
-			</category>
-		
-		</PodcastGenerator>";
-		//Set up the parser object
-		$parser = new XMLParser($xml);
-		
-		//Parse the XML file with categories data...
-		$parser->Parse();
-		
-		//}
 
 
 		// define variables
 		$arr = NULL;
 		$arrid = NULL;
 		$n = 0;
-
-		foreach($parser->document->category as $singlecategory)
-		{
-			//echo $singlecategory->id[0]->tagData."<br>";
-			//echo $singlecategory->description[0]->tagData;
-
-			$arr[] .= $singlecategory->description[0]->tagData;
-			$arrid[] .= $singlecategory->id[0]->tagData;
-			$n++;
-		}
 
 		$PG_mainbody .=	'<form name="'.$L_itunescategories.'" method="POST" enctype="multipart/form-data" action="?p=admin&do=itunescat&action=change">';
 
@@ -400,9 +156,9 @@ if(isset($amilogged) AND $amilogged =="true") {
 		$PG_mainbody .= '<select name="category1" class="form-control">';
 
 
-		natcasesort($arr); // Natcasesort orders more naturally and is different from "sort", which is case sensitive
+		natcasesort($itunes_cats); // Natcasesort orders more naturally and is different from "sort", which is case sensitive
 
-		foreach ($arr as $key => $val) {
+		foreach ($itunes_cats as $key => $val) {
 
 			if ( $val != "" ) { //just for 1st category - cannot be empty
 
@@ -426,9 +182,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 		$PG_mainbody .= '<select name="category2" class="form-control">';
 
 
-		natcasesort($arr); // Natcasesort orders more naturally and is different from "sort", which is case sensitive
-
-		foreach ($arr as $key => $val) {
+		foreach ($itunes_cats as $key => $val) {
 
 			$PG_mainbody .= '
 				<option value="' . $val . '"';
@@ -448,9 +202,7 @@ if(isset($amilogged) AND $amilogged =="true") {
 		$PG_mainbody .= '<select name="category3" class="form-control">';
 
 
-		natcasesort($arr); // Natcasesort orders more naturally and is different from "sort", which is case sensitive
-
-		foreach ($arr as $key => $val) {
+		foreach ($itunes_cats as $key => $val) {
 
 			$PG_mainbody .= '<option value="' . $val . '"';
 

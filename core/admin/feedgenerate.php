@@ -160,7 +160,7 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 	    exit();
 	}
 	
-	$sql = "SELECT * FROM Episodes";
+	$sql = "SELECT * FROM Episodes ORDER BY DATE(date) DESC";
 
   $result = $mysqli->query($sql);
   $single_file;
@@ -317,7 +317,7 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
   	fclose($fpjson2);
   	
   	
-    $PG_mainbody .= "JSON created".$jsonfeed;
+    $PG_mainbody .= "JSON created";
   	############
   
   	$PG_mainbody .= "<p><strong>".$L_feedgenerated."</strong></p>";

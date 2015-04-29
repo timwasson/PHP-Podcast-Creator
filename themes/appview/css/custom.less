@@ -250,7 +250,6 @@ body {
     overflow: scroll;
     left:0;
     right:0;
-    display: table;
     border-spacing: 0 10px;
     margin: 0 10px;
     li {
@@ -270,7 +269,11 @@ body {
         padding: 0 20px;
         font-size: 1.25em;
         letter-spacing: -1px;
-        
+        span.pubdate {
+          font-size:.75em;
+          color: darken(@bodybg,30%);
+          letter-spacing: 0;
+        }
       }
       img {
         width:100%;
@@ -293,46 +296,30 @@ body {
   article {
     position: absolute;
     overflow: auto;
+    top:50px;
     bottom: 0;
     left: 0;
-    top:48px;
     section {
       background-color: @bodybg;
       width: 100%;
       position: relative;
     }
     #ep_bg {
-      overflow: hidden;
-      height:130px;
-      position: relative;
-      width:100%;
-      margin:-1px;
       img {
-        height:auto;
-        width:110%;
-        margin-left: -5%;
-        margin-top:-5%;
-        transform: scale(1.5);
-        .blur(10px);
-        position: absolute;
+        margin: 0 auto;
+        display: block;
       }
     }
     h1 {
       font-size: 2em;
       letter-spacing: -2px;
-      text-shadow: 1px 1px 10px black;
-      position: absolute;
-      top:0;
-      left: 0;
-      right: 0;
       padding: 0 20px;
-      height: 120px;
-      span {
-        bottom: 20px;
-        position: absolute;
-        display: block;
-        color: #fff;
-      }
+      color: #000;
+    }
+    #pubdate {
+      padding: 0 20px;
+      font-size:.85em;
+      color: darken(@bodybg, 30%);
     }
     #ep_desc {
       line-height: 1.3em;

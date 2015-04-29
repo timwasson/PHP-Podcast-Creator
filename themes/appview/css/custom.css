@@ -313,7 +313,6 @@ body {
   overflow: scroll;
   left: 0;
   right: 0;
-  display: table;
   border-spacing: 0 10px;
   margin: 0 10px;
 }
@@ -333,6 +332,11 @@ body {
   padding: 0 20px;
   font-size: 1.25em;
   letter-spacing: -1px;
+}
+.episodes ul li p span.pubdate {
+  font-size: .75em;
+  color: #a3a3a3;
+  letter-spacing: 0;
 }
 .episodes ul li img {
   width: 100%;
@@ -355,52 +359,29 @@ body {
 .ep_info article {
   position: absolute;
   overflow: auto;
+  top: 50px;
   bottom: 0;
   left: 0;
-  top: 48px;
 }
 .ep_info article section {
   background-color: #f0f0f0;
   width: 100%;
   position: relative;
 }
-.ep_info article #ep_bg {
-  overflow: hidden;
-  height: 130px;
-  position: relative;
-  width: 100%;
-  margin: -1px;
-}
 .ep_info article #ep_bg img {
-  height: auto;
-  width: 110%;
-  margin-left: -5%;
-  margin-top: -5%;
-  transform: scale(1.5);
-  -webkit-filter: blur(10px);
-  -moz-filter: blur(10px);
-  -o-filter: blur(10px);
-  -ms-filter: blur(10px);
-  filter: blur(10px);
-  filter: url(../img/blur.svg#blur);
-  position: absolute;
+  margin: 0 auto;
+  display: block;
 }
 .ep_info article h1 {
   font-size: 2em;
   letter-spacing: -2px;
-  text-shadow: 1px 1px 10px black;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   padding: 0 20px;
-  height: 120px;
+  color: #000;
 }
-.ep_info article h1 span {
-  bottom: 20px;
-  position: absolute;
-  display: block;
-  color: #fff;
+.ep_info article #pubdate {
+  padding: 0 20px;
+  font-size: .85em;
+  color: #a3a3a3;
 }
 .ep_info article #ep_desc {
   line-height: 1.3em;

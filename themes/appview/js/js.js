@@ -40,6 +40,7 @@ $(document).ready(function() {
       playitem["audio"] = val['enclosure'];
       playitem["image"] = val['image'];
       playitem["description"] = val["description"];
+      playitem["pubdate"] = val["pubdate"];
       
       items.push(playitem);
     });
@@ -57,7 +58,7 @@ $(document).ready(function() {
       eplongid = eplongid.split(".");
       eplongid = eplongid[0];
       
-      $("ul#ep-list").append( "<li id='" + key + "' data-epid=\""+eplongid+"\" class=\"track\"><img src=\"/themes/appview/imgszr/resize.php?image=/images/"+shortpath+"&width=250&height=250\" /><p>" + val['title'] + "</p></li>" );
+      $("ul#ep-list").append( "<li id='" + key + "' data-epid=\""+eplongid+"\" class=\"track\"><img src=\"/themes/appview/imgszr/resize.php?image=/images/"+shortpath+"&width=250&height=250\" /><p>" + val['title'] + "<br /><span class=\"pubdate\">" + val['pubdate'] + "</span></p></li>" );
     });
     
     // Load the first episode. Feels like a hack. Works. So whatever.
@@ -85,7 +86,7 @@ $(document).ready(function() {
       $(".episodes").animate({"left":-80},50);
     }
     
-    $(".ep_info h1 span").text(items[epid].title);
+    $(".ep_info h1").text(items[epid].title);
     // This is kind of a hack but it adds the background image to the H1
     var shortpath = items[epid].image.split("/");
       shortpath = shortpath[shortpath.length - 1];
@@ -93,6 +94,7 @@ $(document).ready(function() {
     $("#ep_bg img").attr("src","/themes/appview/imgszr/resize.php?image=/images/"+shortpath+"&width=250&height=250");
     
     $(".ep_info #ep_desc").html(items[epid].description);
+    $(".ep_info #pubdate").html("Posted: " + items[epid].pubdate);
     $(".ep_info a[data-dtype=download]").attr("href",items[epid].audio);
     
     $(".ep_info a[href=#play]").click(function(e){
@@ -106,12 +108,6 @@ $(document).ready(function() {
         $(".jp-current-time").text(seconds2time(audioEl[0].currentTime));
         $(".jp-duration").text(seconds2time(audioEl[0].duration));
       };
-      
-      audioEl.bind('timeupdate', function() {
-        var perDone = (audioEl[0].currentTime / audioEl[0].duration) * 100;
-        $(".jp-current-time").text(seconds2time(audioEl[0].currentTime));
-        $("#playProc").val(perDone);
-      });
       
   		audioEl[0].play();
   		playButton.hide();
@@ -145,8 +141,18 @@ $(document).ready(function() {
     pauseButton.show();
   });
   
+  audioEl.bind('timeupdate', function() {
+    var perDone = (audioEl[0].currentTime / audioEl[0].duration) * 100;
+    $(".jp-current-time").text(seconds2time(audioEl[0].currentTime));
+    $("#playProc").val(perDone);
+  });
+  
   $("#playProc").bind("mousedown touchstart", function() {
     audioEl[0].pause();
+  });
+  
+  $("#playProc").bind("mouseup touchend", function() {
+    audioEl[0].play();
   });
   
   $("#playProc").on("change",function() {

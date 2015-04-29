@@ -1,3 +1,23 @@
+// To convert the seconds into human readable h:m:s.
+function seconds2time(seconds) {
+  seconds = Math.round(seconds);
+  var h, m, s, result='';
+  // HOURs
+  h = Math.floor(seconds/3600);
+  seconds -= h*3600;
+  if(h){
+    result = h<10 ? '0'+h+':' : h+':';
+  }
+  // MINUTEs
+  m = Math.floor(seconds/60);
+  seconds -= m*60;
+  result += m<10 ? '0'+m+':' : m+':';
+  // SECONDs
+  s=seconds%60;
+  result += s<10 ? '0'+s : s;
+  return result;
+}
+
 $(document).ready(function() {
   
   // First get the hash
@@ -7,6 +27,7 @@ $(document).ready(function() {
   var audioEl = $("#ep_audio");
   var playButton = $(".jp-play");
   var pauseButton = $(".jp-pause");
+  var isPlaying = false;
 
   var items = [];
   // Handler for .ready() called.
@@ -82,22 +103,32 @@ $(document).ready(function() {
   		
   		// Set duration and time only once loaded.
       audioEl[0].onloadedmetadata = function() {
-        console.log(audioEl[0].duration);
-        $(".jp-current-time").text(audioEl[0].currentTime);
-        $(".jp-duration").text(audioEl[0].duration);
+        $(".jp-current-time").text(seconds2time(audioEl[0].currentTime));
+        $(".jp-duration").text(seconds2time(audioEl[0].duration));
       };
       
       audioEl.bind('timeupdate', function() {
         var perDone = (audioEl[0].currentTime / audioEl[0].duration) * 100;
-        $(".jp-current-time").text(audioEl[0].currentTime);
+        $(".jp-current-time").text(seconds2time(audioEl[0].currentTime));
         $("#playProc").val(perDone);
-        console.log("Time updating: "+ perDone);
       });
       
   		audioEl[0].play();
   		playButton.hide();
   		pauseButton.show();
     });
+    if(isPlaying == false) {
+      $(".track-name").text(items[epid].title);
+  		audioEl.attr("src", items[epid].audio);
+  		
+  		audioEl[0].onloadedmetadata = function() {
+        console.log(audioEl[0].duration);
+        $(".jp-current-time").text(seconds2time(audioEl[0].currentTime));
+        $(".jp-duration").text(seconds2time(audioEl[0].duration));
+      };
+        
+  		isPlaying = true;
+    }
   });
   
   // Hit the pause button

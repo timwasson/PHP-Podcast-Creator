@@ -12,7 +12,7 @@
 <body>
 	<div class="menu">
 	  <section>
-  	  <img src="/themes/appview/img/logo.png" class="logo" />
+  	  <img src="/images/itunes_image.jpg" class="logo" />
   	  
   	  <div class="ext-bar">
     	  <a href="https://itunes.apple.com/us/podcast/atomicast/id925486047#" class="itunes">iTunes</a><!--
@@ -25,8 +25,7 @@
     	<h2>{{ subtitle }}</h2>
     	<ul>
     	  <li class="eplink"><a href="#episodes"><i class="fa fa-headphones"></i> Episodes</a></li>
-    	  <li class="radio"><a href="#radio"><i class="fa fa-microphone"></i> Atomicast Radio</a></li>
-        <li class="rss"><a href="http://atomicast.com/feed.xml"><i class="fa fa-rss"></i> RSS Feed</a></li>
+        <li class="rss"><a href="{{ url }}/feed.xml"><i class="fa fa-rss"></i> RSS Feed</a></li>
         <li class="email"><a href="mailto:atomicast1@gmail.com"><i class="fa fa-envelope"></i> Email us</a></li>
     	</ul>
   	</section>
@@ -63,7 +62,7 @@
 		</ul>
 
 		<div class="jp-progress">
-		  <input type="range" min="0" max="100" id="playProc" style="width:100%">
+		  <input type="range" min="0" max="100" id="playProc" style="width:100%" step="0.01">
 		</div>
 		
 		<div class="timedur">

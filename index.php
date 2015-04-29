@@ -41,8 +41,10 @@ else { // if no p= specifies, e.g. just index.php with no GET
 	$output = file_get_contents($theme_path."/app.html");
   
   $output = str_replace("{{ title }}", $podcast_title, $output);
-  
   $output = str_replace("{{ subtitle }}", $podcast_subtitle, $output);
+  $output = str_replace("{{ url }}", $url, $output);
+  
+  // Google Analytics, email, links, etc. should all go here.
   
   echo $output;
 }

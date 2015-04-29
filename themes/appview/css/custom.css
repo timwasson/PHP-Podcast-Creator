@@ -126,39 +126,6 @@ table {
   border-spacing: 0;
 }
 /*!Custom CSS */
-.seekbar {
-  background: #7f7f7f;
-  /* Old browsers */
-  background: -moz-linear-gradient(top, #7f7f7f 0%, #494949 100%);
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7f7f7f), color-stop(100%, #494949));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #7f7f7f 0%, #494949 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #7f7f7f 0%, #494949 100%);
-  /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #7f7f7f 0%, #494949 100%);
-  /* IE10+ */
-  background: linear-gradient(to bottom, #7f7f7f 0%, #494949 100%);
-  /* W3C */
-}
-.playbar {
-  background: #218ec4;
-  /* Old browsers */
-  background: -moz-linear-gradient(top, #218ec4 0%, #295c84 100%);
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #218ec4), color-stop(100%, #295c84));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #218ec4 0%, #295c84 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #218ec4 0%, #295c84 100%);
-  /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #218ec4 0%, #295c84 100%);
-  /* IE10+ */
-  background: linear-gradient(to bottom, #218ec4 0%, #295c84 100%);
-  /* W3C */
-  box-shadow: 0 0 12px rgba(33, 142, 196, 0.5);
-}
 /*
 body:before {
   content:"";
@@ -183,7 +150,7 @@ html {
 }
 body {
   font-family: "Helvetica Neue", "Helvetica", sans-serif;
-  background-color: #d2d2d2;
+  background-color: #f0f0f0;
   overflow: hidden;
   position: relative;
 }
@@ -202,7 +169,7 @@ body {
   background-color: #5f0512;
 }
 .menu section {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.6);
   height: 100%;
   overflow: auto;
 }
@@ -294,7 +261,6 @@ body {
   position: fixed;
   top: 0;
   bottom: 80px;
-  border-left: solid 1px #938c85;
   transition: all .5s;
   -webkit-overflow-scrolling: touch;
   overflow-y: scroll;
@@ -337,7 +303,7 @@ body {
 }
 .episodes {
   z-index: 1;
-  background-color: #d2d2d2;
+  background-color: #f0f0f0;
   left: 33.333%;
 }
 .episodes ul {
@@ -347,6 +313,9 @@ body {
   overflow: scroll;
   left: 0;
   right: 0;
+  display: table;
+  border-spacing: 0 10px;
+  margin: 0 10px;
 }
 .episodes ul li {
   clear: left;
@@ -357,9 +326,6 @@ body {
 .episodes ul li.active {
   background-color: #ffffff;
 }
-.episodes ul li:active {
-  background-color: #5f0512;
-}
 .episodes ul li p {
   display: table-cell;
   vertical-align: middle;
@@ -367,13 +333,12 @@ body {
   padding: 0 20px;
   font-size: 1.25em;
   letter-spacing: -1px;
-  border-bottom: solid 1px #9f9f9f;
 }
 .episodes ul li img {
   width: 100%;
   height: auto;
-  border-bottom: solid 1px #9f9f9f;
   display: table-cell;
+  padding: 10px;
 }
 @media (max-width: 600px) {
   .episodes {
@@ -384,7 +349,7 @@ body {
 .ep_info {
   left: 66.666%;
   z-index: 2;
-  background-color: #d2d2d2;
+  background-color: #f0f0f0;
   overflow-x: hidden;
 }
 .ep_info article {
@@ -395,7 +360,7 @@ body {
   top: 48px;
 }
 .ep_info article section {
-  background-color: #d2d2d2;
+  background-color: #f0f0f0;
   width: 100%;
   position: relative;
 }
@@ -453,7 +418,7 @@ body {
   padding-bottom: 30px;
 }
 .ep_info article .linkbar a {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.6);
   display: inline-block;
   padding: 8px;
   width: 42%;
@@ -479,10 +444,10 @@ body {
 #jp_container {
   position: fixed;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: #d7d7d7;
   width: 100%;
   height: 80px;
-  color: #fff;
+  color: #000;
 }
 p.timer {
   position: absolute;
@@ -503,14 +468,12 @@ p.timer .track-name {
   bottom: 10px;
 }
 .music-controls {
-  color: #fff;
   position: absolute;
   width: 80px;
-  background-color: rgba(0, 0, 0, 0.9);
   display: table;
 }
 .music-controls li a {
-  color: #fff;
+  color: #000;
   height: 80px;
   width: 80px;
   font-size: 2em;
@@ -519,48 +482,11 @@ p.timer .track-name {
   text-align: center;
 }
 .jp-progress {
-  background-color: gray;
   height: 20px;
   position: absolute;
   left: 80px;
   right: 30px;
   top: 30px;
-}
-.jp-progress .jp-seek-bar {
-  background: #7f7f7f;
-  /* Old browsers */
-  background: -moz-linear-gradient(top, #7f7f7f 0%, #494949 100%);
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7f7f7f), color-stop(100%, #494949));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #7f7f7f 0%, #494949 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #7f7f7f 0%, #494949 100%);
-  /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #7f7f7f 0%, #494949 100%);
-  /* IE10+ */
-  background: linear-gradient(to bottom, #7f7f7f 0%, #494949 100%);
-  /* W3C */
-  height: 20px;
-}
-.jp-progress .jp-play-bar {
-  background: #218ec4;
-  /* Old browsers */
-  background: -moz-linear-gradient(top, #218ec4 0%, #295c84 100%);
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #218ec4), color-stop(100%, #295c84));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #218ec4 0%, #295c84 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #218ec4 0%, #295c84 100%);
-  /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #218ec4 0%, #295c84 100%);
-  /* IE10+ */
-  background: linear-gradient(to bottom, #218ec4 0%, #295c84 100%);
-  /* W3C */
-  box-shadow: 0 0 12px rgba(33, 142, 196, 0.5);
-  height: 20px;
-  position: absolute;
 }
 #radiobanner {
   background-color: #57a948;

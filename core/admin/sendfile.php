@@ -68,7 +68,7 @@ if (isset($_FILES['userfile']) AND $_FILES['userfile']!=NULL AND isset($_POST['t
 		#### INPUT DEPURATION N.2
 		$title = depurateContent($title); //title
 		$description = depurateContent($description); //short desc
-		//$long_description = depurateContent($long_description); //long desc
+		$long_description = depurateContent($long_description); //long desc
 		$keywords = depurateContent($keywords); //Keywords
 		$auth_name = depurateContent($auth_name); //author's name
 
@@ -78,14 +78,13 @@ if (isset($_FILES['userfile']) AND $_FILES['userfile']!=NULL AND isset($_POST['t
 		#$PG_mainbody .= "QUI: $long_description<br>lunghezza:".strlen($long_description)."<br>"; //debug
 
 		if ($long_description == NULL OR $long_description == " ") { //if user didn't input long description the long description is equal to short description
-		$PG_mainbody .= "<p>$L_longdesnotpresent</p>";
-		$long_description = $description;
-	}
-
-	else {
-		$PG_mainbody .= "<p>$L_longdescpresent</p>";
-		$long_description = str_replace("&nbsp;", " ", $long_description); 
-	}
+  		$PG_mainbody .= "<p>$L_longdesnotpresent</p>";
+  		$long_description = $description;
+  	}
+  	else {
+  		$PG_mainbody .= "<p>$L_longdescpresent</p>";
+  		$long_description = str_replace("&nbsp;", " ", $long_description); 
+  	}
 
 	##############
 	### processing iTunes KEYWORDS
@@ -298,13 +297,13 @@ if ($file_ext[1]==$podcast_filetype) { //003 (if file extension is accepted, go 
     		length
     		) VALUES (
     		'',
-    		'".$title."',
-    		'".$description."',
-    		'".$long_description."',
-    		'".$auth_name."',
-    		'".$auth_email."',
+    		'".addslashes($title)."',
+    		'".addslashes($description)."',
+    		'".addslashes($long_description)."',
+    		'".addslashes($auth_name)."',
+    		'".addslashes($auth_email)."',
     		'".$filenamechanged.$filesuffix.".".$file_ext[1]."',
-    		'".$keywords."',
+    		'".addslashes($keywords)."',
     		'".$explicit."',
     		'".$image_new_name."',
     		'".$filemimetype."',

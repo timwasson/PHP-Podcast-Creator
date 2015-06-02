@@ -182,12 +182,12 @@ $PG_mainbody .= "<p><b>$L_processingchanges</b></p>";
 // Put it all in the database
     	
     $sql = "UPDATE Episodes SET 
-    		title = '".$title."',
-    		subtitle = '".$description."',
-    		description = '".$long_description."',
+    		title = '".addslashes($title)."',
+    		subtitle = '".addslashes($description)."',
+    		description = '".addslashes($long_description)."',
     		author = '".$auth_name."',
     		authoremail = '".$auth_email."',
-    		keywords = '".$keywords."',
+    		keywords = '".addslashes($keywords)."',
     		explicit = '".$explicit."',
     		image = '".$image_new_name."',
     		type = '".$filemimetype."'

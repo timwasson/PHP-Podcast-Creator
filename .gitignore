@@ -21,3 +21,4 @@ images/*
 themes/appview/imgszr/imagecache/*
 
 setup/error_log
+setup/*

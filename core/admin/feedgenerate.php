@@ -180,9 +180,9 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
       
       $eplink = $url."#/".urlencode($filename[0])."/";
   							
-  		if($bbrytrack == true) {
+  		if(!empty($blubrry_tracking)) {
     	  $hlurl = str_replace("http://", "", $url);
-    	  $encurl = $bbryurl.$hlurl.$upload_dir.$file;
+    	  $encurl = $blubrry_tracking.$hlurl.$upload_dir.$file;
   		} else {
     	  $encurl = $url.$upload_dir.$file;
   		}

@@ -87,6 +87,9 @@ if(isset($amilogged) AND $amilogged =="true") { //if logged
 	$feed_encoding = "'.$feed_encoding.'"; // Feed Encoding (e.g. "iso-8859-1", "utf-8"). UTF-8 is strongly suggested
 
 	$explicit_podcast = "'.$explicit_podcast.'"; //does your podcast contain explicit language? ("yes", "no" or "clean")
+	
+	$g_tracking = "'.$g_tracking.'";
+	$blubrry_tracking = "'.$blubrry_tracking.'";
 
 	// END OF CONFIGURATION
 	$db_user = "'.$db_user.'";	// The user that has access to your database

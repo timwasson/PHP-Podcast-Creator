@@ -57,7 +57,9 @@ if($_GET['log'] != "no") {
 	} else {
 	  
 	  // Sent to Google Analytics
-	  $ssga = new ssga('UA-9248215-19','www.atomicast.com');
+	  $tostr = array("http:","/");
+	  $track_url = str_replace($tostr, "", $url);
+	  $ssga = new ssga($g_tracking,$track_url);
 	  $ssga->set_event('Downloads', 'Download Type', $tfile);
 	  
 	  $ssga->set_page( $tfile );

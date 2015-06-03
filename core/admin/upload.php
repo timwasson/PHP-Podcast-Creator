@@ -34,7 +34,7 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 	
 	//For editing an older episode.
 	$PG_mainbody .= '<h3>'.$L_editpodcast.'</h3>';
-	include("$absoluteurl"."core/admin/sendchanges.php");
+	include($absoluteurl."core/admin/sendchanges.php");
 	//$PG_mainbody .= '</div>';
 
 } else {
@@ -98,6 +98,7 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 			$PG_mainbody .= '<h4>'.$L_filetoedit.'</h4>
 			<div class="well">
 				<strong>'.$text_title.'</strong> ('.$_GET['name'].')
+				
 			</div>
 			<input type="hidden" name="userfile" value="'.$_GET['name'].'">';
 		} else {
@@ -138,7 +139,7 @@ if (isset($_GET['p']) AND $_GET['p']=="admin" AND isset($_GET['do']) AND $_GET['
 			
 			if (file_exists($fileimagetocheck) && !empty($row['image'])) { // if image exists
 				$PG_mainbody .= '
-				<input type="hidden" name="existentimage" value="'.$text_imgpg.'">
+				<input type="hidden" name="existentimage" value="'.$row['image'].'">
 				<h4>'.$L_imagecurrent.'</h4>
 				<img src="'.$url.$img_dir.$row['image'].'" alt="'.$L_imagecurrent.'" />
 				<h4>'.$L_imagenew.'</h4>	

@@ -81,6 +81,10 @@ if (isset($userfile) AND $userfile!=NULL AND isset($_POST['title']) AND $_POST['
 	// echo "<br /><br /><br />$file - err $errore - temp: $temporaneo<br /><br /><br />";
 	$filesuffix = NULL; // declare variable for duplicated filenames
 	$image_new_name = NULL; // declare variable for image name
+	
+	if(!empty($existentimage)) {
+  	$image_new_name = $existentimage;
+	}
 
 	####
 	## here I check lenght of long description: according to the iTunes technical specifications
@@ -118,7 +122,7 @@ if (isset($userfile) AND $userfile!=NULL AND isset($_POST['title']) AND $_POST['
 		#### INPUT DEPURATION N.2
 		$title = depurateContent($title); //title
 		$description = depurateContent($description); //short desc
-		//$long_description = depurateContent($long_description); //long desc
+		$long_description = depurateContent($long_description); //long desc
 		$keywords = depurateContent($keywords); //Keywords
 		$auth_name = depurateContent($auth_name); //author's name
 
@@ -126,16 +130,62 @@ if (isset($userfile) AND $userfile!=NULL AND isset($_POST['title']) AND $_POST['
 		### processing Long Description
 
 		#$PG_mainbody .= "QUI: $long_description<br>lunghezza:".strlen($long_description)."<br>"; //debug
-
-		if ($long_description == NULL OR $long_description == " ") { //if user didn't input long description the long description is equal to short description
+		
+  if ($long_description == NULL OR $long_description == " ") { //if user didn't input long description the long description is equal to short description
 		$PG_mainbody .= "<p>$L_longdesnotpresent</p>";
 		$long_description = $description;
-	}
-
-	else {
+	} else {
 		$PG_mainbody .= "<p>$L_longdescpresent</p>";
 		$long_description = str_replace("&nbsp;", " ", $long_description); 
 	}
+	
+  ######### IMAGE upload section, if image is present
+
+  if (!empty($img)) {
+    $PG_mainbody .= "Image: ".$img;
+	  $PG_mainbody .= "<p><b>$L_imgpresent</b></p>";
+	  
+	  // This is a hack, but it's to make the image filename match the MP3 filename, with a different extension.
+	  $filenamechanged = explode(".",$userfile);
+	  $filenamechanged = $filenamechanged[0];
+
+	  $img_ext = explode(".",$img); // divide filename from extension
+
+	  if ($img_ext[1]=="jpg" OR $img_ext[1]=="jpeg" OR $img_ext[1]=="gif" OR $img_ext[1]=="png" OR $img_ext[1]=="JPG" OR $img_ext[1]=="JPEG" OR $img_ext[1]=="GIF"OR $img_ext[1]=="PNG") { // control accepted image format
+
+	  	// $PG_mainbody .= "<p>$L_origfilename <i>$img</i></p>";
+
+	  	// Assign a new name to the image
+	  	$uploadFile2 = $absoluteurl.$img_dir.$filenamechanged.$filesuffix.".".$img_ext[1];
+
+
+	  	//move file from the temp directory to the upload directory
+	  	if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile2))
+	  	{
+	  		$image_new_name = $filenamechanged.$filesuffix.".".$img_ext[1];
+
+	  		$PG_mainbody .= "<p><font color=\"green\">$L_imgsent</font></p>"; // If upload is successful.
+	  	}
+
+	  	else { // if IMAGE upload is not successful
+
+	  		$image_new_name = NULL;
+
+	  		$PG_mainbody .= "<p><font color=\"red\">$L_imgnotsent $L_ignored</font></p>";
+
+	  	}
+	  }
+
+	  else { // if the image extension is not valid: IGNORE the image
+
+	  	$image_new_name = NULL;
+	  	$PG_mainbody .= "<p>$L_imgnotvalidext $L_imgextok jpg, gif, png.</p>";
+	  }
+	} else {
+  	$PG_mainbody .= "image not present";
+	}
+	########## end IMAGE upload section
+
 
 	##############
 	### processing iTunes KEYWORDS
@@ -169,13 +219,12 @@ if (isset($userfile) AND $userfile!=NULL AND isset($_POST['title']) AND $_POST['
 		$auth_name = NULL; //ignore author
 		$auth_email = NULL; //ignore email
 
-	} 
-
-
+	} else { //if author's name doesn't exist unset also email field
+    $auth_email = NULL; //ignore email
+  }
+	
 }
-else { //if author's name doesn't exist unset also email field
-  $auth_email = NULL; //ignore email
-}
+
 
 $PG_mainbody .= "<p><b>$L_processingchanges</b></p>";
 

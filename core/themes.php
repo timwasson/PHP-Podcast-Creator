@@ -48,6 +48,11 @@ if (isset($_GET['p']) and $_GET['p'] == "admin" and isset($_GET['do']) and $_GET
 	<script type=\"text/javascript\">
 	tinymce.init({
 	    selector: \".tinymce\",
+	    setup: function (editor) {
+        editor.on('change', function () {
+            tinymce.triggerSave();
+        });
+      },
 	    plugins: [
 	        \"advlist autolink lists link image charmap print preview anchor\",
 	        \"searchreplace visualblocks code fullscreen\",

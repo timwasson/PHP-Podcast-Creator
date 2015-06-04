@@ -131,7 +131,11 @@ $(function() {
 	
 	// Simple error checking 
 	$("#uploadform").submit(function() {
-  	tinymce.get('long_description').save();
+  	
+  	// Hack to make tinyMCE not mess up
+  	$('#long_description').val( tinymce.get('long_description').getContent() );
+  	
+  	//tinyMCE.triggerSave();
 		$("#userfile, #title, #description").unwrap();
 		error = 0;
 		

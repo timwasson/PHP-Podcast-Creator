@@ -160,7 +160,7 @@ if (isset($_GET['p'])) if ($_GET['p']=="admin") { // if admin is called from the
 	    exit();
 	}
 	
-	$sql = "SELECT * FROM Episodes ORDER BY DATE(date) DESC";
+	$sql = "SELECT * FROM Episodes ORDER BY `date` DESC";
 
   $result = $mysqli->query($sql);
   $single_file;

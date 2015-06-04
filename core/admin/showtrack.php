@@ -1,5 +1,5 @@
 <?
-$loadjavascripts .= '
+$loadjavascripts = '
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
@@ -78,7 +78,7 @@ $loadjavascripts .= '
 	    }
 	    return $array_items;
 	}
-    $files = directoryToArray("./media");
+  $files = directoryToArray("./media");
 
 	$loadjavascripts .= '
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -111,7 +111,7 @@ $loadjavascripts .= '
 	    $loadjavascripts .= '["'.date("F",strtotime($i." Months")).'",';
 	    
 	    foreach ($files as $file) {   
-		    $query = "SELECT * FROM media WHERE YEAR(time) = YEAR(CURRENT_DATE + INTERVAL ".$i." MONTH) AND MONTH(time) = MONTH(CURRENT_DATE + INTERVAL ".$i." MONTH) AND file = '".$file."'";
+		    $query = "SELECT DISTINCT file, YEAR(time), MONTH(time), DAY(time), ip FROM media WHERE YEAR(time) = YEAR(CURRENT_DATE + INTERVAL ".$i." MONTH) AND MONTH(time) = MONTH(CURRENT_DATE + INTERVAL ".$i." MONTH) AND file = '".$file."'";
 			if ($stmt = $mysqli->prepare($query)) {
 			
 			    /* execute query */
@@ -120,18 +120,17 @@ $loadjavascripts .= '
 			    /* store result */
 			    $stmt->store_result();
 	
-				$loadjavascripts .= $stmt->num_rows.',';
-				
+          $loadjavascripts .= $stmt->num_rows.',';
+				  
 			    /* close statement */
 			    $stmt->close();
 			}
-			
 		}
 		$loadjavascripts .= '],';
-	    $i++;
+    $i++;
 	endwhile;
 	
-	$mysqli->close();
+	
 	
 	$loadjavascripts .= '
         ]);
@@ -144,4 +143,27 @@ $loadjavascripts .= '
         chart.draw(data, options);
       }
     </script>';
+  
+  /* Generate the better table for totals */
+  sort($files, SORT_NATURAL | SORT_FLAG_CASE);
+  $dltbrow = "<table class=\"table table-striped\">";
+  $dltbrow .= "<tr><th>File</th><th>Downloads</th></tr>";
+  foreach ($files as $file) {
+    $sql = "SELECT DISTINCT file, YEAR(time), MONTH(time), DAY(time), ip FROM media WHERE file = '".$file."'";
+
+    $result = $mysqli->query($sql);
+    //$dltbrow .= $result;
+    if ($result->num_rows > 0) {
+      
+      // output data of each row
+      //while($row = $result->fetch_assoc()) {
+        $dltbrow .= "<tr><td><a href=\"?p=admin&do=epdlinfo&file=".$file."\">". $file. "</a></td><td>". $result->num_rows. "</td></tr>";
+      //}
+    }
+  }
+  $dltbrow .= "</table>";
+  
+  $PG_mainbody .= $dltbrow;
+  
+  $mysqli->close();
 ?>

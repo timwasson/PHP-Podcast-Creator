@@ -72,7 +72,6 @@ $.fn.uploadProgress = function(options){
 
 // Custom Functions below.
 
-
 $(function() {
 	// Count the description field and update the error if applicable.
 	$("#description").keyup(function() {
@@ -86,8 +85,6 @@ $(function() {
 			$(".cdown").parent("div").removeClass().addClass("alert alert-info");
 		}
 	});
-	
-	var error = 0;
 	
 	// Show additional information on the Add Podcast page
 	//First slide up the panel
@@ -108,12 +105,13 @@ $(function() {
 	});
 	
 	// Very basic Error Checking on the New Podcast Episode page
-	function CheckEmpEr(inputid) {
-		if (inputid.val().length == 0) {
-			$(inputid).wrap("<div class=\"control-group alert alert-error\">");
-			error = 1;
-		}
-	}
+  function CheckEmpEr(inputid) {
+    if (inputid.val().length == 0) {
+  		$(inputid).wrap("<div class=\"control-group alert alert-error\">");
+  		error = 1;
+    }
+  }
+
 	
 	//Progress Bar
 	$("#uploadform").uploadProgress( { onProgress:progressupdate } );
@@ -128,15 +126,25 @@ $(function() {
 	// Hide progress bar, show it upon submission. 
 	$("#fileProgress").hide();
 	
+	// Set the error to 0 for error checking
+	var error = 0;
+	
 	// Simple error checking 
 	$("#uploadform").submit(function() {
+  	
+  	// Hack to make tinyMCE not mess up
+  	$('#long_description').val( tinymce.get('long_description').getContent() );
+  	
+  	//tinyMCE.triggerSave();
 		$("#userfile, #title, #description").unwrap();
 		error = 0;
 		
 		// Check for the file input only if the FTP file is empty.
+		// This definitely needs fixin'
+		/*
 		if($("#ftpfile").val().length == 0) {
 			CheckEmpEr($("#userfile"));
-		}
+		}*/
 		
 		CheckEmpEr($("#title"));
 		CheckEmpEr($("#description"));

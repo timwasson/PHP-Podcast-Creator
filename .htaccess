@@ -11,3 +11,7 @@ RewriteRule ^media/([^/]*)$ /core/track.php?file=$1 [L]
 
 #Disable tracking for some media files (Like when you're loading the home page)
 RewriteRule ^media/n/([^/]*)$ /core/track.php?log=no&file=$1 [L]
+
+<ifModule mod_headers.c>
+    Header set Access-Control-Allow-Origin: *
+</ifModule>

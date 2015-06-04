@@ -1,12 +1,12 @@
 # PHP Podcast Creator
 
-Built with PHP, XML, and jQuery. 
+Built with PHP, mySQL, and jQuery. 
 
 This is an unofficial porting of Podcast Generator 1.4, which you can find here: http://podcastgen.sourceforge.net/index.php?lang=en
 
 While waiting for the official release of the original Podcast Generator 2.0, I made a customized version that suited my needs a little better. Blatantly stolen from the original generator's website, this script features:
 
-- Very easy to install (Web Setup Wizard);
+- Simplified installation;
 - Free and open source;
 - Supports ANY media filetype (mp3, ogg, mpg, m4v, mov, pdf, etc...) and allows to create mixed audio and video podcasts;
 - The XML feed automatically generated is fully compatible with aggregators (e.g. Juice and iTunes), meets the w3c standards and supports iTunes specific tags;
@@ -20,10 +20,9 @@ While waiting for the official release of the original Podcast Generator 2.0, I 
 - HTML5 progress uploads (compatible with modern [not IE] browsers)
 - HTML5 audio/video player (jPlayer)
 - Significant structural changes that make updates and upgrades easier
-- Clean URLs using URL rewrites
 - Feed download tracking
 - Episode download tracking
-- mySQL integration (currently only for feed tracking)
+- mySQL integration
 - Bootstrap 3 integration for mobile-first compatibility
 
 In an effort to streamline the original Generator, I removed categories, archives, freebox, the default themes, and several other components. I removed the reliance on prototype/scriptaculous and replaced that functionality with jQuery (via CDN). I improved error checking, and implemented Twitter Bootstrap 3 (also via CDN) as the main theme for easy customization. 
@@ -38,8 +37,9 @@ Download jPlayer (http://jplayer.org/) and put it in /components/player (so the 
 After that, just load your website and walk through the installation.
 
 ## Coming Soon
-- Abandon the XML file storage for mySQL storage
-- Front-end rewrite to make page generation faster and less resource-intensive
+- Front-end rewrite
 
 ## Notes
 The jPlayer video implementation still needs a little help, so any HTML5 video gurus are welcome to fork this project to work on optimizing this.
+
+With this release I've totally abandoned the XML flat-storage of episode metadata and transitioned to mySQL for storing episode data. I've rewritten a lot of the feed regeneration process which speeds things up substantially for feeds with many episodes. With this release, there is likely no clear or easy update from the Podcast Generator to Podcast Creator. Sorry about that.

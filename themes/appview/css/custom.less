@@ -1,0 +1,435 @@
+@charset "UTF-8";
+/* CSS Document */
+/* RESET */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+} 
+
+/*!Custom CSS */
+@menubg: rgba(0,0,0,.6);
+@listbg: #f0f0f0;
+@bodybg: #f0f0f0;
+@reswidth: 600px;
+@headebg: #989898;
+@bordercolor: #938c85;
+
+@maroon: #5f0512;
+@orange: #ff7900;
+@pink: #ad6f81;
+@green: #94cd8a;
+@teal: #496664;
+@blue: #6b72a3;
+
+.blur(@rad) {
+  -webkit-filter: blur(@rad);
+  -moz-filter: blur(@rad);
+  -o-filter: blur(@rad);
+  -ms-filter: blur(@rad);
+  filter: blur(@rad);
+  filter: url(../img/blur.svg#blur);
+}
+
+/*
+body:before {
+  content:"";
+  position:fixed;
+  height:100%;
+  width: 100%;
+  background-image: url(/images/itunes_image.jpg);
+  background-size: cover;
+  background-position: center center;
+  -webkit-filter: blur(15px);
+  -moz-filter: blur(15px);
+  -o-filter: blur(15px);
+  -ms-filter: blur(15px);
+  filter: blur(15px);
+}
+*/
+* {
+  -webkit-tap-highlight-color:transparent;
+}
+html {
+  overflow: hidden;
+}
+body {
+  font-family: "Helvetica Neue", "Helvetica", sans-serif;
+  background-color: @bodybg;
+  overflow: hidden;
+  position:relative;
+ }
+
+.menu {
+  -webkit-overflow-scrolling: touch;
+  z-index: 2;
+  width:33.333%;
+  float: left;
+  position: fixed;
+  top:0;
+  bottom: 80px;
+  color: #fff;
+  transition:all .5s;
+  .logo {
+    background-color: @maroon;
+  }
+  section {
+    background-color: @menubg;
+    height: 100%;
+    overflow: auto;
+  }
+  h1 {
+    font-size: 1.8em;
+    margin-top: 30px;
+    margin-left: 30px;
+    letter-spacing: -1px;
+  }
+  h2 {
+    margin-left: 30px;
+  }
+  img {
+    max-width: 100%;
+  }
+  .rss:hover {
+    background-color: #FF6600;
+  }
+  ul {
+    margin-top: 30px;
+    margin-left: 20px;
+    li {
+      a {
+        padding: 6px;
+        display: block;
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+  }
+  .ext-bar {
+    .social {
+      display: inline-block;
+      width:9%;
+      padding:0;
+      text-align: center;
+      color: #fff;
+    }
+    .itunes, .stitcher {
+      width:35%;
+      text-align: center;
+      display: inline-block;
+      color: #fff;
+      text-decoration: none;
+      padding:9px 0;
+      transition:all .5s;
+    }
+    .stitcher {
+      background-color: #EE5131;
+      &:hover {
+        background-color: darken(#EE5131, 20%);
+      }
+    }
+    .itunes {
+      background-color: #4385D0;
+      &:hover {
+        background-color: darken(#4385D0, 20%);
+      }
+    }
+  }
+  @media(max-width: @reswidth) {
+    width: 100%;
+    left: -100%;
+    ul {
+      &:after {
+          content:" ";
+          float: none;
+          clear: both;
+          display: block;
+          margin-bottom: 50px;
+      }
+      li {
+        width:50%;
+        float: left;
+        text-align: center;
+        margin-top: 15px;
+        &:nth-child(odd) {
+          clear: left;
+        }
+        i {
+          display: block;
+          text-align: center;
+          font-size: 4em;
+          padding-bottom: 8px;
+        }
+      }
+    }
+  }
+}
+.episodes, .ep_info {
+  width: 33.333%;
+  position: fixed;
+  //background-color: @listbg;
+  top:0;
+  bottom: 80px;
+  transition: all .5s;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
+  overflow-x: hidden;
+   h2 {
+    background-color: @headebg;
+    color: #fff;
+    font-size: 1.5em;
+    padding: 12px;
+    text-align: center;
+    i {
+      left: 20px;
+      position: absolute;
+      span {
+        position: relative;
+        top:-2px;
+        font-size: .7em;
+      }
+      @media(min-width: @reswidth) {
+        display: none;
+      }
+      &:active {
+        color: @maroon;
+      }
+    }
+  }
+  @media(max-width: @reswidth) {
+    width: 100%;
+  }
+}
+.episodes {
+  z-index: 1;
+  background-color: @listbg;
+  left: 33.333%;
+  ul {
+    position: absolute;
+    top: 48px;
+    bottom: 0;
+    overflow: scroll;
+    left:0;
+    right:0;
+    border-spacing: 0 10px;
+    margin: 0 10px;
+    li {
+      clear: left;
+      display: table-row;
+      transition: all .5s;
+      cursor: pointer;
+      
+      &.active {
+        background-color: lighten(@listbg, 20%);
+      }
+      p {
+        //margin: 50% 0 0 0; 
+        display: table-cell;
+        vertical-align: middle; 
+        width: 70%;
+        padding: 0 20px;
+        font-size: 1.25em;
+        letter-spacing: -1px;
+        span.pubdate {
+          font-size:.75em;
+          color: darken(@bodybg,30%);
+          letter-spacing: 0;
+        }
+      }
+      img {
+        width:100%;
+        height: auto;
+        display: table-cell;
+        padding:10px;
+      }
+    }
+  }
+  @media(max-width: @reswidth) {
+    width: 100%;
+    left:0;
+  }
+}
+.ep_info {
+  left: 66.666%;
+  z-index: 2;
+  background-color: @listbg;
+  overflow-x: hidden;
+  article {
+    position: absolute;
+    overflow: auto;
+    top:50px;
+    bottom: 0;
+    left: 0;
+    section {
+      background-color: @bodybg;
+      width: 100%;
+      position: relative;
+    }
+    #ep_bg {
+      img {
+        margin: 0 auto;
+        display: block;
+      }
+    }
+    h1 {
+      font-size: 2em;
+      letter-spacing: -2px;
+      padding: 0 20px;
+      color: #000;
+    }
+    #pubdate {
+      padding: 0 20px;
+      font-size:.85em;
+      color: darken(@bodybg, 30%);
+    }
+    #ep_desc {
+      line-height: 1.3em;
+      position: relative;
+      padding:20px;
+      z-index: 5;
+      br {
+        line-height: 2em;
+      }
+    }
+    .linkbar {
+    text-align: center;
+    margin-top: 30px;
+    position: relative;
+    padding-bottom: 30px;
+      a {
+        background-color: @menubg;
+        display: inline-block;
+        padding: 8px;
+        width:42%;
+        color: #fff;
+        text-decoration: none;
+        i {
+          display: block;
+          font-size: 2.5em;
+        }
+        &:first-child {
+          border-radius: 6px 0px 0px 6px;
+        }
+        &:last-child {
+          border-radius: 0px 6px 6px 0px;
+        }
+      }
+    } 
+  }
+  @media(max-width: @reswidth) {
+    left:100%;
+  }
+}
+/* The player at the bottom */
+#jp_container {
+  position: fixed;
+  bottom:0;
+  background-color: #d7d7d7;
+  width:100%;
+  height: 80px;
+  color: #000;
+}
+p.timer {
+  position: absolute;
+  left: 85px;
+  right: 0;
+  top:8px;
+  .track-name {
+    display: block;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.timedur {
+  position: fixed;
+  left:85px;
+  bottom: 10px;
+}
+.music-controls {
+  position: absolute;
+  width:80px;
+  display: table;
+  li {
+    a {
+      color: #000;
+      height: 80px;
+      width: 80px;
+      font-size: 2em;
+      display: table-cell;  
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
+}
+.jp-progress {
+  height: 20px;
+  position: absolute;
+  left: 80px;
+  right: 30px;
+  top:30px;
+}
+#radiobanner {
+  background-color: darken(@green,20%);
+  position: fixed;
+  color: darken(@green,40%);
+  z-index: 1000;
+  right:0;
+  left:33.333%;
+  display:none;
+  cursor: pointer;
+  border-bottom: solid 1px darken(@green,40%);
+  p {
+    padding: 1.6em;
+    font-size: 1.3em;
+  }
+  i {
+    position: absolute;
+    right: 20px;
+    top: 40px;
+    font-size:2em;
+  }
+  @media(max-width: @reswidth) {
+    left:0;
+  }
+}

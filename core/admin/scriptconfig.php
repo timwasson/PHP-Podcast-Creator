@@ -18,6 +18,8 @@ if(isset($amilogged) AND $amilogged =="true") {
 	$PG_mainbody .= '<fieldset><legend>'.$L_admin_changeconf.'</legend>';
 
 	if (isset($_GET['action']) AND $_GET['action']=="change") { // if action is set
+  	
+  	
 	
 		// strict rename
 		$strictfilename = $_POST['strictfilename'];
@@ -48,8 +50,15 @@ if(isset($amilogged) AND $amilogged =="true") {
 		if ($scriptlanguage != "") {
 			$scriptlang = $scriptlanguage;
 		}
+		
+		// Google tracking
+		$g_tracking = $_POST['g_tracking'];
+		
+		// Blubrry tracking
+		$blubrry_tracking = $_POST['blubrry_tracking'];
 
-		include ("$absoluteurl"."core/admin/createconfig.php"); //regenerate config.php
+
+		include ($absoluteurl."core/admin/createconfig.php"); //regenerate config.php
 
 		$PG_mainbody .= '<p><b>'.$L_informationsent.'</b></p>';
 
@@ -165,8 +174,18 @@ if(isset($amilogged) AND $amilogged =="true") {
 			}
 			$PG_mainbody .= '>' . $val . '</option>';	
 		}
-		$PG_mainbody .= '</select></fieldset><br>';	
-		$PG_mainbody .= '<div class="form-actions">
+		$PG_mainbody .= '</select><br>';
+		
+		$PG_mainbody .= '<p><label for="blubrry_tracking"><b>Blubrry Podcast Tracking</b></label></p>
+			<input name="blubrry_tracking" type="text" id="title" size="50" maxlength="255" value="'.$blubrry_tracking.'" class="form-control">
+			<span id="helpBlock" class="help-block">If you want to track episode downloads through BluBrry, please enter your Media Redirect URL here. You can get this URL by logging into your blubrry account, then looking under Dashboard > Measure > Program Statistics > Getting Started.</span>';
+			
+    $PG_mainbody .= '<p><label for="g_tracking"><b>Google Analytics Tracking</b></label></p>
+			<input name="g_tracking" type="text" id="title" size="50" maxlength="255" value="'.$g_tracking.'" class="form-control">
+			<span id="helpBlock" class="help-block">You can track episode downloads through Google Analytics. Enter your Analytics tracking code here. This is an experimental feature and doesn\'t work as well as Blubrry or built-in tracking.</span>';
+			
+			
+		$PG_mainbody .= '</fieldset><div class="form-actions">
 			<input type="submit" name="'.$L_send.'" value="'.$L_send.'" class="btn btn-primary">
 			</div>';
 	}

@@ -1,7 +1,10 @@
+error_log
 
 media/*
 
 config.php
+
+components/getid3/*
 
 components/player/*
 
@@ -11,8 +14,11 @@ core/admin/custom-ck.js
 
 feed.xml
 
+feed.json
+
 images/*
 
-setup/*
+themes/appview/imgszr/imagecache/*
 
-themes/*
+setup/error_log
+setup/*

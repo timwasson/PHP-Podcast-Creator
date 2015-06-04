@@ -43,7 +43,7 @@ if(isset($_GET['action']) AND $_GET['action'] == "logout" ){
 // check if user is already logged in (Thanks to Pavel Urusov for the MD5 password encoding suggestion)
 if(isset($_SESSION["user_session"]) AND $_SESSION["user_session"]==$username AND md5($_SESSION["password_session"])==$userpassword){ //if so, keep displaying the page
 
-	$PG_mainbody .= '
+	$PG_mainbody = '
 <div class="navbar">
 	<ul class="nav navbar-nav pull-right">
 		<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">'.$username.' <i class="icon-caret-down"></i></a>';

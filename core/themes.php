@@ -18,8 +18,8 @@ if (isset($_GET['p']) AND $_GET['p'] == "admin") {
 } else {
 	$tempfile = "index.htm";
 }
-if(($theme_file_contents = file_get_contents($theme_path.$tempfile)) === FALSE) {
-	echo "<p class=\"error\">".$L_failedopentheme."</p>";
+if(($theme_file_contents = file_get_contents($absoluteurl.$theme_path.$tempfile)) === FALSE) {
+	echo "<p class=\"error\">".$L_failedopentheme."</p>".$absoluteurl.$theme_path.$tempfile;
 	exit;
 }
 
@@ -38,14 +38,9 @@ $theme_file_contents = str_replace("-----PG_PAGETITLE-----", $page_title, $theme
 ###############################
 # LOAD JAVASCRIPTS IN THE HEADER IF PAGE REQUIRES - REPLACES "-----PG_JSLOAD-----" IN THE HEADER OF THE THEME PAGE
 if (isset($_GET['p']) and $_GET['p'] == "admin") {
-	$loadjavascripts = "<script src=\"/core/admin/custom.js\"></script>";
+	$loadjavascripts .= "<script src=\"/core/admin/custom.js\"></script>";
 }
-if (isset($_GET['p']) and $_GET['p'] == "admin" and empty($_GET['do'])) {
-	
-	// This loads all the Google Chart on the front page of the admin panel for the total number of Feed downloads.
-	include ("admin/showtrack.php");
-    
-}
+
 if (isset($_GET['p']) and $_GET['p'] == "admin" and isset($_GET['do']) and $_GET['do'] == "upload" or $_GET['do'] == "edit") {
 
 	$loadjavascripts .= "
@@ -53,6 +48,11 @@ if (isset($_GET['p']) and $_GET['p'] == "admin" and isset($_GET['do']) and $_GET
 	<script type=\"text/javascript\">
 	tinymce.init({
 	    selector: \".tinymce\",
+	    setup: function (editor) {
+        editor.on('change', function () {
+            tinymce.triggerSave();
+        });
+      },
 	    plugins: [
 	        \"advlist autolink lists link image charmap print preview anchor\",
 	        \"searchreplace visualblocks code fullscreen\",
@@ -63,8 +63,8 @@ if (isset($_GET['p']) and $_GET['p'] == "admin" and isset($_GET['do']) and $_GET
 	</script>
 	";
 }
-$loadjavascripts .= '<script type="text/javascript" src="/components/player/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="/'.$theme_path.'js/player.js"></script>';
+//$loadjavascripts .= '<script type="text/javascript" src="/components/player/jquery.jplayer.min.js"></script>
+//<script type="text/javascript" src="/'.$theme_path.'js/player.js"></script>';
 
 //if(empty($trackfeed)) { $trackfeed =""; } else { $trackfeed = $trackfeed; }
 

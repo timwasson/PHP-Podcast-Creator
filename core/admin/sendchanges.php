@@ -122,7 +122,7 @@ if (isset($userfile) AND $userfile!=NULL AND isset($_POST['title']) AND $_POST['
 		#### INPUT DEPURATION N.2
 		$title = depurateContent($title); //title
 		$description = depurateContent($description); //short desc
-		$long_description = depurateContent($long_description); //long desc
+		#$long_description = depurateContent($long_description); //long desc
 		$keywords = depurateContent($keywords); //Keywords
 		$auth_name = depurateContent($auth_name); //author's name
 
